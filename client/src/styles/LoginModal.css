@@ -1,6 +1,7 @@
 .modal {
     width: 520px;
-    height: 700px;
+    min-height: 700px;
+    height: fit-content;
     background-color: white;
     border-radius: 4px;
     position: fixed;
