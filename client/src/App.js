@@ -1,17 +1,22 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import "../src/App.css"
+import Nav from "./components/Nav";
+import LoginModal from "./components/LoginModal";
 
 function App() {
-  const [count, setCount] = useState(0);
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false)
 
-  useEffect(() => {
-    fetch("/hello")
-      .then((r) => r.json())
-      .then((data) => setCount(data.count));
-  }, []);
+  const handleLogIn = (clicked) => {
+    if (clicked) {
+      setIsLoginModalOpen(true)
+    }
+  }
 
   return (
     <div className="App">
-      <h1>Page Count: {count}</h1>
+
+      <Nav handleLogIn={handleLogIn}/>
+      <LoginModal isLoginModalOpen={isLoginModalOpen} setIsLoginModalOpen={setIsLoginModalOpen}/>
     </div>
   );
 }
