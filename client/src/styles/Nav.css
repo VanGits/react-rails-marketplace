@@ -17,6 +17,15 @@ nav{
     justify-content: space-between;
 }
 
+.nav-logo-search{
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 70%;
+    
+}
+
 #logo{
     font-size: 34px;
     color: #F67280
@@ -58,11 +67,12 @@ nav{
 
 .nav input{
     padding: 16px;
-    max-width: 450px;
+    max-width: 550px;
     width: 100%;
-    border: 1px solid rgb(34, 34, 34);
+    border: 1px solid rgb(204, 204, 204);
     border-radius: 24px;
     font-size: 16px;
+    margin-left: 12px;
 }
 
 .nav input:active, .nav input:focus{

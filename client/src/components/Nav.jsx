@@ -10,8 +10,11 @@ const Nav = ({handleLogIn}) => {
     return (
         <nav className='nav'>
             <div className="nav-wrapper">
+                <div className="nav-logo-search">
                 <h1 id='logo'>MarketPlace</h1>
                 <input type="text" placeholder='Search'/>
+                </div>
+                
                 <div className="nav-elements">
 
                     <span><AiOutlineHeart/><p> Saved</p></span>
