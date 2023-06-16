@@ -79,3 +79,18 @@ nav{
     outline: #F67280;
     border-color: #F67280;
 }
+
+.nav img{
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+#profile{
+    border: none;
+    margin: 12px;
+}
+#profile:hover{
+    background: none;
+}

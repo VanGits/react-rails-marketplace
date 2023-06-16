@@ -5,10 +5,71 @@
   padding: 0;
   box-sizing: border-box;
   font-family: "Inter";
-  
+  -webkit-user-select: none; 
+  -moz-user-select: none; 
+  -ms-user-select: none; 
+  user-select: none; 
 }
 
 .App{
   min-height: 100vh;
 }
 
+.navigation{
+  position: relative;
+  
+}
+.profile-pop-up{
+  position: absolute;
+ 
+  right: 0;
+  margin-right: 32px;
+  box-shadow: 0px 2.98px 7.46px 0px rgba(0, 0, 0, 0.3);
+  width: 100%;
+  max-width: 300px;
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  border-radius: 8px;
+}
+
+.profile-pop-up img{
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.profile-details{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 12px;
+}
+
+.profile-details:hover{
+  background-color: rgb(243, 243, 243);
+  
+}
+.profile-details h1{
+  margin: 0 12px;
+  color: #222831;
+  font-size: 24px;
+}
+
+.profile-pop-up p{
+  cursor: pointer;
+  margin-top: 14px;
+   width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px;
+}
+
+.profile-pop-up p:hover{
+  background-color: rgb(243, 243, 243);
+}

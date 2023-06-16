@@ -1,14 +1,67 @@
 import React, { useState } from 'react';
 import "../styles/LoginModal.css"
+import { ToastContainer, toast } from "react-toastify";
 import ReactModal from "react-modal";
-const LoginModal = ({ isLoginModalOpen, setIsLoginModalOpen }) => {
+const LoginModal = ({ isLoginModalOpen, setIsLoginModalOpen, onLogin, setIsProfileClicked }) => {
 
     const [isLoginModal, setIsLoginModal] = useState(true)
 
+    // Track signup inputs with state
+    const [name, setName] = useState("")
+    const [image, setImage] = useState("")
+    const [password, setPassword] = useState("")
 
     const handleClick = () => {
         setIsLoginModal(!isLoginModal)
     }
+
+    const handleSignUp = (e) => {
+        e.preventDefault();
+        fetch("/signup", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ 
+            name: name, 
+            image_url: image, 
+            password: password }),
+        }).then((r) => {
+          if (r.ok) {
+            setIsLoginModalOpen(false)
+            toast.success("Signed up successfully!")
+            r.json().then((user) => onLogin(user));
+           
+          } else {
+            r.json().then((err) => toast.error(err.errors && err.errors[0]));
+          }
+        });
+    }
+
+    const handleLogIn = (e) => {
+        e.preventDefault();
+        fetch("/login", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ 
+            name: name, 
+            password: password }),
+        }).then((r) => {
+          if (r.ok) {
+            setIsLoginModalOpen(false)
+            setIsProfileClicked(false)
+            toast.success("Logged in successfully!")
+            r.json().then((user) => onLogin(user));
+            
+          } else {
+            r.json().then((err) => toast.error(err.errors && err.errors[0]));
+          }
+        });
+    }
+
+    
 
     const loginModal =
         <>
@@ -19,15 +72,15 @@ const LoginModal = ({ isLoginModalOpen, setIsLoginModalOpen }) => {
             </div>
             <h1 id='logo'>MarketPlace</h1>
 
-            <form action="">
+            <form action="" onSubmit={handleLogIn}>
                 <div className="inputs">
                     <h4>Username</h4>
-                    <input type="text" />
+                    <input type="text"  onChange={(e) => setName(e.target.value)}/>
 
                 </div>
                 <div className="inputs">
                     <h4>Password</h4>
-                    <input type="password" />
+                    <input type="password"  onChange={(e) => setPassword(e.target.value)}/>
 
                 </div>
 
@@ -42,20 +95,20 @@ const LoginModal = ({ isLoginModalOpen, setIsLoginModalOpen }) => {
 
             </div>
             <h1 id='logo'>MarketPlace</h1>
-            <form action="">
+            <form onSubmit={handleSignUp}>
                 <div className="inputs">
                     <h4>Username</h4>
-                    <input type="text" />
+                    <input type="text" onChange={(e) => setName(e.target.value)}/>
 
                 </div>
                 <div className="inputs">
                     <h4>Image Url</h4>
-                    <input type="password" />
+                    <input type="text"  onChange={(e) => setImage(e.target.value)}/>
 
                 </div>
                 <div className="inputs">
                     <h4>Password</h4>
-                    <input type="password" />
+                    <input type="password"  onChange={(e) => setPassword(e.target.value)}/>
 
                 </div>
             
