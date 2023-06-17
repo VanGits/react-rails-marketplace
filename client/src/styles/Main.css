@@ -25,6 +25,7 @@
 .Main .display-item{
     width: 100%;
     padding: 10px;
+    cursor: pointer;
 }
 
 .Main .display-item img{

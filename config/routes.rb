@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   resources :transactions
   resources :listings
-  resources :items, only: [:index, :create]
+  resources :items, only: [:index, :show, :create]
   
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

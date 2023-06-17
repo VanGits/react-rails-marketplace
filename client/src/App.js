@@ -5,13 +5,17 @@ import LoginModal from "./components/LoginModal";
 import Main from "./components/Main";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
-import { ImClearFormatting } from "react-icons/im";
+import { BrowserRouter, Navigate, Route, Routes, useNavigate, useParams } from "react-router-dom";
+import ItemDisplay from "./components/ItemDisplay";
 
 function App() {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false)
   const [items, setItems] = useState([])
+  const [item, setItem] = useState()
   const [currentUser, setCurrentUser] = useState(null)
   const [isProfileClicked, setIsProfileClicked] = useState(false)
+  
+
   const handleLogInModal = (clicked) => {
     if (clicked) {
       setIsLoginModalOpen(true)
@@ -19,11 +23,10 @@ function App() {
   }
   useEffect(() => {
     fetch("/items")
-    .then((r) => r.json())
-    .then(itemsData => setItems(itemsData))
+      .then((r) => r.json())
+      .then(itemsData => setItems(itemsData))
   }, [])
 
-  
 
   useEffect(() => {
     fetch("/me").then((res) => {
@@ -42,7 +45,10 @@ function App() {
   const handleProfileClick = () => {
     setIsProfileClicked(!isProfileClicked)
   }
+ 
   
+
+
   const handleLogOut = (e) => {
     e.preventDefault()
     fetch("/logout", {
@@ -50,40 +56,69 @@ function App() {
       headers: {
         "Content-Type": "application/json",
       },
-    
+
     }).then((r) => {
-        if (r.ok){
-            setCurrentUser(null)
-            
-            
-            
-        } 
+      if (r.ok) {
+        setCurrentUser(null)
+
+
+
+      }
     });
   }
-  
+  console.log(item)
   return (
     <div className="App">
       <ToastContainer />
-      <div className="navigation">
-        <Nav handleLogInModal={handleLogInModal} currentUser={currentUser} handleProfileClick = {handleProfileClick}/>
-        {isProfileClicked && currentUser && <div className="profile-pop-up">
-          <div className="profile-details">
-          <img src={currentUser && currentUser.image_url}/>
-          <div className="profile-texts"> 
-          <h1>{currentUser && currentUser.name}</h1>
-          <p>View Profile</p>
-          </div>
-          
-          </div>
-          <p onClick={handleLogOut}>Log out</p>
-          
-        </div>}
-      </div>
+      <BrowserRouter>
+        <Routes>
 
-      <LoginModal setIsProfileClicked= {setIsProfileClicked}onLogin={onLogin} isLoginModalOpen={isLoginModalOpen} setIsLoginModalOpen={setIsLoginModalOpen} />
-      <Main items={items} />
 
+          <Route path="/" element={
+            <>
+              <div className="navigation">
+                <Nav handleLogInModal={handleLogInModal} currentUser={currentUser} handleProfileClick={handleProfileClick} />
+                {isProfileClicked && currentUser && <div className="profile-pop-up">
+                  <div className="profile-details">
+                    <img src={currentUser && currentUser.image_url} />
+                    <div className="profile-texts">
+                      <h1>{currentUser && currentUser.name}</h1>
+                      <p>View Profile</p>
+                    </div>
+
+                  </div>
+                  <p onClick={handleLogOut}>Log out</p>
+
+                </div>}
+              </div>
+
+              <LoginModal setIsProfileClicked={setIsProfileClicked} onLogin={onLogin} isLoginModalOpen={isLoginModalOpen} setIsLoginModalOpen={setIsLoginModalOpen} />
+              <Main items={items} setItem = {setItem} /></>} />
+          <Route path="/items/:id" element={
+            <>
+              <div className="navigation">
+                <Nav handleLogInModal={handleLogInModal} currentUser={currentUser} handleProfileClick={handleProfileClick} />
+                {isProfileClicked && currentUser && <div className="profile-pop-up">
+                  <div className="profile-details">
+                    <img src={currentUser && currentUser.image_url} />
+                    <div className="profile-texts">
+                      <h1>{currentUser && currentUser.name}</h1>
+                      <p>View Profile</p>
+                    </div>
+
+                  </div>
+                  <p onClick={handleLogOut}>Log out</p>
+
+                </div>}
+              </div>
+
+              <LoginModal setIsProfileClicked={setIsProfileClicked} onLogin={onLogin} isLoginModalOpen={isLoginModalOpen} setIsLoginModalOpen={setIsLoginModalOpen} />
+              <ItemDisplay item = {item} setItem={setItem}/>
+               </>} />
+        </Routes>
+      </BrowserRouter>
     </div>
+
   );
 }
 
