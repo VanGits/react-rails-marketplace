@@ -17,6 +17,13 @@ function App() {
       setIsLoginModalOpen(true)
     }
   }
+  useEffect(() => {
+    fetch("/items")
+    .then((r) => r.json())
+    .then(itemsData => setItems(itemsData))
+  }, [])
+
+  
 
   useEffect(() => {
     fetch("/me").then((res) => {

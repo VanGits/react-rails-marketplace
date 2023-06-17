@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
   resources :transactions
   resources :listings
-  resources :items
-  resources :users
+  resources :items, only: [:index, :create]
+  
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
