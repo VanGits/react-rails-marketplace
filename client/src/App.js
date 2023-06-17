@@ -66,7 +66,7 @@ function App() {
       }
     });
   }
-  console.log(item)
+  
   return (
     <div className="App">
       <ToastContainer />
@@ -93,7 +93,7 @@ function App() {
               </div>
 
               <LoginModal setIsProfileClicked={setIsProfileClicked} onLogin={onLogin} isLoginModalOpen={isLoginModalOpen} setIsLoginModalOpen={setIsLoginModalOpen} />
-              <Main items={items} setItem = {setItem} /></>} />
+              <Main items={items} /></>} />
           <Route path="/items/:id" element={
             <>
               <div className="navigation">

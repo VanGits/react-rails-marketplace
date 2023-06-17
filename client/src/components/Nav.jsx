@@ -3,6 +3,7 @@ import "../styles/Nav.css"
 import { AiOutlineHeart } from 'react-icons/ai';
 import { GrTransaction } from 'react-icons/gr';
 import { MdSell } from 'react-icons/md';
+import { Link } from 'react-router-dom';
 
 
 const Nav = ({ handleLogInModal, currentUser, handleProfileClick }) => {
@@ -11,7 +12,7 @@ const Nav = ({ handleLogInModal, currentUser, handleProfileClick }) => {
         <nav className='nav'>
             <div className="nav-wrapper">
                 <div className="nav-logo-search">
-                    <h1 id='logo'>MarketPlace</h1>
+                    <Link to="/"><h1 id='logo'>MarketPlace</h1></Link> 
                     <input type="text" placeholder='Search' />
                 </div>
 

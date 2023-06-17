@@ -3,20 +3,13 @@ import { ImSpinner8 } from 'react-icons/im';
 import "../styles/Main.css"
 import { useNavigate } from 'react-router-dom';
 
-const Main = ({items, setItem}) => {
+const Main = ({ items }) => {
 
     const navigate = useNavigate()
 
     const handleItemClick = (itemId) => {
-    
-        fetch(`/items/${itemId}`)
-          .then((r) => r.json())
-          .then(itemData => setItem(itemData))
-         navigate(`/items/${itemId}`)
-    
-    
-    
-      }
+        navigate(`/items/${itemId}`)
+    }
 
     const displayItem = items.map((item) => {
         return (
@@ -26,8 +19,8 @@ const Main = ({items, setItem}) => {
         )
     })
     return (
-        <div className='Main'> 
-            {items.length > 0 ? <div className='display-items-wrapper'> {displayItem} </div>: <ImSpinner8 className='load'/> }
+        <div className='Main'>
+            {items.length > 0 ? <div className='display-items-wrapper'> {displayItem} </div> : <ImSpinner8 className='load' />}
         </div>
     );
 }
