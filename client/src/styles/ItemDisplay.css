@@ -33,10 +33,12 @@
     
 }
 
-.item-details-wrapper #not-found{
-    text-align: center !important;
-    align-self: center !important;
-    justify-self: center !important;
+#not-found{
+    text-align: center ;
+    align-self: center ;
+    justify-self: center ;
+    margin-top: 64px;
+    color: #F67280;
 }
 
 .item-details{
@@ -54,3 +56,4 @@
 .item-details-profile h3{
     margin: 0 12px;
 }
+
