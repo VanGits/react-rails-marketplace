@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
+  resources :favorites
+  resources :item_listings, only: [:index, :show, :create]
   resources :transactions
-  resources :listings
-  resources :items, only: [:index, :show, :create]
+ 
+  
   
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

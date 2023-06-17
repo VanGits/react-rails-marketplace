@@ -22,7 +22,7 @@ function App() {
     }
   }
   useEffect(() => {
-    fetch("/items")
+    fetch("/item_listings")
       .then((r) => r.json())
       .then(itemsData => setItems(itemsData))
   }, [])

@@ -1,7 +1,6 @@
-class ItemsController < ApplicationController
-
+class ItemListingsController < ApplicationController
     def index
-        items = Item.all
+        items = ItemListing.all
         render json: items, status: :ok
     end
 
@@ -10,22 +9,22 @@ class ItemsController < ApplicationController
         render json: item, status: :ok
     end
     def create
-        item = Item.new(item_params)
-        listing = item.listings.build(user_id: @user.id)
+        item = @user.item_listings.new(item_params)
         
-        if item.save && listing.save
+
+        if item.save
           render json: { message: 'Item and listing created successfully' }, status: :created
         else
           render json: { errors: item.errors.full_messages }, status: :unprocessable_entity
         end
     end
-    
+
       private
-    
+
       def item_params
-        params.require(:item).permit(:name, :description, :image_url, :location)
+        params.permit(:title, :description, :image_url, :location, :price)
       end
       def find_item
-        Item.find(params[:id])
+        ItemListing.find(params[:id])
       end
 end

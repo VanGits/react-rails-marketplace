@@ -12,7 +12,7 @@ const ItemDisplay = () => {
         const fetchItem = () => {
             setIsLoading(true);
 
-            fetch(`/items/${params.id}`)
+            fetch(`/item_listings/${params.id}`)
                 .then(response => {
                     if (response.ok) {
                         return response.json();
@@ -42,14 +42,19 @@ const ItemDisplay = () => {
                 <div className="item-details-wrapper">
 
                     {item && <img src={item.image_url} alt="" />}
-                    <div className="item-details">
+                    {item ? <div className="item-details"> 
                         <div className="item-details-profile">
-                            <img src={item.users[0].image_url} alt="" />
-                            <h3> by {item.users[0].name}</h3>
-                        </div>
 
-                        <h1>{item.name}</h1>
-                    </div>
+
+                            <img src={item && item.user.image_url} alt="" />
+                            <h3> by {item && item.user.name}</h3>
+
+
+                        </div>
+                        <h2>{item && item.price}</h2>
+
+                        <h1>{item && item.title}</h1>
+                    </div>: <h1 id='not-found'>Item not found</h1>}
 
                 </div>
 

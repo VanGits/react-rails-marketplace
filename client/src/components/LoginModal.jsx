@@ -29,6 +29,7 @@ const LoginModal = ({ isLoginModalOpen, setIsLoginModalOpen, onLogin, setIsProfi
         }).then((r) => {
           if (r.ok) {
             setIsLoginModalOpen(false)
+            setIsProfileClicked(false)
             toast.success("Signed up successfully!")
             r.json().then((user) => onLogin(user));
            

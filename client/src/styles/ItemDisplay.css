@@ -21,6 +21,8 @@
     justify-content: space-between;
     max-width: 1100px;
     width: 100%;
+    
+    padding: 36px;
 }
 
 .item-details img{
@@ -29,6 +31,12 @@
     border-radius: 50%;
     box-shadow: none;
     
+}
+
+.item-details-wrapper #not-found{
+    text-align: center !important;
+    align-self: center !important;
+    justify-self: center !important;
 }
 
 .item-details{
