@@ -11,16 +11,16 @@ const Main = ({ items }) => {
         navigate(`/items/${itemId}`)
     }
 
-    const displayItem = items.map((item) => {
-        return (
+    const displayItem = Array.isArray(items) ? (
+        items.map((item) => (
             <div className='display-item' onClick={() => handleItemClick(item.id)}>
                 <img src={item.image_url} alt="" />
             </div>
-        )
-    })
+        ))
+    ) : null;
     return (
         <div className='Main'>
-            {items.length > 0 ? <div className='display-items-wrapper'> {displayItem} </div> : <ImSpinner8 className='load' />}
+            {items.length > 0 && items ? <div className='display-items-wrapper'> {displayItem} </div> : <ImSpinner8 className='load' />}
         </div>
     );
 }
