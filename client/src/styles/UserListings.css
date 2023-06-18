@@ -51,6 +51,18 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    max-width: 500px;
+    width: 100%;
+    position: relative;
+}
+
+.user-listings .user-listing-details #delete-btn{
+    font-size: 28px;
+    color: #F67280;
+    position: absolute;
+    top: 0;
+    right: 0;
+    cursor: pointer;
 }
 
 .user-listing{

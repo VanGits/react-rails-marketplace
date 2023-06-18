@@ -43,7 +43,7 @@
 
  .display-items-wrapper{
     display: grid;
-  grid-template-columns: repeat(5, 1fr); 
+  grid-template-columns: repeat(4, 1fr); 
   grid-auto-rows: auto; 
   grid-gap: 10px; 
   margin: 64px 0;
@@ -52,7 +52,7 @@
 }
 
  .display-item{
-    width: 100%;
+    width: fit-content;
     padding: 10px;
     
 }
@@ -62,6 +62,7 @@
 }
 
 .item-details-display{
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -91,6 +92,7 @@
   display: inline-block;
   height: 250px;
   overflow: hidden;
+  box-shadow: 0px 2.98px 7.46px 0px rgba(0, 0, 0, 0.1);
   border: 1px solid rgb(204, 204, 204);
   border-radius: 8px;
 }

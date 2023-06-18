@@ -19,6 +19,7 @@ function App() {
   const [currentUser, setCurrentUser] = useState(null)
   const [isProfileClicked, setIsProfileClicked] = useState(false)
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalDeleteOpen, setIsModalDeleteOpen] = useState(false)
 
 
   const handleLogInModal = (clicked) => {
@@ -81,13 +82,39 @@ function App() {
       }
     });
   }
-
+ 
   // update state when changes to listings have been made
 
   const addListing = (newListing) => {
     setUserListings([...userListings, newListing])
     setItems([...items, newListing])
     
+  }
+
+  const deleteListing = (itemUserId, listingId) => {
+    console.log("hello")
+    console.log(itemUserId, listingId, "in app")
+    fetch(`/item_listings/${listingId}`, {
+      method: "DELETE",
+    }).then((r) => {
+      if (r.ok) {
+        if (items && items.length > 0){
+          const filteredItems = items.filter(
+            (item) => item.id !== listingId
+          );
+          setItems(filteredItems)
+        }
+        if (userListings && userListings.length > 0){
+          const filteredUserListings = userListings.filter(
+            (listing) => listing.id !== listingId
+          )
+          setUserListings(filteredUserListings)
+        }
+        toast.success("Listing deleted!")
+      } else {
+        r.json().then((err) => toast.error(err.error))
+      }
+    })
   }
 
   return (
@@ -162,7 +189,7 @@ function App() {
               </div>
 
               <LoginModal setIsProfileClicked={setIsProfileClicked} onLogin={onLogin} isLoginModalOpen={isLoginModalOpen} setIsLoginModalOpen={setIsLoginModalOpen} />
-              {currentUser && <UserListings userListings={userListings} isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} addListing = {addListing}/>}
+              {currentUser && <UserListings userListings={userListings} isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} addListing = {addListing} isModalDeleteOpen={isModalDeleteOpen} setIsModalDeleteOpen={setIsModalDeleteOpen} deleteListing={deleteListing}/>}
               <Footer/>
             </>} />
         </Routes>

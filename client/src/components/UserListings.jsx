@@ -4,9 +4,14 @@ import ListingModal from './modals/ListingModal';
 import { IoMdAddCircle } from 'react-icons/io';
 import { ImSpinner8 } from 'react-icons/im';
 import { useNavigate } from 'react-router-dom';
+import { AiFillDelete } from 'react-icons/ai';
+import DeleteModal from './modals/DeleteModal';
 
-const UserListings = ({ userListings, isModalOpen, setIsModalOpen, addListing }) => {
+
+const UserListings = ({ userListings, isModalOpen, setIsModalOpen, deleteListing,addListing, isModalDeleteOpen, setIsModalDeleteOpen }) => {
     const [isLoading, setIsLoading] = useState(true);
+    const [itemUserId, setItemUserId] = useState(null)
+    const [listingId, setListingId] = useState(null)
    
 
     useEffect(() => {
@@ -27,6 +32,14 @@ const UserListings = ({ userListings, isModalOpen, setIsModalOpen, addListing })
     }
 
 
+    const handleDeleteModal = (userId, listingId) => {
+        
+        setIsModalDeleteOpen(!isModalDeleteOpen)
+        setItemUserId(userId)
+        setListingId(listingId)
+        
+    }
+
 
 
     const userListing = userListings.map((listing) => {
@@ -39,6 +52,7 @@ const UserListings = ({ userListings, isModalOpen, setIsModalOpen, addListing })
                 <img src={listing.image_url} alt="" />
                 
                 <div className="user-listing-details">
+                    <AiFillDelete id='delete-btn' onClick={() => handleDeleteModal(listing.user_id, listing.id)}/>
                     <h1>{listing.title}</h1>
                     <h2>${listing.price}</h2>
                     <h3>{formattedDate}</h3>
@@ -64,6 +78,7 @@ const UserListings = ({ userListings, isModalOpen, setIsModalOpen, addListing })
                     <ListingModal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} addListing={addListing}/>
                 </>
             )}
+            <DeleteModal isModalDeleteOpen={isModalDeleteOpen} setIsModalDeleteOpen={setIsModalDeleteOpen} handleItemClick={handleItemClick} itemUserId={itemUserId} listingId={listingId} deleteListing={deleteListing}/>
         </div>
     );
 }

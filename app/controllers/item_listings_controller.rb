@@ -26,6 +26,16 @@ class ItemListingsController < ApplicationController
         end
     end
 
+    def destroy
+      item = find_item
+      if @user.id === item.user.id
+        item.destroy
+        head :no_content
+      else
+        render json: { error: "You are not authorized to delete this listing" }, status: :unauthorized
+      end
+    end
+
       private
 
       def item_params
