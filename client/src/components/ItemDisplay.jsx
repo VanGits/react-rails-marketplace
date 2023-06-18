@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import "../styles/ItemDisplay.css"
 import { BsBookmark } from 'react-icons/bs';
 
+
 const ItemDisplay = () => {
     const [item, setItem] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
