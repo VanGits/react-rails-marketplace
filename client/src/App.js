@@ -9,6 +9,7 @@ import { BrowserRouter, Navigate, Route, Routes, useNavigate, useParams } from "
 import ItemDisplay from "./components/ItemDisplay";
 import UserListings from "./components/UserListings";
 import UserContext from "./context/UserContext";
+import Footer from "./components/Footer";
 
 function App() {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false)
@@ -108,7 +109,10 @@ function App() {
               </div>
 
               <LoginModal setIsProfileClicked={setIsProfileClicked} onLogin={onLogin} isLoginModalOpen={isLoginModalOpen} setIsLoginModalOpen={setIsLoginModalOpen} />
-              <Main items={items} isModalOpen={isModalOpen} setIsModalOpen= {setIsModalOpen}/></>} />
+              <Main items={items} isModalOpen={isModalOpen} setIsModalOpen= {setIsModalOpen}/>
+              <Footer/>
+              </>} />
+            
           <Route path="/items/:id" element={
             <>
               <div className="navigation">
@@ -129,6 +133,7 @@ function App() {
 
               <LoginModal setIsProfileClicked={setIsProfileClicked} onLogin={onLogin} isLoginModalOpen={isLoginModalOpen} setIsLoginModalOpen={setIsLoginModalOpen} />
               <ItemDisplay item={item} setItem={setItem} items = {items} />
+              <Footer/>
             </>} />
           <Route path="/my-listings" element={
             <>
