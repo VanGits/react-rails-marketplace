@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import "../styles/Nav.css"
-import { AiOutlineHeart } from 'react-icons/ai';
+import { BsBookmark } from 'react-icons/bs';
 import { GrTransaction } from 'react-icons/gr';
 import { MdSell } from 'react-icons/md';
 import { Link } from 'react-router-dom';
@@ -20,7 +20,7 @@ const Nav = ({ handleLogInModal, currentUser, handleProfileClick }) => {
                 <span ><p>Sell an item</p></span>
                     <span onClick={handleLogInModal}><p>Log in</p></span>
                 </div> : <div className="nav-elements">
-                    <span><AiOutlineHeart /><p> Saved</p></span>
+                    <span><BsBookmark /><p> Favorites</p></span>
                     <span><GrTransaction /><p>Transactions</p></span>
                     <span><MdSell /><p>My Listings</p></span>
                     <span id='profile'><img src={currentUser.image_url} alt="" onClick={handleProfileClick}/></span>
