@@ -82,6 +82,14 @@ function App() {
     });
   }
 
+  // update state when changes to listings have been made
+
+  const addListing = (newListing) => {
+    setUserListings([...userListings, newListing])
+    setItems([...items, newListing])
+    
+  }
+
   return (
     <div className="App">
       <ToastContainer />
@@ -154,7 +162,8 @@ function App() {
               </div>
 
               <LoginModal setIsProfileClicked={setIsProfileClicked} onLogin={onLogin} isLoginModalOpen={isLoginModalOpen} setIsLoginModalOpen={setIsLoginModalOpen} />
-              {currentUser && <UserListings userListings={userListings} isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen}/>}
+              {currentUser && <UserListings userListings={userListings} isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} addListing = {addListing}/>}
+              <Footer/>
             </>} />
         </Routes>
         </UserContext.Provider>

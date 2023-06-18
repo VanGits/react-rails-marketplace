@@ -3,7 +3,7 @@ import "../../styles/modals/ListingModal.css"
 import ReactModal from "react-modal";
 import { toast } from 'react-toastify';
 import UserContext from "../../context/UserContext";
-const ListingModal = ({isModalOpen, setIsModalOpen}) => {
+const ListingModal = ({isModalOpen, setIsModalOpen, addListing}) => {
     //attributes :id, :title, :description, :image_url, :location, :user_id, :price,
     const currentUser = useContext(UserContext);
     // states to track inputs
@@ -13,37 +13,44 @@ const ListingModal = ({isModalOpen, setIsModalOpen}) => {
     const [image, setImage] = useState("")
     const [price, setPrice] = useState("")
    
-    
-
+  
+   
     const handleSubmit = (e) => {
-        e.preventDefault()
+        e.preventDefault();
         fetch("/item_listings", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ 
-                title: title,
-                description: description,
-                image_url: image,
-                location: currentUser.location,
-                price: price,
-                user_id: currentUser.id
-    
-            }),
-          }).then((r) => {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ 
+            title: title,
+            description: description,
+            image_url: image,
+            location: currentUser.location,
+            price: price,
+            user_id: currentUser.id
+          }),
+        })
+          .then((r) => {
             if (r.ok) {
-              
-            //   r.json().then((newHighlight) => addHighlight(newHighlight));
-              
-              toast.success("Listing created!")
-              setIsModalOpen(false)
-            //   navigate("/home")
+              return r.json(); 
             } else {
-              r.json().then((err) => toast.error(err.errors[0]));
+              return r.json().then((err) => {
+                throw new Error(err.errors[0]);
+              });
             }
+          })
+          .then((newListing) => {
+            addListing(newListing);
+            setIsModalOpen(false)
+            toast.success("Listing created!");
+            // navigate("/home");
+          })
+          .catch((error) => {
+            console.error(error);
+            toast.error(error.message);
           });
-    }
+      };
 
 
     return (

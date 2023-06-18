@@ -69,7 +69,13 @@
 .user-listing img{
     width: 250px;
     height: 250px;
-    object-fit: cover;
+    object-fit: contain;
     border: 1px solid rgb(204, 204, 204);
     border-radius: 8px;
+}
+
+.user-listing-details a{
+    text-decoration: underline;
+    margin-top: 12px;
+    cursor: pointer;
 }

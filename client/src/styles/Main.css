@@ -8,9 +8,13 @@
     
 }
 
-.Main p{
+.Main p, .item-price{
   font-size: 20px;
   font-weight: 400;
+}
+
+.display-item:hover{
+  text-decoration: underline;
 }
 
 .main-banner img{
@@ -61,14 +65,14 @@
  .display-item img{
     width: 250px;
     height: 250px;
-    object-fit: cover;
+    object-fit: contain;
     border-radius: 8px;
     
 }
 
-.display-item img:hover{
+/* .display-item img:hover{
   background-color: grey;
-}
+} */
 
 .image-container {
   position: relative;

@@ -3,10 +3,11 @@ import "../styles/UserListings.css"
 import ListingModal from './modals/ListingModal';
 import { IoMdAddCircle } from 'react-icons/io';
 import { ImSpinner8 } from 'react-icons/im';
+import { useNavigate } from 'react-router-dom';
 
-const UserListings = ({ userListings, isModalOpen, setIsModalOpen }) => {
+const UserListings = ({ userListings, isModalOpen, setIsModalOpen, addListing }) => {
     const [isLoading, setIsLoading] = useState(true);
-    
+   
 
     useEffect(() => {
         // Simulating API fetch delay
@@ -20,6 +21,10 @@ const UserListings = ({ userListings, isModalOpen, setIsModalOpen }) => {
     const handleClick = () => {
         setIsModalOpen(!isModalOpen);
     };
+    const navigate = useNavigate()
+    const handleItemClick = (itemId) => {
+        navigate(`/items/${itemId}`)
+    }
 
 
 
@@ -32,12 +37,14 @@ const UserListings = ({ userListings, isModalOpen, setIsModalOpen }) => {
         return (
             <div key={listing.id} className='user-listing'>
                 <img src={listing.image_url} alt="" />
+                
                 <div className="user-listing-details">
                     <h1>{listing.title}</h1>
                     <h2>${listing.price}</h2>
                     <h3>{formattedDate}</h3>
                     <h4>{listing.description}</h4>
-
+                    <button className='list-btn'>Edit listing</button>
+                    <a onClick={() => handleItemClick(listing.id)}>View Listing</a>
                 </div>
             </div>
         );
@@ -54,7 +61,7 @@ const UserListings = ({ userListings, isModalOpen, setIsModalOpen }) => {
             ) : (
                 <>
                     {userListing.length > 0 ? userListing : <h1>No listings yet!</h1>}
-                    <ListingModal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
+                    <ListingModal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} addListing={addListing}/>
                 </>
             )}
         </div>

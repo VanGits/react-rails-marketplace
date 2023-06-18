@@ -112,6 +112,7 @@
     height: 200px;
     resize: none;
     border-radius: 5px;
+    padding: 12px;
   }
 
   .modal textarea:focus, .modal textarea:active{
