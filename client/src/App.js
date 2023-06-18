@@ -17,6 +17,7 @@ function App() {
   const [item, setItem] = useState(null)
   const [currentUser, setCurrentUser] = useState(null)
   const [isProfileClicked, setIsProfileClicked] = useState(false)
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
 
   const handleLogInModal = (clicked) => {
@@ -107,7 +108,7 @@ function App() {
               </div>
 
               <LoginModal setIsProfileClicked={setIsProfileClicked} onLogin={onLogin} isLoginModalOpen={isLoginModalOpen} setIsLoginModalOpen={setIsLoginModalOpen} />
-              <Main items={items} /></>} />
+              <Main items={items} isModalOpen={isModalOpen} setIsModalOpen= {setIsModalOpen}/></>} />
           <Route path="/items/:id" element={
             <>
               <div className="navigation">
@@ -148,7 +149,7 @@ function App() {
               </div>
 
               <LoginModal setIsProfileClicked={setIsProfileClicked} onLogin={onLogin} isLoginModalOpen={isLoginModalOpen} setIsLoginModalOpen={setIsLoginModalOpen} />
-              {currentUser && <UserListings userListings={userListings}/>}
+              {currentUser && <UserListings userListings={userListings} isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen}/>}
             </>} />
         </Routes>
         </UserContext.Provider>

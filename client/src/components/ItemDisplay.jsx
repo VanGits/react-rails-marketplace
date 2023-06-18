@@ -56,7 +56,7 @@ const ItemDisplay = ({ items, item, setItem }) => {
         .filter((i) => item && item.id !== i.id) // Filter the items array
         .map((i) => (
 
-            <div className='display-item' key={i.id} onClick={() => handleItemClick(i.id)}><img src={i.image_url} alt="" /><h4>{i.location}</h4></div>
+            <div className='display-item' key={i.id} onClick={() => handleItemClick(i.id)}> <div className="image-container"><img src={i.image_url} alt="" /></div><h4>{i.location}</h4></div>
 
         ));
         const navigate = useNavigate()

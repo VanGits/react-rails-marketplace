@@ -92,7 +92,7 @@
     font-weight: 500;
 }
 
-.item-details button{
+.item-details button, .list-btn{
     margin-top: auto;
     padding: 12px;
     width: 100%;
@@ -106,7 +106,7 @@
     justify-self: flex-end;
   }
 
-  .item-details button:hover{
+  .item-details button:hover, .list-btn{
     background-color: #f8818c;
   }
 

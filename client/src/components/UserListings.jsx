@@ -4,9 +4,9 @@ import ListingModal from './modals/ListingModal';
 import { IoMdAddCircle } from 'react-icons/io';
 import { ImSpinner8 } from 'react-icons/im';
 
-const UserListings = ({ userListings }) => {
+const UserListings = ({ userListings, isModalOpen, setIsModalOpen }) => {
     const [isLoading, setIsLoading] = useState(true);
-    const [isModalOpen, setIsModalOpen] = useState(false);
+    
 
     useEffect(() => {
         // Simulating API fetch delay
