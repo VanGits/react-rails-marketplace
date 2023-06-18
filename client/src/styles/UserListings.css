@@ -8,8 +8,17 @@
     
 }
 
+.no-listings {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    position: relative;
+    flex-direction: column;
+}
 
-.new-listing{
+
+.new-listing, .no-listings .new-listing{
     position: absolute;
     
     
@@ -20,7 +29,7 @@
     color: #F67280;
     
 }
-.user-listings h1{
+.user-listings h1, .no-listings h1{
     cursor: pointer;
    
     font-size: 48px;
@@ -29,10 +38,11 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    text-align: center;
    
   
 }
-.user-listings .user-listing-details h1{
+.user-listings .user-listing-details h1, .no-listings .user-listing-details h1{
     cursor: auto;
 }
 

@@ -44,7 +44,7 @@ const UserListings = ({ userListings, isModalOpen, setIsModalOpen }) => {
     });
 
     return (
-        <div className='user-listings'>
+        <div className={userListing.length > 0 ? 'user-listings': "no-listings"}>
             <div className="new-listing">
                 <h1 onClick={handleClick}><IoMdAddCircle /></h1>
                 <h2>Add new listing!</h2>
