@@ -7,6 +7,13 @@
     z-index: 0;
 }
 
+.item-viewer .display-items-wrapper{
+  max-width: 1200px;
+  width: 100%;
+  margin-top: 24px;
+  border-top: 1px solid rgb(204, 204, 204);
+}
+
 .item-details-wrapper img{
     max-width: 550px;
     width: 100%;
@@ -135,7 +142,7 @@
     align-items: flex-start;
     justify-content: flex-start;
     flex-direction: column;
-    min-height: 100vh;
+    
   }
 
   .description-wrapper h1{
@@ -145,7 +152,7 @@
   }
 
   .description-wrapper h3{
-    margin-top: 24px;
+    margin: 24px 0;
   }
 
   .map{
@@ -154,5 +161,7 @@
     height: 1000px;
     overflow: auto;
   }
+
+
 
   

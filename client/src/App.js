@@ -14,7 +14,7 @@ function App() {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false)
   const [items, setItems] = useState([])
   const [userListings, setUserListings] = useState([])
-  const [item, setItem] = useState()
+  const [item, setItem] = useState(null)
   const [currentUser, setCurrentUser] = useState(null)
   const [isProfileClicked, setIsProfileClicked] = useState(false)
 
@@ -45,11 +45,9 @@ function App() {
         fetch("/my-listings").then((res) => {
           if (res.ok) {
             res.json().then((listings) => setUserListings(listings));
-          } else {
-            toast.error("Please log in");
-          }
+          } 
         });
-  }, [])
+  }, [currentUser])
 
   
 
@@ -129,7 +127,7 @@ function App() {
               </div>
 
               <LoginModal setIsProfileClicked={setIsProfileClicked} onLogin={onLogin} isLoginModalOpen={isLoginModalOpen} setIsLoginModalOpen={setIsLoginModalOpen} />
-              <ItemDisplay item={item} setItem={setItem} />
+              <ItemDisplay item={item} setItem={setItem} items = {items} />
             </>} />
           <Route path="/my-listings" element={
             <>

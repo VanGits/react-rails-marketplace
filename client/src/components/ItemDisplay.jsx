@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { ImSpinner8 } from 'react-icons/im';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import "../styles/ItemDisplay.css"
 import { BsBookmark } from 'react-icons/bs';
 import MapDisplay from './MapDisplay';
@@ -8,8 +8,8 @@ import MapDisplay from './MapDisplay';
 
 
 
-const ItemDisplay = () => {
-    const [item, setItem] = useState(null);
+const ItemDisplay = ({ items, item, setItem }) => {
+
     const [isLoading, setIsLoading] = useState(true);
     const params = useParams();
 
@@ -50,9 +50,19 @@ const ItemDisplay = () => {
     const formattedDate = date.toLocaleDateString('en-US', options);
 
 
+    // display recommended items 
 
+    const recommendedItems = items
+        .filter((i) => item && item.id !== i.id) // Filter the items array
+        .map((i) => (
 
+            <div className='display-item' key={i.id} onClick={() => handleItemClick(i.id)}><img src={i.image_url} alt="" /><h4>{i.location}</h4></div>
 
+        ));
+        const navigate = useNavigate()
+        const handleItemClick = (itemId) => {
+            navigate(`/items/${itemId}`)
+        }
 
     return (
         <div className='item-display'>
@@ -80,7 +90,7 @@ const ItemDisplay = () => {
                         <h2 className='price'>${item && item.price.toFixed(2)}</h2>
 
                         <h4>Posted at {formattedDate}</h4>
-                        <span><BsBookmark/><h4>Favorite</h4></span>
+                        <span><BsBookmark /><h4>Favorite</h4></span>
                         <button>Message</button>
                     </div>
 
@@ -88,13 +98,23 @@ const ItemDisplay = () => {
                 <div className="description-wrapper">
                     <h1>Description</h1>
                     <h3>{item.description}</h3>
-                    <MapDisplay item={item}/>
+                    <MapDisplay item={item} />
+                    <h1>Other items</h1>
+                </div>
+             
+                <div className='display-items-wrapper'>
+                
+                    {recommendedItems}
                 </div>
 
-                </div>
+
+
+
+
+            </div>
             )}
         </div>
-       
+
     );
 
 

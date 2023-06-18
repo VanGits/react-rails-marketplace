@@ -1,16 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import "../styles/MapDisplay.css"
+import "../styles/MapDisplay.css";
+
 const MapDisplay = ({ item }) => {
   const [map, setMap] = useState(null);
 
   useEffect(() => {
-    const loadGoogleMapsAPI = () => {
-      const script = document.createElement('script');
-      script.src = `https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}`;
-      script.onload = handleScriptLoad;
-      document.body.appendChild(script);
-    };
-
     const handleScriptLoad = () => {
       if (window.google && window.google.maps) {
         const geocoder = new window.google.maps.Geocoder();
@@ -37,7 +31,7 @@ const MapDisplay = ({ item }) => {
             fillOpacity: 0.35,
             map,
             center: location,
-            radius: 2000, 
+            radius: 2000,
           };
           new window.google.maps.Circle(circleOptions);
         } else {
@@ -52,12 +46,19 @@ const MapDisplay = ({ item }) => {
       return isFinite(lat) && Math.abs(lat) <= 90 && isFinite(lng) && Math.abs(lng) <= 180;
     };
 
-    loadGoogleMapsAPI();
+    if (window.google && window.google.maps) {
+      handleScriptLoad();
+    } else {
+      const script = document.createElement('script');
+      script.src = `https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}&libraries=places`;
+      script.onload = handleScriptLoad;
+      document.body.appendChild(script);
+    }
   }, [item?.location]);
 
   console.log(item?.location);
 
-  return <div id='map' ></div>;
+  return <div id='map'></div>;
 };
 
 export default MapDisplay;

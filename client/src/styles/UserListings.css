@@ -4,6 +4,8 @@
     justify-content: center;
     min-height: 100vh;
     position: relative;
+    flex-direction: column;
+    
 }
 
 
@@ -29,4 +31,26 @@
     justify-content: center;
    
   
+}
+.user-listings .user-listing-details h1{
+    cursor: auto;
+}
+
+.user-listing{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+    height: 100%;
+    max-width: 1200px;
+    width: 100%;
+    margin-top: 62px;
+    border-bottom: 1px solid rgb(204, 204, 204);
+    padding: 24px;
+}
+
+.user-listing img{
+    width: 250px;
+    height: 250px;
+    object-fit: cover;
 }
