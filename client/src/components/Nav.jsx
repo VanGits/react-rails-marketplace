@@ -22,7 +22,7 @@ const Nav = ({ handleLogInModal, currentUser, handleProfileClick }) => {
                 </div> : <div className="nav-elements">
                     <span><BsBookmark /><p> Favorites</p></span>
                     <span><GrTransaction /><p>Transactions</p></span>
-                    <span><MdSell /><p>My Listings</p></span>
+                    <Link to="/my-listings"><span><MdSell /><p>My Listings</p></span></Link>
                     <span id='profile'><img src={currentUser.image_url} alt="" onClick={handleProfileClick}/></span>
                 </div>}
 

@@ -106,6 +106,19 @@
     border-color: #F67280;
   }
 
+  .modal textarea{
+    width: 100%;
+    border: 1px solid rgb(204, 204, 204);
+    height: 200px;
+    resize: none;
+    border-radius: 5px;
+  }
+
+  .modal textarea:focus, .modal textarea:active{
+    outline: none;
+    border-color: #F67280;
+  }
+
   #no-account{
     margin-top: 32px;
     font-size: 18px;
@@ -138,7 +151,7 @@
   }
 
   .pac-container{
-    z-index: 1000000000;
+    z-index: 10000000009;
   }
 
   

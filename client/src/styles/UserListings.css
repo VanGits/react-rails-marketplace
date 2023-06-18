@@ -1,0 +1,32 @@
+.user-listings{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    position: relative;
+}
+
+
+.new-listing{
+    position: absolute;
+    
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 0;
+    color: #F67280;
+    
+}
+.user-listings h1{
+    cursor: pointer;
+   
+    font-size: 48px;
+    text-align: center;
+    transition: all 300ms ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+   
+  
+}

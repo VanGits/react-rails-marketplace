@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import "../styles/LoginModal.css"
+import "../../styles/modals/LoginModal.css"
 import { ToastContainer, toast } from "react-toastify";
 import ReactModal from "react-modal";
 
@@ -29,7 +29,9 @@ const LoginModal = ({ isLoginModalOpen, setIsLoginModalOpen, onLogin, setIsProfi
       body: JSON.stringify({
         name: name,
         image_url: image,
+        location: location,
         password: password
+        
       }),
     }).then((r) => {
       if (r.ok) {
@@ -82,12 +84,12 @@ const LoginModal = ({ isLoginModalOpen, setIsLoginModalOpen, onLogin, setIsProfi
       <form action="" onSubmit={handleLogIn}>
         <div className="inputs">
           <h4>Username</h4>
-          <input type="text" onChange={(e) => setName(e.target.value)} />
+          <input type="text" placeholder="Username"onChange={(e) => setName(e.target.value)} />
 
         </div>
         <div className="inputs">
           <h4>Password</h4>
-          <input type="password" onChange={(e) => setPassword(e.target.value)} />
+          <input type="password" placeholder="Password"onChange={(e) => setPassword(e.target.value)} />
 
         </div>
 
@@ -105,11 +107,11 @@ const LoginModal = ({ isLoginModalOpen, setIsLoginModalOpen, onLogin, setIsProfi
       <form onSubmit={handleSignUp}>
         <div className="inputs">
           <h4>Username</h4>
-          <input type="text" onChange={(e) => setName(e.target.value)} />
+          <input type="text" placeholder="Username"onChange={(e) => setName(e.target.value)} />
         </div>
         <div className="inputs">
           <h4>Image Url</h4>
-          <input type="text" onChange={(e) => setImage(e.target.value)} />
+          <input type="text"  placeholder="Enter an image url"onChange={(e) => setImage(e.target.value)} />
         </div>
         <div className="inputs autocomplete">
           <h4>Location</h4>
@@ -128,7 +130,7 @@ const LoginModal = ({ isLoginModalOpen, setIsLoginModalOpen, onLogin, setIsProfi
 
         <div className="inputs">
           <h4>Password</h4>
-          <input type="password" onChange={(e) => setPassword(e.target.value)} />
+          <input type="password"  placeholder="Password"onChange={(e) => setPassword(e.target.value)} />
         </div>
         
         <h2 onClick={handleClick} id="no-account">

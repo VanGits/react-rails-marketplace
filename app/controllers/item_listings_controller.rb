@@ -6,6 +6,11 @@ class ItemListingsController < ApplicationController
         render json: items, status: :ok
     end
 
+    def userIndex
+      items = @user.item_listings.all
+      render json: items, status: :ok
+    end
+
     def show
         item = find_item
         render json: item, status: :ok

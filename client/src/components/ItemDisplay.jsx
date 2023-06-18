@@ -52,7 +52,13 @@ const ItemDisplay = () => {
                 <ImSpinner8 className='load' />
             ) : (<div className='item-viewer'>
                 <div className={item ? "item-details-wrapper" : ""}>
-                     <div className="item-details">
+                    
+
+                    {item && <img src={item.image_url} alt="" />}
+                   
+                    {item ? "" : <h1 id='not-found'>Item not found</h1>}
+
+                    <div className="item-details">
                         <div className="item-details-profile">
 
 
@@ -68,10 +74,6 @@ const ItemDisplay = () => {
                         <span><BsBookmark/><h4>Favorite</h4></span>
                         <button>Message</button>
                     </div>
-
-                    {item && <img src={item.image_url} alt="" />}
-                   
-                    {item ? "" : <h1 id='not-found'>Item not found</h1>}
 
                 </div>
                 <div className="description-wrapper">

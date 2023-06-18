@@ -18,12 +18,14 @@
 .navigation{
   position: relative;
   
+  
 }
 .profile-pop-up{
   position: absolute;
+  z-index: 999999 !important; 
  
   right: 0;
-  margin-right: 32px;
+  margin-right: 24px;
   box-shadow: 0px 2.98px 7.46px 0px rgba(0, 0, 0, 0.3);
   width: 100%;
   max-width: 300px;
