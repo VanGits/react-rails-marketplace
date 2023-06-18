@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import "../styles/Nav.css"
 import { BsBookmark } from 'react-icons/bs';
 import { GrTransaction } from 'react-icons/gr';
 import { MdSell } from 'react-icons/md';
 import { Link } from 'react-router-dom';
+import UserContext from "../context/UserContext";
 
-
-const Nav = ({ handleLogInModal, currentUser, handleProfileClick }) => {
-
+const Nav = ({ handleLogInModal, handleProfileClick }) => {
+    const currentUser = useContext(UserContext);
     return (
         <nav className='nav'>
             <div className="nav-wrapper">

@@ -8,6 +8,7 @@ import { ToastContainer, toast } from "react-toastify";
 import { BrowserRouter, Navigate, Route, Routes, useNavigate, useParams } from "react-router-dom";
 import ItemDisplay from "./components/ItemDisplay";
 import UserListings from "./components/UserListings";
+import UserContext from "./context/UserContext";
 
 function App() {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false)
@@ -41,7 +42,7 @@ function App() {
   }, []);
 
   useEffect(() => {
-        fetch("/user-listings").then((res) => {
+        fetch("/my-listings").then((res) => {
           if (res.ok) {
             res.json().then((listings) => setUserListings(listings));
           } else {
@@ -85,13 +86,14 @@ function App() {
     <div className="App">
       <ToastContainer />
       <BrowserRouter>
+      <UserContext.Provider value={currentUser}>
         <Routes>
 
 
           <Route path="/" element={
             <>
               <div className="navigation">
-                <Nav handleLogInModal={handleLogInModal} currentUser={currentUser} handleProfileClick={handleProfileClick} />
+                <Nav handleLogInModal={handleLogInModal} handleProfileClick={handleProfileClick} />
                 {isProfileClicked && currentUser && <div className="profile-pop-up">
                   <div className="profile-details">
                     <img src={currentUser && currentUser.image_url} />
@@ -132,7 +134,7 @@ function App() {
           <Route path="/my-listings" element={
             <>
               <div className="navigation">
-                <Nav handleLogInModal={handleLogInModal} currentUser={currentUser} handleProfileClick={handleProfileClick} />
+                <Nav handleLogInModal={handleLogInModal}  handleProfileClick={handleProfileClick} />
                 {isProfileClicked && currentUser && <div className="profile-pop-up">
                   <div className="profile-details">
                     <img src={currentUser && currentUser.image_url} />
@@ -148,9 +150,10 @@ function App() {
               </div>
 
               <LoginModal setIsProfileClicked={setIsProfileClicked} onLogin={onLogin} isLoginModalOpen={isLoginModalOpen} setIsLoginModalOpen={setIsLoginModalOpen} />
-              <UserListings userListings={userListings}/>
+              {currentUser && <UserListings userListings={userListings}/>}
             </>} />
         </Routes>
+        </UserContext.Provider>
       </BrowserRouter>
     </div>
 
