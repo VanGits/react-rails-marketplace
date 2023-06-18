@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import "../../styles/modals/LoginModal.css"
 import { ToastContainer, toast } from "react-toastify";
 import ReactModal from "react-modal";
@@ -18,6 +18,23 @@ const LoginModal = ({ isLoginModalOpen, setIsLoginModalOpen, onLogin, setIsProfi
   const handleClick = () => {
     setIsLoginModal(!isLoginModal)
   }
+  useEffect(() => {
+    const loadGoogleMapsPlacesAPI = () => {
+      const script = document.createElement("script");
+      script.src = `https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}&libraries=places`;
+      script.async = true;
+      script.onload = () => {
+        // API loaded successfully
+      };
+      script.onerror = () => {
+        // API failed to load
+        toast.error("Failed to load Google Maps Places API");
+      };
+      document.body.appendChild(script);
+    };
+
+    loadGoogleMapsPlacesAPI();
+  }, []);
 
   const handleSignUp = (e) => {
     e.preventDefault();
@@ -114,12 +131,13 @@ const LoginModal = ({ isLoginModalOpen, setIsLoginModalOpen, onLogin, setIsProfi
           <input type="text"  placeholder="Enter an image url"onChange={(e) => setImage(e.target.value)} />
         </div>
         <div className="inputs autocomplete">
-          <h4>Location</h4>
+          <h4>City</h4>
           <Autocomplete
             apiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}
             onPlaceSelected={(place) => {
               setLocation(place.formatted_address);
             }}
+            placeholder='Enter a city'
             types={['geocode']}
             componentrestrictions={{ country: 'us' }} 
           />

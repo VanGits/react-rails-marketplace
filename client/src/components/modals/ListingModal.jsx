@@ -1,9 +1,51 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import "../../styles/modals/ListingModal.css"
 import ReactModal from "react-modal";
+import { toast } from 'react-toastify';
+import UserContext from "../../context/UserContext";
 const ListingModal = ({isModalOpen, setIsModalOpen}) => {
     //attributes :id, :title, :description, :image_url, :location, :user_id, :price,
+    const currentUser = useContext(UserContext);
+    // states to track inputs
+
+    const [title, setTitle] = useState("")
+    const [description, setDescription] = useState("")
+    const [image, setImage] = useState("")
+    const [price, setPrice] = useState("")
+   
     
+
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        fetch("/item_listings", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ 
+                title: title,
+                description: description,
+                image_url: image,
+                location: currentUser.location,
+                price: price,
+                user_id: currentUser.id
+    
+            }),
+          }).then((r) => {
+            if (r.ok) {
+              
+            //   r.json().then((newHighlight) => addHighlight(newHighlight));
+              
+              toast.success("Listing created!")
+              setIsModalOpen(false)
+            //   navigate("/home")
+            } else {
+              r.json().then((err) => toast.error(err.errors[0]));
+            }
+          });
+    }
+
+
     return (
         <ReactModal
         isOpen={isModalOpen}
@@ -11,23 +53,23 @@ const ListingModal = ({isModalOpen, setIsModalOpen}) => {
         className="modal listing"
         overlayClassName="modal-overlay">
           
-        <form action="">
+        <form onSubmit={handleSubmit}>
             <div className="inputs">
                 <h4>Title</h4>
-                <input type="text" />
+                <input type="text" onChange={(e) => setTitle(e.target.value)}/>
             </div>
            
             <div className="inputs">
                 <h4>Listing Image URL</h4>
-                <input type="text" />
+                <input type="text"onChange={(e) => setImage(e.target.value)} />
             </div>
             <div className="inputs">
                 <h4>Price</h4>
-                <input type="number" />
+                <input type="number" onChange={(e) => setPrice(e.target.value)}/>
             </div>
             <div className="inputs">
                 <h4>Description</h4>
-                <textarea name="" id="" ></textarea>
+                <textarea name="" id="" onChange={(e) => setDescription(e.target.value)}></textarea>
             </div>
             <button>Create new listing</button>
             
