@@ -13,9 +13,7 @@
   font-weight: 400;
 }
 
-.display-item:hover{
-  text-decoration: underline;
-}
+
 
 .main-banner img{
   width: 500px;
@@ -25,7 +23,7 @@
   margin-top: 24px;
   max-width: 1200px;
   width: 100%;
-  height: 100%;
+  height: 425px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -56,17 +54,31 @@
  .display-item{
     width: 100%;
     padding: 10px;
-    cursor: pointer;
+    
 }
 .list-btn{
   max-width: 500px;
   margin-top: 24px !important;
 }
+
+.item-details-display{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.bookmark{
+  font-size: 24px;
+  cursor: pointer;
+}
+
+
  .display-item img{
     width: 250px;
     height: 250px;
     object-fit: contain;
     border-radius: 8px;
+    cursor: pointer;
     
 }
 

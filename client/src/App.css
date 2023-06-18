@@ -24,7 +24,7 @@
 }
 .profile-pop-up{
   position: absolute;
-  z-index: 2;
+  z-index: 9999;
  
   right: 0;
   margin-right: 24px;

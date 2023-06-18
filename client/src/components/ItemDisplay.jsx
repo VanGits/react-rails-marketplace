@@ -56,13 +56,34 @@ const ItemDisplay = ({ items, item, setItem }) => {
         .filter((i) => item && item.id !== i.id) // Filter the items array
         .map((i) => (
 
-            <div className='display-item' key={i.id} onClick={() => handleItemClick(i.id)}> <div className="image-container"><img src={i.image_url} alt="" /></div><p className='item-price'>${item.price}</p><h4>{i.location}</h4></div>
+
+            
+            <div className='display-item' key={i.id} > 
+            <div className="image-container"onClick={() => handleItemClick(i.id)}>
+                <img src={i.image_url} alt="" />
+                </div>
+                <div className="item-details-display">
+                    <div className="display-details">
+                    <p className='item-price'>${i.price}</p>
+                    <h4>{i.location}</h4>
+                    </div>
+                    
+                    <div className="bookmark">
+                    <BsBookmark />
+                    </div>
+                    
+                </div>
+           </div>
+
+
+
+
 
         ));
-        const navigate = useNavigate()
-        const handleItemClick = (itemId) => {
-            navigate(`/items/${itemId}`)
-        }
+    const navigate = useNavigate()
+    const handleItemClick = (itemId) => {
+        navigate(`/items/${itemId}`)
+    }
 
     return (
         <div className='item-display'>
@@ -83,18 +104,18 @@ const ItemDisplay = ({ items, item, setItem }) => {
 
                             {item && <img src={item.user.image_url} alt="" />}
                             <div className="item-details-profile-elements">
-                            {item && <h3> {item.user.name}</h3>}
-                            {item && <h4>Posted at {formattedDate}</h4>}
+                                {item && <h3> {item.user.name}</h3>}
+                                {item && <h4>Posted at {formattedDate}</h4>}
                             </div>
-                            
+
 
                         </div>
                         <h2 className='title price'>Title: {item && item.title}</h2>
                         <h2 className='price'>${item && item.price.toFixed(2)}</h2>
-                        
-                        
 
-                        
+
+
+
                         <span><BsBookmark /><h4>Favorite</h4></span>
                         <button>Message</button>
                     </div>
@@ -106,9 +127,9 @@ const ItemDisplay = ({ items, item, setItem }) => {
                     <MapDisplay item={item} />
                     <h1>Other items</h1>
                 </div>
-             
+
                 <div className='display-items-wrapper'>
-                
+
                     {recommendedItems}
                 </div>
 
