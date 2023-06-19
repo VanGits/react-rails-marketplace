@@ -7,7 +7,7 @@ class ItemListingsController < ApplicationController
     end
 
     def userIndex
-      items = @user.item_listings.all
+      items = @user.item_listings.all.order(created_at: :desc)
       render json: items, status: :ok
     end
 
