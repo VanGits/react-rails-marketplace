@@ -57,8 +57,8 @@ const UserListings = ({ userListings, isModalOpen, setIsModalOpen, deleteListing
                     <h2>${listing.price}</h2>
                     <h3>{formattedDate}</h3>
                     <h4>{listing.description}</h4>
-                    <button className='list-btn'>Edit listing</button>
-                    <a onClick={() => handleItemClick(listing.id)}>View Listing</a>
+                    <button className='list-btn'onClick={() => handleItemClick(listing.id)}>Edit listing</button>
+                    
                 </div>
             </div>
         );

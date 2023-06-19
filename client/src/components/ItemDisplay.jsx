@@ -1,19 +1,25 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import { ImSpinner8 } from 'react-icons/im';
+import { FaUserEdit } from 'react-icons/fa';
 import { useNavigate, useParams } from 'react-router-dom';
 import "../styles/ItemDisplay.css"
 import { BsBookmark } from 'react-icons/bs';
 import MapDisplay from './MapDisplay';
+import UserContext from "../context/UserContext";
+import { toast } from 'react-toastify';
 
 
 
-
-const ItemDisplay = ({ items, item, setItem }) => {
+const ItemDisplay = ({ items, item, setItem, updateListing }) => {
 
     const [isLoading, setIsLoading] = useState(true);
+    const [isEditing, setIsEditing] = useState(false);
+    const [editedTitle, setEditedTitle] = useState('');
+    const [editedPrice, setEditedPrice] = useState('');
+    const [editedDescription, setEditedDescription] = useState('');
     const params = useParams();
 
-
+    const currentUser = useContext(UserContext);
 
     useEffect(() => {
         const fetchItem = () => {
@@ -85,65 +91,122 @@ const ItemDisplay = ({ items, item, setItem }) => {
         navigate(`/items/${itemId}`)
     }
 
+    const handleEditClick = () => {
+        setIsEditing(true);
+        setEditedTitle(item && item.title);
+        setEditedPrice(item && item.price.toFixed(2));
+        setEditedDescription(item && item.description);
+    };
+
+   
+
+    const handleSaveClick = (e) => {
+        
+        setIsEditing(false);
+        e.preventDefault()
+        fetch(`/item_listings/${item.id}`, {
+            method: "PATCH",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                ...item,
+                title: editedTitle,
+                price: parseFloat(editedPrice),
+                description: editedDescription
+            }),
+          }).then((r) => {
+            if (r.ok) {
+              r.json().then((editedListing) => updateListing(editedListing));
+              toast.success("Listing updated!");
+            } else {
+              r.json().then((err) => toast.error(err.errors && err.errors[0]));
+            }
+          });
+
+        
+    };
+
+
     return (
         <div className='item-display'>
-
-            {isLoading ? (
-                <ImSpinner8 className='load' />
-            ) : (<div className='item-viewer'>
-                <div className={item ? "item-details-wrapper" : ""}>
-
-
-                    {item && <img src={item.image_url} alt="" />}
-
-                    {item ? "" : <h1 id='not-found'>Item not found</h1>}
-
-                    <div className="item-details">
-                        <div className="item-details-profile">
-
-
-                            {item && <img src={item.user.image_url} alt="" />}
-                            <div className="item-details-profile-elements">
-                                {item && <h3> {item.user.name}</h3>}
-                                {item && <h4>Posted at {formattedDate}</h4>}
-                            </div>
-
-
-                        </div>
+          {isLoading ? (
+            <ImSpinner8 className='load' />
+          ) : (
+            <div className='item-viewer'>
+              <div className={item ? 'item-details-wrapper' : ''}>
+                {currentUser && currentUser.id === item?.user.id ? (
+                  <FaUserEdit
+                    id='user-edit'
+                    onClick={isEditing ? handleSaveClick : handleEditClick}
+                  />
+                ) : (
+                  ''
+                )}
+                {item && <img src={item.image_url} alt='' />}
+                {item ? (
+                  ''
+                ) : (
+                  <h1 id='not-found'>Item not found</h1>
+                )}
+                {item && (
+                  <div className='item-details'>
+                    <div className='item-details-profile'>
+                      {item && <img src={item.user.image_url} alt='' />}
+                      <div className='item-details-profile-elements'>
+                        <h3>{item && item.user.name}</h3>
+                        <h4>Posted at {formattedDate}</h4>
+                      </div>
+                    </div>
+                    {isEditing ? (
+                      <>
+                        <input
+                          type='text'
+                          value={editedTitle}
+                          onChange={(e) => setEditedTitle(e.target.value)}
+                        />
+                        <input
+                          type='number'
+                          value={editedPrice}
+                          onChange={(e) => setEditedPrice(e.target.value)}
+                        />
+                        
+                        <button onClick={handleSaveClick}>Save</button>
+                      </>
+                    ) : (
+                      <>
                         <h2 className='title price'>Title: {item && item.title}</h2>
                         <h2 className='price'>${item && item.price.toFixed(2)}</h2>
-
-
-
-
-                        <span><BsBookmark /><h4>Favorite</h4></span>
+                        <span>
+                          <BsBookmark />
+                          <h4>Favorite</h4>
+                        </span>
                         <button>Message</button>
-                    </div>
-
+                      </>
+                    )}
+                  </div>
+                )}
+              </div>
+              {item && (
+                <div className='description-wrapper'>
+                  <h1>{item && 'Description'}</h1>
+                  {isEditing ? (
+                    <textarea
+                      value={editedDescription}
+                      onChange={(e) => setEditedDescription(e.target.value)}
+                    ></textarea>
+                  ) : (
+                    <h3>{item && item.description}</h3>
+                  )}
+                  {item && <MapDisplay item={item} />}
+                  {item && <h1>Other items</h1>}
                 </div>
-                <div className="description-wrapper">
-                    <h1>Description</h1>
-                    <h3>{item.description}</h3>
-                    <MapDisplay item={item} />
-                    <h1>Other items</h1>
-                </div>
-
-                <div className='display-items-wrapper'>
-
-                    {recommendedItems}
-                </div>
-
-
-
-
-
+              )}
+              <div className='display-items-wrapper'>{recommendedItems}</div>
             </div>
-            )}
+          )}
         </div>
-
-    );
-
-
-};
+      );
+    };
 
 export default ItemDisplay;

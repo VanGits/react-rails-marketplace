@@ -25,6 +25,19 @@ class ItemListingsController < ApplicationController
           render json: { errors: item.errors.full_messages }, status: :unprocessable_entity
         end
     end
+    def update
+      item = find_item
+      if @user.id == item.user.id
+        if item.update(item_params)
+          render json: item, status: :ok
+        else
+          render json: { errors: item.errors.full_messages }, status: :unprocessable_entity
+        end
+      else
+        render json: { error: "You are not authorized to update this listing" }, status: :unauthorized
+      end
+      
+    end
 
     def destroy
       item = find_item

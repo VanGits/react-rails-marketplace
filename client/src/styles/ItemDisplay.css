@@ -36,6 +36,7 @@
     height: 622px;
     padding: 36px;
     border-bottom: 1px solid rgb(204, 204, 204);
+    position: relative;
 }
 
 .item-details img{
@@ -153,6 +154,26 @@
     color: #222831;
     font-size: 42px;
     
+  }
+  .item-display input, .item-display textarea{
+    margin: 24px 0;
+  }
+  .item-display textarea{
+    max-width: 100%;
+    width: 100% !important;
+    height: 400px;
+    resize: none;
+  }
+
+  
+    
+
+  #user-edit{
+    position: absolute;
+    font-size: 48px;
+    top: 0;
+    right: 0;
+    cursor: pointer;
   }
 
   .description-wrapper h3{

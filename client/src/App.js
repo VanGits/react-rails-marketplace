@@ -91,6 +91,28 @@ function App() {
     
   }
 
+  const updateListing = (editedListing) => {
+    setItem(editedListing)
+    const updatedListing = items.map((item) => {
+      if (item.id === editedListing.id) {
+        return { ...item, ...editedListing };
+      } else {
+        return item;
+      }
+    });
+    setItems(updatedListing);
+    
+    const updatedUserListing = userListings.map((item) => {
+      if (item.id === editedListing.id) {
+        return { ...item, ...editedListing };
+      } else {
+        return item;
+      }
+    });
+    setUserListings(updatedUserListing);
+  }
+  console.log(items, "items in app")
+
   const deleteListing = (itemUserId, listingId) => {
     console.log("hello")
     console.log(itemUserId, listingId, "in app")
@@ -167,7 +189,7 @@ function App() {
               </div>
 
               <LoginModal setIsProfileClicked={setIsProfileClicked} onLogin={onLogin} isLoginModalOpen={isLoginModalOpen} setIsLoginModalOpen={setIsLoginModalOpen} />
-              <ItemDisplay item={item} setItem={setItem} items = {items} />
+              <ItemDisplay item={item} setItem={setItem} items = {items} updateListing={updateListing}/>
               <Footer/>
             </>} />
           <Route path="/my-listings" element={

@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   resources :favorites
-  resources :item_listings, only: [:index, :show, :create, :destroy]
+  resources :item_listings, only: [:index, :show, :create, :update, :destroy]
   resources :transactions
  
   
