@@ -7,6 +7,9 @@
     flex-direction: column;
     
 }
+.no-l{
+    color: #F67280;
+}
 
 .no-listings {
     display: flex;

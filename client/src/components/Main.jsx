@@ -1,15 +1,17 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { ImSpinner8 } from 'react-icons/im';
 import "../styles/Main.css";
 import { useNavigate } from 'react-router-dom';
 import banner from "../assets/dollar.svg";
 import UserContext from "../context/UserContext";
 import ListingModal from './modals/ListingModal';
-import { BsBookmark } from 'react-icons/bs';
+import { BsBookmarkFill, BsBookmark } from 'react-icons/bs';
+import { toast } from 'react-toastify';
 
-const Main = ({ items, isModalOpen, setIsModalOpen, addListing }) => {
+const Main = ({ items, isModalOpen, setIsModalOpen, addListing, toggleBookmark, isItemBookmarked }) => {
     const navigate = useNavigate();
     const currentUser = useContext(UserContext);
+    
 
     const handleItemClick = (itemId) => {
         navigate(`/item/${itemId}`);
@@ -21,10 +23,9 @@ const Main = ({ items, isModalOpen, setIsModalOpen, addListing }) => {
         }
         return title;
     };
-    
 
     
-
+    
     const displayItem = items.map((item) => {
         const truncatedTitle = truncateTitle(item.title, 20);
 
@@ -39,8 +40,8 @@ const Main = ({ items, isModalOpen, setIsModalOpen, addListing }) => {
                         <p>${item.price.toFixed(2)}</p>
                         <h4>{item.location}</h4>
                     </div>
-                    <div className="bookmark">
-                        <BsBookmark />
+                    <div className="bookmark" onClick={() => toggleBookmark(item.id)}>
+                        {isItemBookmarked(item.id) ? <BsBookmarkFill /> : <BsBookmark />}
                     </div>
                 </div>
             </div>
@@ -66,7 +67,7 @@ const Main = ({ items, isModalOpen, setIsModalOpen, addListing }) => {
                     {items.length === 0 ? <p className='no-items'>No items found</p> : <ImSpinner8 className='load' />}
                 </div>
             )}
-            <ListingModal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} addListing={addListing}/>
+            <ListingModal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} addListing={addListing} />
         </div>
     );
 };

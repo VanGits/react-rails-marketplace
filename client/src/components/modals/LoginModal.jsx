@@ -1,15 +1,22 @@
 import React, { useEffect, useState } from 'react';
-import "../../styles/modals/LoginModal.css";
-import { ToastContainer, toast } from "react-toastify";
-import ReactModal from "react-modal";
+import '../../styles/modals/LoginModal.css';
+import { ToastContainer, toast } from 'react-toastify';
+import ReactModal from 'react-modal';
 import Autocomplete from 'react-google-autocomplete';
+import { ImSpinner8 } from 'react-icons/im';
 
-const LoginModal = ({ isLoginModalOpen, setIsLoginModalOpen, onLogin, setIsProfileClicked }) => {
+const LoginModal = ({
+  isLoginModalOpen,
+  setIsLoginModalOpen,
+  onLogin,
+  setIsProfileClicked,
+}) => {
   const [isLoginModal, setIsLoginModal] = useState(true);
-  const [name, setName] = useState("");
-  const [image, setImage] = useState("");
-  const [password, setPassword] = useState("");
-  const [location, setLocation] = useState("");
+  const [name, setName] = useState('');
+  const [image, setImage] = useState('');
+  const [password, setPassword] = useState('');
+  const [location, setLocation] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleClick = () => {
     setIsLoginModal(!isLoginModal);
@@ -17,7 +24,7 @@ const LoginModal = ({ isLoginModalOpen, setIsLoginModalOpen, onLogin, setIsProfi
 
   useEffect(() => {
     const loadGoogleMapsPlacesAPI = () => {
-      const script = document.createElement("script");
+      const script = document.createElement('script');
       script.src = `https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}&libraries=places`;
       script.async = true;
       script.onload = () => {
@@ -25,7 +32,7 @@ const LoginModal = ({ isLoginModalOpen, setIsLoginModalOpen, onLogin, setIsProfi
       };
       script.onerror = () => {
         // API failed to load
-        toast.error("Failed to load Google Maps Places API");
+        toast.error('Failed to load Google Maps Places API');
       };
       document.body.appendChild(script);
     };
@@ -35,23 +42,26 @@ const LoginModal = ({ isLoginModalOpen, setIsLoginModalOpen, onLogin, setIsProfi
 
   const handleSignUp = (e) => {
     e.preventDefault();
-    fetch("/signup", {
-      method: "POST",
+    setIsLoading(true);
+
+    fetch('/signup', {
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({
         name: name,
         image_url: image,
         location: location,
-        password: password
+        password: password,
       }),
     })
       .then((r) => {
+        setIsLoading(false);
         if (r.ok) {
           setIsLoginModalOpen(false);
           setIsProfileClicked(false);
-          toast.success("Signed up successfully!");
+          toast.success('Signed up successfully!');
           r.json().then((user) => onLogin(user));
         } else {
           r.json().then((err) => toast.error(err.errors && err.errors[0]));
@@ -61,21 +71,24 @@ const LoginModal = ({ isLoginModalOpen, setIsLoginModalOpen, onLogin, setIsProfi
 
   const handleLogIn = (e) => {
     e.preventDefault();
-    fetch("/login", {
-      method: "POST",
+    setIsLoading(true);
+
+    fetch('/login', {
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({
         name: name,
-        password: password
+        password: password,
       }),
     })
       .then((r) => {
+        setIsLoading(false);
         if (r.ok) {
           setIsLoginModalOpen(false);
           setIsProfileClicked(false);
-          toast.success("Logged in successfully!");
+          toast.success('Logged in successfully!');
           r.json().then((user) => onLogin(user));
         } else {
           r.json().then((err) => toast.error(err.errors && err.errors));
@@ -89,7 +102,7 @@ const LoginModal = ({ isLoginModalOpen, setIsLoginModalOpen, onLogin, setIsProfi
         <h1>Log in</h1>
         <h2 onClick={() => setIsLoginModalOpen(false)}>Cancel</h2>
       </div>
-      <h1 id='logo'>MarketPlace</h1>
+      <h1 id="logo">MarketPlace</h1>
       <form action="" onSubmit={handleLogIn}>
         <div className="inputs">
           <h4>Username</h4>
@@ -99,8 +112,10 @@ const LoginModal = ({ isLoginModalOpen, setIsLoginModalOpen, onLogin, setIsProfi
           <h4>Password</h4>
           <input type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
         </div>
-        <h2 id='no-account' onClick={handleClick}>Don't have an account? Sign Up</h2>
-        <button>Log in</button>
+        <h2 id="no-account" onClick={handleClick}>
+          Don't have an account? Sign Up
+        </h2>
+        <button disabled={isLoading}>{isLoading ? <ImSpinner8 className='loading'/> : 'Log in'}</button>
       </form>
     </>
   );
@@ -128,7 +143,7 @@ const LoginModal = ({ isLoginModalOpen, setIsLoginModalOpen, onLogin, setIsProfi
             onPlaceSelected={(place) => {
               setLocation(place.formatted_address);
             }}
-            placeholder='Enter a city'
+            placeholder="Enter a city"
             types={['geocode']}
             componentRestrictions={{ country: 'us' }}
           />
@@ -140,7 +155,7 @@ const LoginModal = ({ isLoginModalOpen, setIsLoginModalOpen, onLogin, setIsProfi
         <h2 onClick={handleClick} id="no-account">
           Already have an account? Log in
         </h2>
-        <button>Sign Up</button>
+        <button disabled={isLoading}>{isLoading ? <ImSpinner8 className='loading'/> : 'Sign Up'}</button>
       </form>
     </>
   );
@@ -150,7 +165,8 @@ const LoginModal = ({ isLoginModalOpen, setIsLoginModalOpen, onLogin, setIsProfi
       isOpen={isLoginModalOpen}
       onRequestClose={() => setIsLoginModalOpen(false)}
       className="modal"
-      overlayClassName="modal-overlay">
+      overlayClassName="modal-overlay"
+    >
       {isLoginModal ? loginModal : signUpModal}
     </ReactModal>
   );

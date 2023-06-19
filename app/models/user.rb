@@ -5,9 +5,9 @@ class User < ApplicationRecord
     has_many :item_listings
     
     has_many :transactions, foreign_key: :buyer_id 
-    has_many :sold_items, through: :transactions, source: :item
+    has_many :sold_items, through: :transactions, source: :item_listing
     has_many :favorites
-  has_many :favorited_items, through: :favorites, source: :item
+    has_many :favorited_items, through: :favorites, source: :item_listing
     # validations
 
     validates :name, presence: true, uniqueness: true

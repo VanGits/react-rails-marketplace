@@ -11,6 +11,8 @@ import UserListings from "./components/UserListings";
 import UserContext from "./context/UserContext";
 import Footer from "./components/Footer";
 import SearchMain from "./components/Searchmain";
+import Favorites from "./components/Favorites";
+
 
 
 
@@ -25,6 +27,7 @@ function App() {
   const [isModalDeleteOpen, setIsModalDeleteOpen] = useState(false)
   const [searchedItems, setSearchedItems] = useState([])
   const [searchInput, setSearchInput] = useState('');
+  const [bookmarkedItems, setBookmarkedItems] = useState([]);
 
 
   const handleLogInModal = (clicked) => {
@@ -55,6 +58,14 @@ function App() {
             res.json().then((listings) => setUserListings(listings));
           } 
         });
+  }, [currentUser])
+
+  useEffect(() => {
+    fetch("/favorites").then((res) => {
+      if (res.ok) {
+        res.json().then((favorites) => setBookmarkedItems(favorites));
+      } 
+    });
   }, [currentUser])
 
   
@@ -160,6 +171,67 @@ function App() {
       window.removeEventListener("click", handleClickOutsideProfilePopUp);
     };
   }, [isProfileClicked]);
+
+  const isItemBookmarked = (itemId) => {
+    return bookmarkedItems.find((item) => item.id === itemId);
+};
+
+const toggleBookmark = (itemId) => {
+    if (isItemBookmarked(itemId)) {
+        removeBookmark(itemId);
+    } else {
+        addBookmark(itemId);
+    }
+};
+
+const addBookmark = (itemId) => {
+    // Perform a PATCH request to add the item to favorites
+    fetch(`/favorites/${itemId}`, {
+        method: "PATCH",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({}),
+    })
+        .then((response) => {
+            if (response.ok) {
+                return response.json().then((newBookMarked) => {
+                    setBookmarkedItems([...bookmarkedItems, newBookMarked]);
+                    console.log("Item added to favorites.");
+                });
+            } else {
+                return response.json().then((data) => {
+                    toast.error(data.errors[0]);
+                });
+            }
+        })
+        .catch((error) => {
+            console.error("Error adding item to favorites:", error);
+        });
+};
+
+const removeBookmark = (itemId) => {
+    // Perform a DELETE request to remove the item from favorites
+    fetch(`/favorites/${itemId}`, {
+        method: "DELETE",
+        headers: {
+            "Content-Type": "application/json",
+        },
+    })
+        .then((response) => {
+            if (response.ok) {
+                setBookmarkedItems(bookmarkedItems.filter((item) => item.id !== itemId));
+                console.log("Item removed from favorites.");
+            } else {
+                return response.json().then((data) => {
+                    toast.error(data.errors[0]);
+                });
+            }
+        })
+        .catch((error) => {
+            console.error("Error removing item from favorites:", error);
+        });
+};
   
 
   return (
@@ -172,7 +244,7 @@ function App() {
 
           <Route path="/" element={
             <>
-              
+            
               <div className="navigation">
                 <Nav handleLogInModal={handleLogInModal} handleProfileClick={handleProfileClick}  setSearchedItems={setSearchedItems} setSearchInput={setSearchInput} searchInput = {searchInput}/>
                 {isProfileClicked && currentUser && <div className="profile-pop-up">
@@ -190,7 +262,7 @@ function App() {
               </div>
 
               <LoginModal setIsProfileClicked={setIsProfileClicked} onLogin={onLogin} isLoginModalOpen={isLoginModalOpen} setIsLoginModalOpen={setIsLoginModalOpen} />
-              <Main addListing={addListing}items={items} isModalOpen={isModalOpen} setIsModalOpen= {setIsModalOpen} searchedItems= {searchedItems}/>
+              <Main isItemBookmarked={isItemBookmarked}toggleBookmark={toggleBookmark} addListing={addListing}items={items} isModalOpen={isModalOpen} setIsModalOpen= {setIsModalOpen} searchedItems= {searchedItems}/>
               <Footer/>
               </>} />
             
@@ -213,7 +285,7 @@ function App() {
               </div>
 
               <LoginModal setIsProfileClicked={setIsProfileClicked} onLogin={onLogin} isLoginModalOpen={isLoginModalOpen} setIsLoginModalOpen={setIsLoginModalOpen} />
-              <ItemDisplay item={item} setItem={setItem} items = {items} updateListing={updateListing}/>
+              <ItemDisplay isItemBookmarked={isItemBookmarked}toggleBookmark={toggleBookmark}item={item} setItem={setItem} items = {items} updateListing={updateListing}/>
               <Footer/>
             </>} />
           <Route path="/user-listings" element={
@@ -258,6 +330,28 @@ function App() {
 
               <LoginModal setIsProfileClicked={setIsProfileClicked} onLogin={onLogin} isLoginModalOpen={isLoginModalOpen} setIsLoginModalOpen={setIsLoginModalOpen} />
               <SearchMain searchedItems={searchedItems} />
+              <Footer/>
+            </>} />
+            <Route path="/user-favorites" element={
+            <>
+              <div className="navigation">
+                <Nav handleLogInModal={handleLogInModal}  handleProfileClick={handleProfileClick}  setSearchedItems={setSearchedItems} setSearchInput={setSearchInput} searchInput = {searchInput}/>
+                {isProfileClicked && currentUser && <div className="profile-pop-up">
+                  <div className="profile-details">
+                    <img src={currentUser && currentUser.image_url} />
+                    <div className="profile-texts">
+                      <h1>{currentUser && currentUser.name}</h1>
+                      <p>View Profile</p>
+                    </div>
+
+                  </div>
+                  <p onClick={handleLogOut}>Log out</p>
+
+                </div>}
+              </div>
+
+              <LoginModal setIsProfileClicked={setIsProfileClicked} onLogin={onLogin} isLoginModalOpen={isLoginModalOpen} setIsLoginModalOpen={setIsLoginModalOpen} />
+              {currentUser && <Favorites isItemBookmarked={isItemBookmarked}toggleBookmark={toggleBookmark}bookmarkedItems={bookmarkedItems}/>}
               <Footer/>
             </>} />
         </Routes>

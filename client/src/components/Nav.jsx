@@ -67,7 +67,7 @@ const Nav = ({ handleLogInModal, handleProfileClick, setSearchedItems, searchInp
                     </div>
                 ) : (
                     <div className="nav-elements">
-                        <span><BsBookmark /><p> Favorites</p></span>
+                        <Link to="/user-favorites"><span><BsBookmark /><p> Favorites</p></span></Link>
                         <span><GrTransaction /><p>Transactions</p></span>
                         <Link to="/user-listings"><span><MdSell /><p>My Listings</p></span></Link>
                         <span id='profile'><img src={currentUser.image_url} alt="" onClick={handleProfileClick} /></span>

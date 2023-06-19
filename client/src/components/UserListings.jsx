@@ -75,7 +75,7 @@ const UserListings = ({ userListings, isModalOpen, setIsModalOpen, deleteListing
                 <ImSpinner8 className='load' />
             ) : (
                 <>
-                    {userListing.length > 0 ? userListing : <h1>No listings yet!</h1>}
+                    {userListing.length > 0 ? userListing : <h1 className='no-l'>No listings yet!</h1>}
                     <ListingModal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} addListing={addListing}/>
                 </>
             )}
