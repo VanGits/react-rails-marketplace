@@ -13,7 +13,10 @@
   font-weight: 400;
 }
 
-
+.search-input{
+  text-align: left;
+  justify-self: flex-start;
+}
 
 .main-banner img{
   width: 500px;

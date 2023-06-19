@@ -3,11 +3,12 @@ class ItemListingsController < ApplicationController
   skip_before_action :authorize, only: [:index, :show]
   def index
     if params[:search].present?
-      items = ItemListing.where("title LIKE ?", "%#{params[:search]}%")
+      search_query = params[:search].downcase
+      items = ItemListing.where("LOWER(title) LIKE ?", "%#{search_query}%")
     else
       items = ItemListing.all
     end
-
+  
     render json: items.order(created_at: :desc), status: :ok
   end
 

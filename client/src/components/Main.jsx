@@ -7,7 +7,7 @@ import UserContext from "../context/UserContext";
 import ListingModal from './modals/ListingModal';
 import { BsBookmark } from 'react-icons/bs';
 
-const Main = ({ items, isModalOpen, setIsModalOpen }) => {
+const Main = ({ items, isModalOpen, setIsModalOpen, searchedItems }) => {
     const navigate = useNavigate();
     const currentUser = useContext(UserContext);
 
@@ -21,6 +21,8 @@ const Main = ({ items, isModalOpen, setIsModalOpen }) => {
         }
         return title;
     };
+
+    
 
     const displayItem = items.map((item) => {
         const truncatedTitle = truncateTitle(item.title, 20);

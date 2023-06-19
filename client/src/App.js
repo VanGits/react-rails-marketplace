@@ -10,6 +10,7 @@ import ItemDisplay from "./components/ItemDisplay";
 import UserListings from "./components/UserListings";
 import UserContext from "./context/UserContext";
 import Footer from "./components/Footer";
+import SearchMain from "./components/Searchmain";
 
 function App() {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false)
@@ -20,6 +21,8 @@ function App() {
   const [isProfileClicked, setIsProfileClicked] = useState(false)
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isModalDeleteOpen, setIsModalDeleteOpen] = useState(false)
+  const [searchedItems, setSearchedItems] = useState([])
+  const [searchInput, setSearchInput] = useState('');
 
 
   const handleLogInModal = (clicked) => {
@@ -154,13 +157,7 @@ function App() {
       window.removeEventListener("click", handleClickOutsideProfilePopUp);
     };
   }, [isProfileClicked]);
-
-  const handleSearch = (searchQuery) => {
-    fetch(`/item_listings?search=${searchQuery}`)
-      .then((r) => r.json())
-      .then((data) => setItems(data))
-      .catch((error) => console.error(error));
-  };
+  
 
   return (
     <div className="App">
@@ -173,7 +170,7 @@ function App() {
           <Route path="/" element={
             <>
               <div className="navigation">
-                <Nav handleLogInModal={handleLogInModal} handleProfileClick={handleProfileClick} handleSearch = {handleSearch}/>
+                <Nav handleLogInModal={handleLogInModal} handleProfileClick={handleProfileClick}  setSearchedItems={setSearchedItems} setSearchInput={setSearchInput} searchInput = {searchInput}/>
                 {isProfileClicked && currentUser && <div className="profile-pop-up">
                   <div className="profile-details">
                     <img src={currentUser && currentUser.image_url} />
@@ -189,14 +186,14 @@ function App() {
               </div>
 
               <LoginModal setIsProfileClicked={setIsProfileClicked} onLogin={onLogin} isLoginModalOpen={isLoginModalOpen} setIsLoginModalOpen={setIsLoginModalOpen} />
-              <Main items={items} isModalOpen={isModalOpen} setIsModalOpen= {setIsModalOpen}/>
+              <Main items={items} isModalOpen={isModalOpen} setIsModalOpen= {setIsModalOpen} searchedItems= {searchedItems}/>
               <Footer/>
               </>} />
             
           <Route path="/items/:id" element={
             <>
               <div className="navigation">
-                <Nav handleLogInModal={handleLogInModal} currentUser={currentUser} handleProfileClick={handleProfileClick} />
+                <Nav  setSearchedItems={setSearchedItems} handleLogInModal={handleLogInModal}  handleProfileClick={handleProfileClick} setSearchInput={setSearchInput} searchInput = {searchInput}/>
                 {isProfileClicked && currentUser && <div className="profile-pop-up">
                   <div className="profile-details">
                     <img src={currentUser && currentUser.image_url} />
@@ -218,7 +215,7 @@ function App() {
           <Route path="/my-listings" element={
             <>
               <div className="navigation">
-                <Nav handleLogInModal={handleLogInModal}  handleProfileClick={handleProfileClick} />
+                <Nav handleLogInModal={handleLogInModal}  handleProfileClick={handleProfileClick}  setSearchedItems={setSearchedItems} setSearchInput={setSearchInput} searchInput = {searchInput}/>
                 {isProfileClicked && currentUser && <div className="profile-pop-up">
                   <div className="profile-details">
                     <img src={currentUser && currentUser.image_url} />
@@ -235,6 +232,28 @@ function App() {
 
               <LoginModal setIsProfileClicked={setIsProfileClicked} onLogin={onLogin} isLoginModalOpen={isLoginModalOpen} setIsLoginModalOpen={setIsLoginModalOpen} />
               {currentUser && <UserListings userListings={userListings} isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} addListing = {addListing} isModalDeleteOpen={isModalDeleteOpen} setIsModalDeleteOpen={setIsModalDeleteOpen} deleteListing={deleteListing}/>}
+              <Footer/>
+            </>} />
+            <Route path="/search?" element={
+            <>
+              <div className="navigation">
+                <Nav handleLogInModal={handleLogInModal}  handleProfileClick={handleProfileClick}  setSearchedItems={setSearchedItems} setSearchInput={setSearchInput} searchInput = {searchInput}/>
+                {isProfileClicked && currentUser && <div className="profile-pop-up">
+                  <div className="profile-details">
+                    <img src={currentUser && currentUser.image_url} />
+                    <div className="profile-texts">
+                      <h1>{currentUser && currentUser.name}</h1>
+                      <p>View Profile</p>
+                    </div>
+
+                  </div>
+                  <p onClick={handleLogOut}>Log out</p>
+
+                </div>}
+              </div>
+
+              <LoginModal setIsProfileClicked={setIsProfileClicked} onLogin={onLogin} isLoginModalOpen={isLoginModalOpen} setIsLoginModalOpen={setIsLoginModalOpen} />
+              <SearchMain searchedItems={searchedItems} />
               <Footer/>
             </>} />
         </Routes>
