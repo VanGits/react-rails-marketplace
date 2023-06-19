@@ -8,14 +8,15 @@ import { AiFillDelete } from 'react-icons/ai';
 import DeleteModal from './modals/DeleteModal';
 
 
-const UserListings = ({ userListings, isModalOpen, setIsModalOpen, deleteListing,addListing, isModalDeleteOpen, setIsModalDeleteOpen }) => {
+const UserListings = ({ userListings, isModalOpen, setIsModalOpen, deleteListing, addListing, isModalDeleteOpen, setIsModalDeleteOpen }) => {
     const [isLoading, setIsLoading] = useState(true);
     const [itemUserId, setItemUserId] = useState(null)
     const [listingId, setListingId] = useState(null)
-   
+  
 
     useEffect(() => {
         // Simulating API fetch delay
+        
         const delay = setTimeout(() => {
             setIsLoading(false);
         }, 2000);

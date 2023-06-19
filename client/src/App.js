@@ -93,6 +93,7 @@ function App() {
     setItems([ newListing, ...items])
     
   }
+ 
 
   const updateListing = (editedListing) => {
     setItem(editedListing)
@@ -186,7 +187,7 @@ function App() {
               </div>
 
               <LoginModal setIsProfileClicked={setIsProfileClicked} onLogin={onLogin} isLoginModalOpen={isLoginModalOpen} setIsLoginModalOpen={setIsLoginModalOpen} />
-              <Main items={items} isModalOpen={isModalOpen} setIsModalOpen= {setIsModalOpen} searchedItems= {searchedItems}/>
+              <Main addListing={addListing}items={items} isModalOpen={isModalOpen} setIsModalOpen= {setIsModalOpen} searchedItems= {searchedItems}/>
               <Footer/>
               </>} />
             

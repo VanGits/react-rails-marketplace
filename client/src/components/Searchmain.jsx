@@ -40,7 +40,7 @@ const SearchMain = ({ searchedItems }) => {
         <div className='item-details-display'>
           <div className='display-details'>
             <p>{truncatedTitle}</p>
-            <p>${item.price}</p>
+            <p>${item.price.toFixed(2)}</p>
             <h4>{item.location}</h4>
           </div>
           <div className='bookmark'>

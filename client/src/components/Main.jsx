@@ -7,7 +7,7 @@ import UserContext from "../context/UserContext";
 import ListingModal from './modals/ListingModal';
 import { BsBookmark } from 'react-icons/bs';
 
-const Main = ({ items, isModalOpen, setIsModalOpen, searchedItems }) => {
+const Main = ({ items, isModalOpen, setIsModalOpen, addListing }) => {
     const navigate = useNavigate();
     const currentUser = useContext(UserContext);
 
@@ -36,7 +36,7 @@ const Main = ({ items, isModalOpen, setIsModalOpen, searchedItems }) => {
                 <div className="item-details-display">
                     <div className="display-details">
                         <p>{truncatedTitle}</p>
-                        <p>${item.price}</p>
+                        <p>${item.price.toFixed(2)}</p>
                         <h4>{item.location}</h4>
                     </div>
                     <div className="bookmark">
@@ -66,7 +66,7 @@ const Main = ({ items, isModalOpen, setIsModalOpen, searchedItems }) => {
                     {items.length === 0 ? <p className='no-items'>No items found</p> : <ImSpinner8 className='load' />}
                 </div>
             )}
-            <ListingModal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
+            <ListingModal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} addListing={addListing}/>
         </div>
     );
 };

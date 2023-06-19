@@ -15,6 +15,7 @@ const ListingModal = ({isModalOpen, setIsModalOpen, addListing}) => {
    
   
    
+   
     const handleSubmit = (e) => {
         e.preventDefault();
         fetch("/item_listings", {
@@ -41,6 +42,7 @@ const ListingModal = ({isModalOpen, setIsModalOpen, addListing}) => {
             }
           })
           .then((newListing) => {
+            
             addListing(newListing);
             setIsModalOpen(false)
             toast.success("Listing created!");

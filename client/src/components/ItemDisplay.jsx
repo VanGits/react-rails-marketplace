@@ -70,7 +70,7 @@ const ItemDisplay = ({ items, item, setItem, updateListing }) => {
                 </div>
                 <div className="item-details-display">
                     <div className="display-details">
-                    <p className='item-price'>${i.price}</p>
+                    <p className='item-price'>${i.price.toFixed(2)}</p>
                     <h4>{i.location}</h4>
                     </div>
                     
