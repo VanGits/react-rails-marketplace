@@ -14,4 +14,7 @@ Rails.application.routes.draw do
   get "/me", to: "users#show"
   delete "/logout", to: "sessions#destroy"
   get "/my-listings", to: "item_listings#userIndex"
+
+  # fix deploy problem
+  get "*path", to: "application#fallback_index_html", constraints: ->(req) { !req.xhr? && req.format.html? }
 end
