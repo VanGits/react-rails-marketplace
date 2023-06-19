@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     resources :transactions
     get "/my-listings", to: "item_listings#userIndex"
   
+    
   
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
@@ -15,7 +16,7 @@ Rails.application.routes.draw do
   get "/me", to: "users#show"
   delete "/logout", to: "sessions#destroy"
  
-
+  
   # fix deploy problem
   get "*path", to: "application#fallback_index_html", constraints: ->(req) { !req.xhr? && req.format.html? }
 end

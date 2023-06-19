@@ -12,6 +12,8 @@ import UserContext from "./context/UserContext";
 import Footer from "./components/Footer";
 import SearchMain from "./components/Searchmain";
 
+
+
 function App() {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false)
   const [items, setItems] = useState([])
@@ -170,6 +172,7 @@ function App() {
 
           <Route path="/" element={
             <>
+              
               <div className="navigation">
                 <Nav handleLogInModal={handleLogInModal} handleProfileClick={handleProfileClick}  setSearchedItems={setSearchedItems} setSearchInput={setSearchInput} searchInput = {searchInput}/>
                 {isProfileClicked && currentUser && <div className="profile-pop-up">
