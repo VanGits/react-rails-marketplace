@@ -41,6 +41,11 @@
     animation: rotate360 750ms infinite linear;
 }
 
+.no-items{
+  margin-top: 48px;
+  color: #F67280;
+}
+
  .display-items-wrapper{
     display: grid;
   grid-template-columns: repeat(4, 1fr); 
@@ -54,6 +59,7 @@
  .display-item{
     width: fit-content;
     padding: 10px;
+    overflow: none;
     
 }
 .list-btn{

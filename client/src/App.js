@@ -155,6 +155,13 @@ function App() {
     };
   }, [isProfileClicked]);
 
+  const handleSearch = (searchQuery) => {
+    fetch(`/item_listings?search=${searchQuery}`)
+      .then((r) => r.json())
+      .then((data) => setItems(data))
+      .catch((error) => console.error(error));
+  };
+
   return (
     <div className="App">
       <ToastContainer />
@@ -166,7 +173,7 @@ function App() {
           <Route path="/" element={
             <>
               <div className="navigation">
-                <Nav handleLogInModal={handleLogInModal} handleProfileClick={handleProfileClick} />
+                <Nav handleLogInModal={handleLogInModal} handleProfileClick={handleProfileClick} handleSearch = {handleSearch}/>
                 {isProfileClicked && currentUser && <div className="profile-pop-up">
                   <div className="profile-details">
                     <img src={currentUser && currentUser.image_url} />

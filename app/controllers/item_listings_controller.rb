@@ -1,10 +1,15 @@
 class ItemListingsController < ApplicationController
 
   skip_before_action :authorize, only: [:index, :show]
-    def index
-        items = ItemListing.all.order(created_at: :desc)
-        render json: items, status: :ok
+  def index
+    if params[:search].present?
+      items = ItemListing.where("title LIKE ?", "%#{params[:search]}%")
+    else
+      items = ItemListing.all
     end
+
+    render json: items.order(created_at: :desc), status: :ok
+  end
 
     def userIndex
       items = @user.item_listings.all.order(created_at: :desc)

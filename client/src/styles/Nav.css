@@ -23,7 +23,41 @@ nav{
     align-items: center;
     justify-content: flex-start;
     width: 70%;
+    position: relative;
     
+}
+
+.search-wrapper{
+    width: 100%;
+    position: relative;
+    max-width: 550px;
+    
+}
+.search-wrapper .search-icon{
+    
+  font-size: 24px;
+}
+.search-icon-wrapper{
+    background-color: #F67280;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  color: white;
+  cursor: pointer;
+}
+.search-wrapper input{
+    width: 100%;
+    max-width: 550px;
+    
+   
+   
 }
 
 #logo{
