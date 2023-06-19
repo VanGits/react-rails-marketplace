@@ -41,3 +41,11 @@ preload_app!
 
 # Allow puma to be restarted by `bin/rails restart` command.
 plugin :tmp_restart
+
+if ENV['RAILS_ENV'] == 'production'
+    # Serve the main HTML file for all non-API requests
+    # Assumes your React app's main HTML file is located at public/index.html
+    get "*path", to: -> (env) {
+      [200, {}, [File.read(File.join(Rails.root, 'public', 'index.html'))]]
+    }
+  end
