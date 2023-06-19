@@ -16,7 +16,7 @@ const SearchMain = ({ searchedItems }) => {
   };
 
   const handleItemClick = (itemId) => {
-    navigate(`/items/${itemId}`);
+    navigate(`/item/${itemId}`);
   };
 
   useEffect(() => {

@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
-  resources :favorites
-  resources :item_listings, only: [:index, :show, :create, :update, :destroy]
-  resources :transactions
- 
+  
+    resources :favorites
+    resources :item_listings, only: [:index, :show, :create, :update, :destroy]
+    resources :transactions
+    get "/my-listings", to: "item_listings#userIndex"
   
   
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
@@ -13,7 +14,7 @@ Rails.application.routes.draw do
   post "/signup", to: "users#create"
   get "/me", to: "users#show"
   delete "/logout", to: "sessions#destroy"
-  get "/my-listings", to: "item_listings#userIndex"
+ 
 
   # fix deploy problem
   get "*path", to: "application#fallback_index_html", constraints: ->(req) { !req.xhr? && req.format.html? }

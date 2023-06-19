@@ -88,7 +88,7 @@ const ItemDisplay = ({ items, item, setItem, updateListing }) => {
         ));
     const navigate = useNavigate()
     const handleItemClick = (itemId) => {
-        navigate(`/items/${itemId}`)
+        navigate(`/item/${itemId}`)
     }
 
     const handleEditClick = () => {

@@ -31,7 +31,7 @@ const Nav = ({ handleLogInModal, handleProfileClick, setSearchedItems, searchInp
             .then((data) => {
                 setSearchedItems(data);
                 if (loweredSearchQuery){
-                    navigate(`/search?q=${loweredSearchQuery}`, { replace: true });
+                    navigate(`/searchs?q=${loweredSearchQuery}`, { replace: true });
                 } else {
                     navigate("/")
                 }
@@ -39,7 +39,7 @@ const Nav = ({ handleLogInModal, handleProfileClick, setSearchedItems, searchInp
             })
             .catch((error) => console.error(error));
     };
-    console.log(searchInput)
+    
 
     return (
         <nav className='nav'>
@@ -69,7 +69,7 @@ const Nav = ({ handleLogInModal, handleProfileClick, setSearchedItems, searchInp
                     <div className="nav-elements">
                         <span><BsBookmark /><p> Favorites</p></span>
                         <span><GrTransaction /><p>Transactions</p></span>
-                        <Link to="/my-listings"><span><MdSell /><p>My Listings</p></span></Link>
+                        <Link to="/user-listings"><span><MdSell /><p>My Listings</p></span></Link>
                         <span id='profile'><img src={currentUser.image_url} alt="" onClick={handleProfileClick} /></span>
                     </div>
                 )}

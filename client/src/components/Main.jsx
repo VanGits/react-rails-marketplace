@@ -12,7 +12,7 @@ const Main = ({ items, isModalOpen, setIsModalOpen, searchedItems }) => {
     const currentUser = useContext(UserContext);
 
     const handleItemClick = (itemId) => {
-        navigate(`/items/${itemId}`);
+        navigate(`/item/${itemId}`);
     };
 
     const truncateTitle = (title, maxLength) => {
@@ -21,6 +21,7 @@ const Main = ({ items, isModalOpen, setIsModalOpen, searchedItems }) => {
         }
         return title;
     };
+    
 
     
 

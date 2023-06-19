@@ -190,7 +190,7 @@ function App() {
               <Footer/>
               </>} />
             
-          <Route path="/items/:id" element={
+          <Route path="/item/:id" element={
             <>
               <div className="navigation">
                 <Nav  setSearchedItems={setSearchedItems} handleLogInModal={handleLogInModal}  handleProfileClick={handleProfileClick} setSearchInput={setSearchInput} searchInput = {searchInput}/>
@@ -212,7 +212,7 @@ function App() {
               <ItemDisplay item={item} setItem={setItem} items = {items} updateListing={updateListing}/>
               <Footer/>
             </>} />
-          <Route path="/my-listings" element={
+          <Route path="/user-listings" element={
             <>
               <div className="navigation">
                 <Nav handleLogInModal={handleLogInModal}  handleProfileClick={handleProfileClick}  setSearchedItems={setSearchedItems} setSearchInput={setSearchInput} searchInput = {searchInput}/>
@@ -234,7 +234,7 @@ function App() {
               {currentUser && <UserListings userListings={userListings} isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} addListing = {addListing} isModalDeleteOpen={isModalDeleteOpen} setIsModalDeleteOpen={setIsModalDeleteOpen} deleteListing={deleteListing}/>}
               <Footer/>
             </>} />
-            <Route path="/search?" element={
+            <Route path="/searchs?" element={
             <>
               <div className="navigation">
                 <Nav handleLogInModal={handleLogInModal}  handleProfileClick={handleProfileClick}  setSearchedItems={setSearchedItems} setSearchInput={setSearchInput} searchInput = {searchInput}/>

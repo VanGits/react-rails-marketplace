@@ -28,7 +28,7 @@ const UserListings = ({ userListings, isModalOpen, setIsModalOpen, deleteListing
     };
     const navigate = useNavigate()
     const handleItemClick = (itemId) => {
-        navigate(`/items/${itemId}`)
+        navigate(`/item/${itemId}`)
     }
 
 
