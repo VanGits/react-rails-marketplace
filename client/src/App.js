@@ -86,8 +86,8 @@ function App() {
   // update state when changes to listings have been made
 
   const addListing = (newListing) => {
-    setUserListings([...userListings, newListing])
-    setItems([...items, newListing])
+    setUserListings([ newListing, ...userListings])
+    setItems([ newListing, ...items])
     
   }
 
@@ -111,11 +111,10 @@ function App() {
     });
     setUserListings(updatedUserListing);
   }
-  console.log(items, "items in app")
+ 
 
   const deleteListing = (itemUserId, listingId) => {
-    console.log("hello")
-    console.log(itemUserId, listingId, "in app")
+    
     fetch(`/item_listings/${listingId}`, {
       method: "DELETE",
     }).then((r) => {
@@ -138,6 +137,23 @@ function App() {
       }
     })
   }
+  useEffect(() => {
+    const handleClickOutsideProfilePopUp = (e) => {
+      if (
+        isProfileClicked &&
+        !e.target.closest(".profile-pop-up") &&
+        !e.target.closest("#profile")
+      ) {
+        setIsProfileClicked(false);
+      }
+    };
+  
+    window.addEventListener("click", handleClickOutsideProfilePopUp);
+  
+    return () => {
+      window.removeEventListener("click", handleClickOutsideProfilePopUp);
+    };
+  }, [isProfileClicked]);
 
   return (
     <div className="App">

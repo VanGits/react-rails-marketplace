@@ -175,7 +175,7 @@ const ItemDisplay = ({ items, item, setItem, updateListing }) => {
                       </>
                     ) : (
                       <>
-                        <h2 className='title price'>Title: {item && item.title}</h2>
+                        <h2 className='title price'>{item && item.title}</h2>
                         <h2 className='price'>${item && item.price.toFixed(2)}</h2>
                         <span>
                           <BsBookmark />

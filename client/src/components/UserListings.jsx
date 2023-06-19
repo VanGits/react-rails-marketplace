@@ -54,9 +54,9 @@ const UserListings = ({ userListings, isModalOpen, setIsModalOpen, deleteListing
                 <div className="user-listing-details">
                     <AiFillDelete id='delete-btn' onClick={() => handleDeleteModal(listing.user_id, listing.id)}/>
                     <h1>{listing.title}</h1>
-                    <h2>${listing.price}</h2>
+                    <h1>${listing.price}</h1>
                     <h3>{formattedDate}</h3>
-                    <h4>{listing.description}</h4>
+                    
                     <button className='list-btn'onClick={() => handleItemClick(listing.id)}>Edit listing</button>
                     
                 </div>

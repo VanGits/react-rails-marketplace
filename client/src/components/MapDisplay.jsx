@@ -56,7 +56,7 @@ const MapDisplay = ({ item }) => {
     }
   }, [item?.location]);
 
-  console.log(item?.location);
+  
 
   return <div id='map'></div>;
 };

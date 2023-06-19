@@ -2,7 +2,7 @@ class ItemListingsController < ApplicationController
 
   skip_before_action :authorize, only: [:index, :show]
     def index
-        items = ItemListing.all
+        items = ItemListing.all.order(created_at: :desc)
         render json: items, status: :ok
     end
 
