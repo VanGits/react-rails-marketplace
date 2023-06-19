@@ -6,7 +6,7 @@ class ApplicationController < ActionController::API
     before_action :authorize
 
     def fallback_index_html
-        render file: "public/index.html"
+        render file: 'public/index.html', layout: false
       end
 
     private
