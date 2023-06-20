@@ -178,6 +178,14 @@
 
   .description-wrapper h3{
     margin: 24px 0;
+    color: #222831;
+    
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: normal;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    width: 100%;
   }
 
   .map{

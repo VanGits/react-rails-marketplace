@@ -188,6 +188,7 @@ const ItemDisplay = ({ handleOfferClick,items, item, setItem, updateListing, isI
           </div>
           {item && (
             <div className='description-wrapper'>
+              
               <h1>{item && 'Description'}</h1>
               {isEditing ? (
                 <textarea
