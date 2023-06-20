@@ -5,7 +5,8 @@ nav{
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #F67280;
+    color: #067252;
+    
     border-bottom: 1px solid rgb(204, 204, 204);
 }
 .nav-wrapper{
@@ -38,7 +39,7 @@ nav{
   font-size: 24px;
 }
 .search-icon-wrapper{
-    background-color: #F67280;
+    background-color: #067252;
     border-radius: 50%;
     width: 40px;
     height: 40px;
@@ -62,7 +63,7 @@ nav{
 
 #logo{
     font-size: 34px;
-    color: #F67280
+    color: #067252
 }
 
 .nav-elements{
@@ -114,8 +115,8 @@ a{
 }
 
 .nav input:active, .nav input:focus{
-    outline: #F67280;
-    border-color: #F67280;
+    outline: #067252;
+    border-color: #067252;
 }
 
 .nav img{

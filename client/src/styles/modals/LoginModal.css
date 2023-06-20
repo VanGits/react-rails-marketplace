@@ -110,7 +110,7 @@
 
   .modal input:focus, .modal input:active{
     outline: none;
-    border-color: #F67280;
+    border-color: #067252;
   }
 
   .modal textarea{
@@ -124,14 +124,14 @@
 
   .modal textarea:focus, .modal textarea:active{
     outline: none;
-    border-color: #F67280;
+    border-color: #067252;
   }
 
   #no-account{
     margin-top: 32px;
     font-size: 18px;
     font-weight: 400;
-    color: #F67280;
+    color: #067252;
     cursor: pointer;
     
   }
@@ -144,13 +144,13 @@
     font-size: 18px;
     border-radius: 50px;
     border: none;
-    background-color: #F67280;
+    background-color: #067252;
     color: white;
     transition: all 300ms ease;
   }
 
   .modal form button:hover{
-    background-color: #f8818c;
+    background-color: #055c42;
   }
 
   .autocomplete {

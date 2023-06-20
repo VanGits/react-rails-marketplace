@@ -40,13 +40,13 @@
 .load{
     font-size: 64px;
     margin-top: 48px;
-    color: #F67280;
+    color: #067252;
     animation: rotate360 750ms infinite linear;
 }
 
 .no-items{
   margin-top: 48px;
-  color: #F67280;
+  color: #067252;
 }
 
  .display-items-wrapper{
@@ -122,7 +122,7 @@
   left: 50%;
   width: 0;
   height: 5px;
-  background-color: #F67280;
+  background-color: #067252;
   transition: width 0.3s ease;
   transform: translateX(-50%);
 }

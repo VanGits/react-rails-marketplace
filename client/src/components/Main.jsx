@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import { ImSpinner8 } from 'react-icons/im';
 import "../styles/Main.css";
 import { useNavigate } from 'react-router-dom';
-import banner from "../assets/dollar.svg";
+import banner from "../assets/dollar2.svg";
 import UserContext from "../context/UserContext";
 import ListingModal from './modals/ListingModal';
 import { BsBookmarkFill, BsBookmark } from 'react-icons/bs';

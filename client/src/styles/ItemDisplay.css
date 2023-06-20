@@ -53,7 +53,7 @@
     align-self: center ;
     justify-self: center ;
     margin-top: 64px;
-    color: #F67280;
+    color: #067252;
 }
 
 .item-details{
@@ -104,14 +104,14 @@
     font-size: 18px;
     border-radius: 50px;
     border: none;
-    background-color: #F67280;
+    background-color: #067252;
     color: white;
     transition: all 300ms ease;
     justify-self: flex-end;
   }
 
   .item-details button:hover, .list-btn{
-    background-color: #f8818c;
+    background-color: #067252;
   }
 
   .item-viewer{
@@ -138,7 +138,7 @@
     margin-top: 42px;
     font-size: 48px;
     cursor: pointer;
-    color: #F67280;
+    color: #067252;
   }
 
   .description-wrapper{
