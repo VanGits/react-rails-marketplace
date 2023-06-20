@@ -1,4 +1,4 @@
-class FavoritesController < ApplicationController
+class Api::V1::FavoritesController < ApplicationController
 
     # user's favorites
     def index

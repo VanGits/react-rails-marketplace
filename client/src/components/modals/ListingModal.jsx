@@ -18,7 +18,7 @@ const ListingModal = ({isModalOpen, setIsModalOpen, addListing}) => {
    
     const handleSubmit = (e) => {
         e.preventDefault();
-        fetch("/item_listings", {
+        fetch("/api/v1/item_listings", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

@@ -1,4 +1,4 @@
-class ItemListingsController < ApplicationController
+class Api::V1::ItemListingsController < ApplicationController
 
   skip_before_action :authorize, only: [:index, :show]
   def index

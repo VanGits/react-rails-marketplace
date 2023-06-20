@@ -36,7 +36,7 @@ function App() {
     }
   }
   useEffect(() => {
-    fetch("/item_listings")
+    fetch("/api/v1/item_listings")
       .then((r) => r.json())
       .then(itemsData => setItems(itemsData))
   }, [])
@@ -53,7 +53,7 @@ function App() {
   }, []);
 
   useEffect(() => {
-        fetch("/my-listings").then((res) => {
+        fetch("/api/v1/my-listings").then((res) => {
           if (res.ok) {
             res.json().then((listings) => setUserListings(listings));
           } 
@@ -61,7 +61,7 @@ function App() {
   }, [currentUser])
 
   useEffect(() => {
-    fetch("/favorites").then((res) => {
+    fetch("/api/v1/favorites").then((res) => {
       if (res.ok) {
         res.json().then((favorites) => setBookmarkedItems(favorites));
       } 
@@ -132,7 +132,7 @@ function App() {
 
   const deleteListing = (itemUserId, listingId) => {
     
-    fetch(`/item_listings/${listingId}`, {
+    fetch(`/api/v1/item_listings/${listingId}`, {
       method: "DELETE",
     }).then((r) => {
       if (r.ok) {
@@ -186,7 +186,7 @@ const toggleBookmark = (itemId) => {
 
 const addBookmark = (itemId) => {
     // Perform a PATCH request to add the item to favorites
-    fetch(`/favorites/${itemId}`, {
+    fetch(`/api/v1/favorites/${itemId}`, {
         method: "PATCH",
         headers: {
             "Content-Type": "application/json",
@@ -212,7 +212,7 @@ const addBookmark = (itemId) => {
 
 const removeBookmark = (itemId) => {
     // Perform a DELETE request to remove the item from favorites
-    fetch(`/favorites/${itemId}`, {
+    fetch(`/api/v1/favorites/${itemId}`, {
         method: "DELETE",
         headers: {
             "Content-Type": "application/json",

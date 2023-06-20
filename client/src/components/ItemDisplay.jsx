@@ -25,7 +25,7 @@ const ItemDisplay = ({ items, item, setItem, updateListing, isItemBookmarked, to
     const fetchItem = () => {
       setIsLoading(true);
 
-      fetch(`/item_listings/${params.id}`)
+      fetch(`/api/v1/item_listings/${params.id}`)
         .then(response => {
           if (response.ok) {
             return response.json();
@@ -103,7 +103,7 @@ const ItemDisplay = ({ items, item, setItem, updateListing, isItemBookmarked, to
 
     setIsEditing(false);
     e.preventDefault()
-    fetch(`/item_listings/${item.id}`, {
+    fetch(`/api/v1/item_listings/${item.id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",

@@ -26,7 +26,7 @@ const Nav = ({ handleLogInModal, handleProfileClick, setSearchedItems, searchInp
     const handleSearch = () => {
         const loweredSearchQuery = searchInput.toLowerCase();
 
-        fetch(`/item_listings?search=${loweredSearchQuery}`)
+        fetch(`/api/v1/item_listings?search=${loweredSearchQuery}`)
             .then((r) => r.json())
             .then((data) => {
                 setSearchedItems(data);
