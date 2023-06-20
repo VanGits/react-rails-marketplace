@@ -22,5 +22,5 @@ Rails.application.routes.draw do
  
  
   # fix deploy problem
-  get "*path", to: "application#fallback_index_html", constraints: ->(req) { !req.xhr? && req.format.html? }
+  get "*path", to: "root#index", constraints: ->(req) { req.format.html? }
 end
