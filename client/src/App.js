@@ -329,7 +329,7 @@ const removeBookmark = (itemId) => {
               </div>
 
               <LoginModal setIsProfileClicked={setIsProfileClicked} onLogin={onLogin} isLoginModalOpen={isLoginModalOpen} setIsLoginModalOpen={setIsLoginModalOpen} />
-              <SearchMain searchedItems={searchedItems} />
+              <SearchMain isItemBookmarked={isItemBookmarked}toggleBookmark={toggleBookmark}searchedItems={searchedItems} />
               <Footer/>
             </>} />
             <Route path="/user-favorites" element={

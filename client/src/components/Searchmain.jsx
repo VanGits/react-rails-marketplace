@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import '../styles/SearchMain.css';
 import { useNavigate } from 'react-router-dom';
-import { BsBookmark } from 'react-icons/bs';
+import { BsBookmarkFill, BsBookmark } from 'react-icons/bs';
 import { ImSpinner8 } from 'react-icons/im';
 
-const SearchMain = ({ searchedItems }) => {
+const SearchMain = ({ searchedItems, isItemBookmarked, toggleBookmark }) => {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(true);
 
@@ -43,8 +43,8 @@ const SearchMain = ({ searchedItems }) => {
             <p>${item.price.toFixed(2)}</p>
             <h4>{item.location}</h4>
           </div>
-          <div className='bookmark'>
-            <BsBookmark />
+          <div className="bookmark" onClick={() => toggleBookmark(item.id)}>
+            {isItemBookmarked(item.id) ? <BsBookmarkFill /> : <BsBookmark />}
           </div>
         </div>
       </div>
