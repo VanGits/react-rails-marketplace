@@ -28,6 +28,7 @@ const Main = ({ items, isModalOpen, setIsModalOpen, addListing, toggleBookmark, 
     
     const displayItem = items.map((item) => {
         const truncatedTitle = truncateTitle(item.title, 20);
+        
 
         return (
             <div className='display-item' key={item.id}>

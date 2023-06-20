@@ -4,7 +4,7 @@ class ItemListing < ApplicationRecord
   has_many :favorited_by_users, through: :favorites, source: :user
 
   #validations
-  validates :title, presence: true
+  validates :title, presence: true, length: {maximum: 20}
   validates :price, presence: true
   validates :image_url, presence: true
   validates :description, presence: true

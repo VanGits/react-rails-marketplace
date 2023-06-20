@@ -96,7 +96,7 @@ const ItemDisplay = ({ items, item, setItem, updateListing, isItemBookmarked, to
     setEditedPrice(item && item.price.toFixed(2));
     setEditedDescription(item && item.description);
   };
-
+ 
 
 
   const handleSaveClick = (e) => {
