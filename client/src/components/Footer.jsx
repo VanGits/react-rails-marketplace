@@ -25,6 +25,7 @@ const Footer = () => {
                 <div className="footer-element">
                     <h3>Future Features</h3>
                     <p>Real time chat</p>
+                    <p>Image file drop</p>
                     
                 </div>
                 </div>

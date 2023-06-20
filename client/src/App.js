@@ -255,6 +255,7 @@ const totalOffersLength = userListings.reduce((total, item) => {
   
 
   return (
+    <> <h1 className="mobile">Mobile Responsiveness under construction</h1>
     <div className="App">
       <ToastContainer />
       <BrowserRouter>
@@ -424,7 +425,7 @@ const totalOffersLength = userListings.reduce((total, item) => {
         </UserContext.Provider>
       </BrowserRouter>
     </div>
-
+    </>
   );
 }
 

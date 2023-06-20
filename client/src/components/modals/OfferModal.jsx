@@ -9,6 +9,7 @@ const OfferModal = ({setIsOfferModalOpen, isOfferModalOpen, offerItemId}) => {
     const currentUser = useContext(UserContext);
     const [contact, setContact] = useState("")
     const [price, setPrice] = useState("")
+    
     const handleOfferSubmit = (e) => {
         e.preventDefault();
         
@@ -30,7 +31,7 @@ const OfferModal = ({setIsOfferModalOpen, isOfferModalOpen, offerItemId}) => {
             if (r.ok) {
               setIsOfferModalOpen(false);
               
-              toast.success('Offer submitted successfully!');
+              toast.success(`Offer submitted to seller!`);
             //   r.json().then((newOffer) => console.log(newOffer));
             } else {
               r.json().then((err) => toast.error(err.error[0]));
