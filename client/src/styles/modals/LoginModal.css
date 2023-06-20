@@ -110,7 +110,7 @@
 
   .modal input:focus, .modal input:active{
     outline: none;
-    border-color: #067252;
+    border-color: #1cc592;
   }
 
   .modal textarea{
@@ -124,14 +124,14 @@
 
   .modal textarea:focus, .modal textarea:active{
     outline: none;
-    border-color: #067252;
+    border-color: #1cc592;
   }
 
   #no-account{
     margin-top: 32px;
     font-size: 18px;
     font-weight: 400;
-    color: #067252;
+    color: #1cc592;
     cursor: pointer;
     
   }
@@ -144,7 +144,7 @@
     font-size: 18px;
     border-radius: 50px;
     border: none;
-    background-color: #067252;
+    background-color: #1cc592;
     color: white;
     transition: all 300ms ease;
   }

@@ -8,7 +8,7 @@
     
 }
 .no-l{
-    color: #067252;
+    color: #1cc592;
 }
 
 .no-listings {
@@ -29,13 +29,13 @@
     align-items: center;
     justify-content: center;
     top: 0;
-    color: #067252;
+    color: #061cc5927252;
     
 }
 .user-listings h1, .no-listings h1{
     cursor: pointer;
    
-    font-size: 48px;
+    font-size: 32px;
     text-align: center;
     transition: all 300ms ease;
     display: flex;
@@ -61,7 +61,7 @@
 
 .user-listings .user-listing-details #delete-btn{
     font-size: 28px;
-    color: #067252;
+    color: #1cc592;
     position: absolute;
     top: 0;
     right: 0;
@@ -85,7 +85,7 @@
     width: 250px;
     height: 250px;
     object-fit: contain;
-    border: 1px solid rgb(204, 204, 204);
+    box-shadow: 0px 2.98px 7.46px 0px rgba(0, 0, 0, 0.15);
     border-radius: 8px;
 }
 
