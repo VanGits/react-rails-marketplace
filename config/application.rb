@@ -38,8 +38,6 @@ module Phase5
     config.middleware.use ActionDispatch::Cookies
     config.middleware.use ActionDispatch::Session::CookieStore
     config.action_dispatch.cookies_same_site_protection = :strict
-    Rails.application.configure do
-      config.middleware.insert_before(0, Rack::Static, urls: ["/"], root: File.expand_path("../../client/public", __FILE__))
-    end
+    
   end
 end
