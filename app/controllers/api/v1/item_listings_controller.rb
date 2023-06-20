@@ -19,7 +19,18 @@ class Api::V1::ItemListingsController < ApplicationController
 
     def show
         item = find_item
+        
         render json: item, status: :ok
+    end
+
+    def protected_show
+      item = find_item
+      if item.user.id === @user.id
+        render json: item, status: :ok
+      else
+        render json: {error: "Not authorized"}, status: :unauthorized
+      end
+
     end
     def create
         item = @user.item_listings.new(item_params)

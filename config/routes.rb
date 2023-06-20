@@ -1,11 +1,13 @@
 Rails.application.routes.draw do
+ 
   
   namespace :api do
     namespace :v1 do
-      resources :favorites
-      resources :item_listings, only: [:index, :show, :create, :update, :destroy]
-      resources :transactions
+      resources :favorites, only: [:index, :show, :update, :destroy]
+      resources :item_listings
+      resources :offers
       get "/my-listings", to: "item_listings#userIndex"
+      get "/my-listings/:id", to: "item_listings#protected_show"
     end
   end
     

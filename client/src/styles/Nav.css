@@ -95,6 +95,8 @@ nav{
     height: 50px;
     cursor: pointer;
     border-right: 1px solid rgb(204, 204, 204);
+    position: relative;
+    
 }
 .nav span:hover{
     background-color: rgb(243, 243, 243);
@@ -117,6 +119,26 @@ a{
 .nav input:active, .nav input:focus{
     outline: #1cc592;
     border-color: #1cc592;
+}
+
+.totalOffersLength{
+    position: absolute;
+    color: white !important;
+    background-color: #1cc592;
+    border-radius: 12px;
+    z-index: 0;
+    left: 0;
+    top: 0;
+    margin-right: 24px;
+}
+
+.nav-offers{
+    width: 140px;
+    
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    flex-direction: row;
 }
 
 .nav img{

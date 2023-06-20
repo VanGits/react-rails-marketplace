@@ -12,6 +12,9 @@ import UserContext from "./context/UserContext";
 import Footer from "./components/Footer";
 import SearchMain from "./components/Searchmain";
 import Favorites from "./components/Favorites";
+import Offers from "./components/Offers";
+import OfferDisplay from "./components/OfferDisplay";
+import OfferModal from "./components/modals/OfferModal";
 
 
 
@@ -28,6 +31,8 @@ function App() {
   const [searchedItems, setSearchedItems] = useState([])
   const [searchInput, setSearchInput] = useState('');
   const [bookmarkedItems, setBookmarkedItems] = useState([]);
+  const [isOfferModalOpen, setIsOfferModalOpen] = useState(false)
+  const [offerItemId, setOfferItemId] = useState(null)
 
 
   const handleLogInModal = (clicked) => {
@@ -35,6 +40,14 @@ function App() {
       setIsLoginModalOpen(true)
     }
   }
+
+  const handleOfferClick = (itemId) => {
+    if (itemId) {
+      setOfferItemId(itemId)
+      setIsOfferModalOpen(true)
+    }
+  }
+  
   useEffect(() => {
     fetch("/api/v1/item_listings")
       .then((r) => r.json())
@@ -232,6 +245,13 @@ const removeBookmark = (itemId) => {
             console.error("Error removing item from favorites:", error);
         });
 };
+
+// get total offers
+
+const totalOffersLength = userListings.reduce((total, item) => {
+  return total + item.offers.length;
+}, 0);
+
   
 
   return (
@@ -246,7 +266,7 @@ const removeBookmark = (itemId) => {
             <>
             
               <div className="navigation">
-                <Nav handleLogInModal={handleLogInModal} handleProfileClick={handleProfileClick}  setSearchedItems={setSearchedItems} setSearchInput={setSearchInput} searchInput = {searchInput}/>
+                <Nav totalOffersLength={totalOffersLength}handleLogInModal={handleLogInModal} handleProfileClick={handleProfileClick}  setSearchedItems={setSearchedItems} setSearchInput={setSearchInput} searchInput = {searchInput}/>
                 {isProfileClicked && currentUser && <div className="profile-pop-up">
                   <div className="profile-details">
                     <img src={currentUser && currentUser.image_url} />
@@ -269,7 +289,7 @@ const removeBookmark = (itemId) => {
           <Route path="/item/:id" element={
             <>
               <div className="navigation">
-                <Nav  setSearchedItems={setSearchedItems} handleLogInModal={handleLogInModal}  handleProfileClick={handleProfileClick} setSearchInput={setSearchInput} searchInput = {searchInput}/>
+                <Nav  totalOffersLength={totalOffersLength}setSearchedItems={setSearchedItems} handleLogInModal={handleLogInModal}  handleProfileClick={handleProfileClick} setSearchInput={setSearchInput} searchInput = {searchInput}/>
                 {isProfileClicked && currentUser && <div className="profile-pop-up">
                   <div className="profile-details">
                     <img src={currentUser && currentUser.image_url} />
@@ -285,13 +305,14 @@ const removeBookmark = (itemId) => {
               </div>
 
               <LoginModal setIsProfileClicked={setIsProfileClicked} onLogin={onLogin} isLoginModalOpen={isLoginModalOpen} setIsLoginModalOpen={setIsLoginModalOpen} />
-              <ItemDisplay isItemBookmarked={isItemBookmarked}toggleBookmark={toggleBookmark}item={item} setItem={setItem} items = {items} updateListing={updateListing}/>
+              <ItemDisplay isItemBookmarked={isItemBookmarked}toggleBookmark={toggleBookmark}item={item} setItem={setItem} items = {items} updateListing={updateListing} handleOfferClick={handleOfferClick}/>
+              <OfferModal isOfferModalOpen={isOfferModalOpen} setIsOfferModalOpen={setIsOfferModalOpen} offerItemId={offerItemId}/>
               <Footer/>
             </>} />
           <Route path="/user-listings" element={
             <>
               <div className="navigation">
-                <Nav handleLogInModal={handleLogInModal}  handleProfileClick={handleProfileClick}  setSearchedItems={setSearchedItems} setSearchInput={setSearchInput} searchInput = {searchInput}/>
+                <Nav totalOffersLength={totalOffersLength}handleLogInModal={handleLogInModal}  handleProfileClick={handleProfileClick}  setSearchedItems={setSearchedItems} setSearchInput={setSearchInput} searchInput = {searchInput}/>
                 {isProfileClicked && currentUser && <div className="profile-pop-up">
                   <div className="profile-details">
                     <img src={currentUser && currentUser.image_url} />
@@ -313,7 +334,7 @@ const removeBookmark = (itemId) => {
             <Route path="/searchs?" element={
             <>
               <div className="navigation">
-                <Nav handleLogInModal={handleLogInModal}  handleProfileClick={handleProfileClick}  setSearchedItems={setSearchedItems} setSearchInput={setSearchInput} searchInput = {searchInput}/>
+                <Nav totalOffersLength={totalOffersLength}handleLogInModal={handleLogInModal}  handleProfileClick={handleProfileClick}  setSearchedItems={setSearchedItems} setSearchInput={setSearchInput} searchInput = {searchInput}/>
                 {isProfileClicked && currentUser && <div className="profile-pop-up">
                   <div className="profile-details">
                     <img src={currentUser && currentUser.image_url} />
@@ -335,7 +356,7 @@ const removeBookmark = (itemId) => {
             <Route path="/user-favorites" element={
             <>
               <div className="navigation">
-                <Nav handleLogInModal={handleLogInModal}  handleProfileClick={handleProfileClick}  setSearchedItems={setSearchedItems} setSearchInput={setSearchInput} searchInput = {searchInput}/>
+                <Nav totalOffersLength={totalOffersLength}handleLogInModal={handleLogInModal}  handleProfileClick={handleProfileClick}  setSearchedItems={setSearchedItems} setSearchInput={setSearchInput} searchInput = {searchInput}/>
                 {isProfileClicked && currentUser && <div className="profile-pop-up">
                   <div className="profile-details">
                     <img src={currentUser && currentUser.image_url} />
@@ -354,6 +375,51 @@ const removeBookmark = (itemId) => {
               {currentUser && <Favorites isItemBookmarked={isItemBookmarked}toggleBookmark={toggleBookmark}bookmarkedItems={bookmarkedItems}/>}
               <Footer/>
             </>} />
+            <Route path="/user-offers" element={
+            <>
+              <div className="navigation">
+                <Nav totalOffersLength={totalOffersLength}handleLogInModal={handleLogInModal}  handleProfileClick={handleProfileClick}  setSearchedItems={setSearchedItems} setSearchInput={setSearchInput} searchInput = {searchInput}/>
+                {isProfileClicked && currentUser && <div className="profile-pop-up">
+                  <div className="profile-details">
+                    <img src={currentUser && currentUser.image_url} />
+                    <div className="profile-texts">
+                      <h1>{currentUser && currentUser.name}</h1>
+                      <p>View Profile</p>
+                    </div>
+
+                  </div>
+                  <p onClick={handleLogOut}>Log out</p>
+
+                </div>}
+              </div>
+
+              <LoginModal setIsProfileClicked={setIsProfileClicked} onLogin={onLogin} isLoginModalOpen={isLoginModalOpen} setIsLoginModalOpen={setIsLoginModalOpen} />
+              {currentUser && <Offers userListings={userListings}/>}
+              <Footer/>
+            </>} />
+            <Route path="/item/offers/:id" element={
+            <>
+              <div className="navigation">
+                <Nav totalOffersLength={totalOffersLength}handleLogInModal={handleLogInModal}  handleProfileClick={handleProfileClick}  setSearchedItems={setSearchedItems} setSearchInput={setSearchInput} searchInput = {searchInput}/>
+                {isProfileClicked && currentUser && <div className="profile-pop-up">
+                  <div className="profile-details">
+                    <img src={currentUser && currentUser.image_url} />
+                    <div className="profile-texts">
+                      <h1>{currentUser && currentUser.name}</h1>
+                      <p>View Profile</p>
+                    </div>
+
+                  </div>
+                  <p onClick={handleLogOut}>Log out</p>
+
+                </div>}
+              </div>
+
+              <LoginModal setIsProfileClicked={setIsProfileClicked} onLogin={onLogin} isLoginModalOpen={isLoginModalOpen} setIsLoginModalOpen={setIsLoginModalOpen} />
+              {currentUser && <OfferDisplay item={item} setItem={setItem} />}
+              <Footer/>
+            </>} />
+            
         </Routes>
         </UserContext.Provider>
       </BrowserRouter>

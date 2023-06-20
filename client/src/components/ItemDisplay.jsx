@@ -10,7 +10,7 @@ import { toast } from 'react-toastify';
 
 
 
-const ItemDisplay = ({ items, item, setItem, updateListing, isItemBookmarked, toggleBookmark }) => {
+const ItemDisplay = ({ handleOfferClick,items, item, setItem, updateListing, isItemBookmarked, toggleBookmark }) => {
 
   const [isLoading, setIsLoading] = useState(true);
   const [isEditing, setIsEditing] = useState(false);
@@ -125,7 +125,7 @@ const ItemDisplay = ({ items, item, setItem, updateListing, isItemBookmarked, to
 
 
   };
-
+  
 
   return (
     <div className='item-display'>
@@ -180,7 +180,7 @@ const ItemDisplay = ({ items, item, setItem, updateListing, isItemBookmarked, to
                     {isItemBookmarked(item.id) ? <BsBookmarkFill /> : <BsBookmark />}
                       <h4>Favorite</h4>
                     </span>
-                    <button>Message</button>
+                    {currentUser?.id !== item.user.id && currentUser && <button onClick={() => handleOfferClick(item.id)}>Offer Price</button>}
                   </>
                 )}
               </div>

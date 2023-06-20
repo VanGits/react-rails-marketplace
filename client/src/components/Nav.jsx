@@ -8,9 +8,9 @@ import { AiOutlineSearch } from 'react-icons/ai';
 import { Link, useNavigate } from 'react-router-dom';
 import UserContext from "../context/UserContext";
 
-const Nav = ({ handleLogInModal, handleProfileClick, setSearchedItems, searchInput, setSearchInput }) => {
+const Nav = ({ handleLogInModal, handleProfileClick, setSearchedItems, searchInput, setSearchInput,totalOffersLength }) => {
     const currentUser = useContext(UserContext);
-    
+
 
     const handleChange = (e) => {
         setSearchInput(e.target.value);
@@ -30,16 +30,16 @@ const Nav = ({ handleLogInModal, handleProfileClick, setSearchedItems, searchInp
             .then((r) => r.json())
             .then((data) => {
                 setSearchedItems(data);
-                if (loweredSearchQuery){
+                if (loweredSearchQuery) {
                     navigate(`/searchs?q=${loweredSearchQuery}`, { replace: true });
                 } else {
                     navigate("/")
                 }
-               
+
             })
             .catch((error) => console.error(error));
     };
-    
+
 
     return (
         <nav className='nav'>
@@ -67,8 +67,8 @@ const Nav = ({ handleLogInModal, handleProfileClick, setSearchedItems, searchInp
                     </div>
                 ) : (
                     <div className="nav-elements">
+                        <Link to="/user-offers"><span className='nav-offers'><GrTransaction /><p>Offers</p><p className='totalOffersLength'>{totalOffersLength}</p></span></Link>
                         <Link to="/user-favorites"><span><BsBookmark /><p> Favorites</p></span></Link>
-                        <span><GrTransaction /><p>Transactions</p></span>
                         <Link to="/user-listings"><span><MdSell /><p>My Listings</p></span></Link>
                         <span id='profile'><img src={currentUser.image_url} alt="" onClick={handleProfileClick} /></span>
                     </div>

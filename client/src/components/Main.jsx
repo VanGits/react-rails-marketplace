@@ -65,7 +65,7 @@ const Main = ({ items, isModalOpen, setIsModalOpen, addListing, toggleBookmark, 
                 <div className='display-items-wrapper'>{displayItem}</div>
             ) : (
                 <div className='no-items-wrapper'>
-                    {items.length === 0 ? <p className='no-items'>No items found</p> : <ImSpinner8 className='load' />}
+                    {items.length === 0 ? <ImSpinner8 className='load' />: <p className='no-items'>No items found</p> }
                 </div>
             )}
             <ListingModal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} addListing={addListing} />
