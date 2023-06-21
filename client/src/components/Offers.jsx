@@ -28,22 +28,25 @@ const Offers = ({userListings}) => {
   
       return () => clearTimeout(delay);
     }, [userListings]); 
+
+    
   
-    const displayItem = userListings.map((item) => {
+    const displayItem = userListings
+    .filter(item => item.offers.length > 0)
+    .map(item => {
       const truncatedTitle = truncateTitle(item.title, 20);
   
       return (
-        <div className='display-item' key={item.id}>
-          <div className='image-container' onClick={() => handleItemClick(item.id)}>
-            <img src={item.image_url} alt='' />
+        <div className="display-item" key={item.id}>
+          <div className="image-container" onClick={() => handleItemClick(item.id)}>
+            <img src={item.image_url} alt="" />
           </div>
-          <div className='item-details-display'>
-            <div className='display-details'>
+          <div className="item-details-display">
+            <div className="display-details">
               <p>{truncatedTitle}</p>
               <p>${item.price.toFixed(2)}</p>
               <h4>{item.location}</h4>
             </div>
-            
           </div>
         </div>
       );
