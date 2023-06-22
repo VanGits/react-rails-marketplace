@@ -3,7 +3,7 @@ import "../../styles/modals/OfferModal.css"
 import ReactModal from 'react-modal';
 import UserContext from "../../context/UserContext";
 import { toast } from 'react-toastify';
-const OfferModal = ({setIsOfferModalOpen, isOfferModalOpen, offerItemId}) => {
+const OfferModal = ({setIsOfferModalOpen, isOfferModalOpen, offerItemId,handleNewOfferFromUser}) => {
 
   
     const currentUser = useContext(UserContext);
@@ -32,7 +32,7 @@ const OfferModal = ({setIsOfferModalOpen, isOfferModalOpen, offerItemId}) => {
               setIsOfferModalOpen(false);
               
               toast.success(`Offer submitted to seller!`);
-            //   r.json().then((newOffer) => console.log(newOffer));
+              r.json().then((newOffer) => handleNewOfferFromUser(newOffer));
             } else {
               r.json().then((err) => toast.error(err.error[0]));
             }

@@ -33,6 +33,7 @@ function App() {
   const [bookmarkedItems, setBookmarkedItems] = useState([]);
   const [isOfferModalOpen, setIsOfferModalOpen] = useState(false)
   const [offerItemId, setOfferItemId] = useState(null)
+  const [userOffers, setUserOffers] = useState([])
 
 
   const handleLogInModal = (clicked) => {
@@ -80,6 +81,16 @@ function App() {
       } 
     });
   }, [currentUser])
+
+  useEffect(() => {
+    fetch("/api/v1/offers").then((res) => {
+      if (res.ok){
+        res.json().then((offers) => setUserOffers(offers))
+        
+      }
+    })
+  }, [currentUser])
+  
 
   
 
@@ -252,6 +263,10 @@ const totalOffersLength = userListings.reduce((total, item) => {
   return total + item.offers.length;
 }, 0);
 
+const handleNewOfferFromUser = (offer) => {
+    setUserOffers([...userOffers, offer])
+}
+
   
 
   return (
@@ -307,7 +322,7 @@ const totalOffersLength = userListings.reduce((total, item) => {
 
               <LoginModal setIsProfileClicked={setIsProfileClicked} onLogin={onLogin} isLoginModalOpen={isLoginModalOpen} setIsLoginModalOpen={setIsLoginModalOpen} />
               <ItemDisplay isItemBookmarked={isItemBookmarked}toggleBookmark={toggleBookmark}item={item} setItem={setItem} items = {items} updateListing={updateListing} handleOfferClick={handleOfferClick}/>
-              <OfferModal isOfferModalOpen={isOfferModalOpen} setIsOfferModalOpen={setIsOfferModalOpen} offerItemId={offerItemId}/>
+              <OfferModal isOfferModalOpen={isOfferModalOpen} setIsOfferModalOpen={setIsOfferModalOpen} offerItemId={offerItemId} handleNewOfferFromUser={handleNewOfferFromUser}/>
               <Footer/>
             </>} />
           <Route path="/user-listings" element={
@@ -395,7 +410,7 @@ const totalOffersLength = userListings.reduce((total, item) => {
               </div>
 
               <LoginModal setIsProfileClicked={setIsProfileClicked} onLogin={onLogin} isLoginModalOpen={isLoginModalOpen} setIsLoginModalOpen={setIsLoginModalOpen} />
-              {currentUser && <Offers userListings={userListings}/>}
+              {currentUser && <Offers userListings={userListings} userOffers={userOffers} />}
               <Footer/>
             </>} />
             <Route path="/item/offers/:id" element={

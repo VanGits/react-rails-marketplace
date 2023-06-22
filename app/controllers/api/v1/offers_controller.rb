@@ -10,6 +10,13 @@ class Api::V1::OffersController < ApplicationController
         
     end
 
+    def index 
+      offers = @user.offers
+      render json: offers, status: :ok
+
+    end
+
+
     def create
         item = find_item_listing
         if @user.id != item.user.id

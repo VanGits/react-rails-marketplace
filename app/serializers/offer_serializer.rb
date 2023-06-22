@@ -1,5 +1,5 @@
 class OfferSerializer < ActiveModel::Serializer
-
+  belongs_to :item_listing
   attributes :id, :price, :contact, :user_name, :user_image_url
 
   def user_name
