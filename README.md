@@ -13,8 +13,7 @@ Welcome to the Marketplace App! This application is built using React.js on the 
    - [Listing CRUD](#listing-crud)
    - [Search](#search)
 3. [Usage](#usage)
-4. [Contributing](#contributing)
-5. [License](#license)
+4. [License](#license)
 
 ## Getting Started
 
