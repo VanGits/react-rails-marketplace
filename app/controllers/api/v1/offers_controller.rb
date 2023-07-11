@@ -1,9 +1,8 @@
 class Api::V1::OffersController < ApplicationController
- 
+    wrap_parameters format: []
     def show
         item = find_item
-        user = User.find_by(id: session[:user_id])
-        if item.user.id == user.id
+        if item.user.id == @user.id
             render json: item.offers, status: :ok
         else
             render json: {error: "Not authorized"}, status: :unauthorized
@@ -12,8 +11,7 @@ class Api::V1::OffersController < ApplicationController
     end
 
     def index 
-      user = User.find_by(id: session[:user_id])
-      offers = user.offers
+      offers = @user.offers
       render json: offers, status: :ok
 
     end
@@ -21,9 +19,8 @@ class Api::V1::OffersController < ApplicationController
 
     def create
         item = find_item_listing
-        user = User.find_by(id: session[:user_id])
-        if user.id != item.user.id
-          offer = user.offers.build(offer_params)
+        if @user.id != item.user.id
+          offer = @user.offers.build(offer_params)
           offer.item_listing = item
     
           if offer.save
@@ -50,8 +47,4 @@ class Api::V1::OffersController < ApplicationController
     def offer_params
         params.permit(:contact, :price, :user_id, :item_listing_id)
     end
-    def authorize
-      user = User.find_by(id: session[:user_id])
-      render json: {error: "Not authorized"}, status: :unauthorized unless user
-  end
 end

@@ -1,5 +1,5 @@
 class Api::V1::ItemListingsController < ApplicationController
-  before_action :authorize
+
   skip_before_action :authorize, only: [:index, :show]
   def index
     if params[:search].present?
@@ -13,8 +13,7 @@ class Api::V1::ItemListingsController < ApplicationController
   end
 
     def userIndex
-      user = User.find_by(id: session[:user_id])
-      items = user.item_listings.all.order(created_at: :desc)
+      items = @user.item_listings.all.order(created_at: :desc)
       render json: items, status: :ok
     end
 
@@ -26,8 +25,7 @@ class Api::V1::ItemListingsController < ApplicationController
 
     def protected_show
       item = find_item
-      user = User.find_by(id: session[:user_id])
-      if item.user.id === user.id
+      if item.user.id === @user.id
         render json: item, status: :ok
       else
         render json: {error: "Not authorized"}, status: :unauthorized
@@ -35,8 +33,7 @@ class Api::V1::ItemListingsController < ApplicationController
 
     end
     def create
-        user = User.find_by(id: session[:user_id])
-        item = user.item_listings.new(item_params)
+        item = @user.item_listings.new(item_params)
         
 
         if item.save
@@ -47,8 +44,7 @@ class Api::V1::ItemListingsController < ApplicationController
     end
     def update
       item = find_item
-      user = User.find_by(id: session[:user_id])
-      if user.id == item.user.id
+      if @user.id == item.user.id
         if item.update(item_params)
           render json: item, status: :ok
         else
@@ -62,8 +58,7 @@ class Api::V1::ItemListingsController < ApplicationController
 
     def destroy
       item = find_item
-      user = User.find_by(id: session[:user_id])
-      if user.id === item.user.id
+      if @user.id === item.user.id
         item.destroy
         head :no_content
       else
