@@ -273,7 +273,7 @@ const handleNewOfferFromUser = (offer) => {
     <> <h1 className="mobile">Mobile Responsiveness is still under construction, please view the app on desktop</h1>
     <div className="App">
       <ToastContainer />
-      <BrowserRouter>
+     
       <UserContext.Provider value={currentUser}>
         <Routes>
 
@@ -438,7 +438,7 @@ const handleNewOfferFromUser = (offer) => {
             
         </Routes>
         </UserContext.Provider>
-      </BrowserRouter>
+      
     </div>
     </>
   );
