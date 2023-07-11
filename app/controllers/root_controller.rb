@@ -1,5 +1,5 @@
 class RootController < ApplicationController
     def index
-        render file: 'client/public/index.html'
+        render file: 'public/index.html'
       end
 end
