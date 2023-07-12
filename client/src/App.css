@@ -5,10 +5,6 @@
   padding: 0;
   box-sizing: border-box;
   font-family: "Poppins";
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
 }
 
 .App {
@@ -198,7 +194,7 @@ footer h1{
 /* Modal */
 .listing{
   width: 400px !important;
-  height: 100px !important;
+  height: 60px !important;
   
 }
 
