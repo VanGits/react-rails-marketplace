@@ -103,7 +103,8 @@
   }
   .nav-elements span {
     
-    border: 0 1px 0 1px solid rgb(204, 204, 204);
+    border: 0 solid rgb(204, 204, 204);
+    border-left: 1px;
     
   }
 
@@ -295,7 +296,7 @@ footer h1{
  /* Login */
  .login-modal{
     width: 400px !important;
-    height: 200px !important;
+    height: 100% !important;
     overflow-y: auto !important;
  }
  /* Favorites */
