@@ -1,3 +1,15 @@
 .listing{
     width: 600px;
+    position: relative;
+}
+
+#exit-btn{
+    position: absolute ; 
+    top: 20px;
+    left: 0;
+    font-size: 24px;
+    z-index: 99999999999999;
+    color: #222831;
+    cursor: pointer;
+    margin-left: 20px;
 }

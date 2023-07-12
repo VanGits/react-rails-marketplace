@@ -186,6 +186,7 @@
     flex-wrap: wrap;
     max-width: 1200px;
     width: 100%;
+    font-weight: 500;
   }
 
   .map{

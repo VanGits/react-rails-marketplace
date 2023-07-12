@@ -5,6 +5,8 @@ import ReactModal from 'react-modal';
 import Autocomplete from 'react-google-autocomplete';
 import { ImSpinner8 } from 'react-icons/im';
 
+
+
 const LoginModal = ({
   isLoginModalOpen,
   setIsLoginModalOpen,
@@ -164,7 +166,7 @@ const LoginModal = ({
     <ReactModal
       isOpen={isLoginModalOpen}
       onRequestClose={() => setIsLoginModalOpen(false)}
-      className="modal"
+      className="modal login-modal"
       overlayClassName="modal-overlay"
     >
       {isLoginModal ? loginModal : signUpModal}

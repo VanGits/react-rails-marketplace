@@ -16,6 +16,7 @@ nav{
     display: flex;
     align-items: center;
     justify-content: space-between;
+    padding: 12px;
 }
 
 .nav-logo-search{
@@ -127,9 +128,13 @@ a{
     background-color: #1cc592;
     border-radius: 12px;
     z-index: 0;
-    left: 0;
+    right: 0;
     top: 0;
-    margin-right: 24px;
+    width: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 12px;
 }
 
 .nav-offers{

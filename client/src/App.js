@@ -270,7 +270,7 @@ const handleNewOfferFromUser = (offer) => {
   
 
   return (
-    <> <h1 className="mobile">Mobile Responsiveness is still under construction, please view the app on desktop</h1>
+   
     <div className="App">
       <ToastContainer />
      
@@ -288,7 +288,7 @@ const handleNewOfferFromUser = (offer) => {
                     <img src={currentUser && currentUser.image_url} />
                     <div className="profile-texts">
                       <h1>{currentUser && currentUser.name}</h1>
-                      <p>View Profile</p>
+                      
                     </div>
 
                   </div>
@@ -311,7 +311,7 @@ const handleNewOfferFromUser = (offer) => {
                     <img src={currentUser && currentUser.image_url} />
                     <div className="profile-texts">
                       <h1>{currentUser && currentUser.name}</h1>
-                      <p>View Profile</p>
+                      
                     </div>
 
                   </div>
@@ -334,7 +334,7 @@ const handleNewOfferFromUser = (offer) => {
                     <img src={currentUser && currentUser.image_url} />
                     <div className="profile-texts">
                       <h1>{currentUser && currentUser.name}</h1>
-                      <p>View Profile</p>
+                      
                     </div>
 
                   </div>
@@ -356,7 +356,7 @@ const handleNewOfferFromUser = (offer) => {
                     <img src={currentUser && currentUser.image_url} />
                     <div className="profile-texts">
                       <h1>{currentUser && currentUser.name}</h1>
-                      <p>View Profile</p>
+                      
                     </div>
 
                   </div>
@@ -378,7 +378,7 @@ const handleNewOfferFromUser = (offer) => {
                     <img src={currentUser && currentUser.image_url} />
                     <div className="profile-texts">
                       <h1>{currentUser && currentUser.name}</h1>
-                      <p>View Profile</p>
+                      
                     </div>
 
                   </div>
@@ -400,7 +400,7 @@ const handleNewOfferFromUser = (offer) => {
                     <img src={currentUser && currentUser.image_url} />
                     <div className="profile-texts">
                       <h1>{currentUser && currentUser.name}</h1>
-                      <p>View Profile</p>
+                      
                     </div>
 
                   </div>
@@ -422,7 +422,7 @@ const handleNewOfferFromUser = (offer) => {
                     <img src={currentUser && currentUser.image_url} />
                     <div className="profile-texts">
                       <h1>{currentUser && currentUser.name}</h1>
-                      <p>View Profile</p>
+                      
                     </div>
 
                   </div>
@@ -440,7 +440,7 @@ const handleNewOfferFromUser = (offer) => {
         </UserContext.Provider>
       
     </div>
-    </>
+ 
   );
 }
 

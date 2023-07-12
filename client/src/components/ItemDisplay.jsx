@@ -142,7 +142,7 @@ const ItemDisplay = ({ handleOfferClick,items, item, setItem, updateListing, isI
             ) : (
               ''
             )}
-            {item && <img src={item.image_url} alt='' />}
+            {item && <img id="product-img" src={item.image_url} alt='' />}
             {item ? (
               ''
             ) : (

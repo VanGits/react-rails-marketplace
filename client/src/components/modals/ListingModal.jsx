@@ -3,6 +3,7 @@ import "../../styles/modals/ListingModal.css"
 import ReactModal from "react-modal";
 import { toast } from 'react-toastify';
 import UserContext from "../../context/UserContext";
+import { RxCross2 } from 'react-icons/rx';
 const ListingModal = ({isModalOpen, setIsModalOpen, addListing}) => {
     //attributes :id, :title, :description, :image_url, :location, :user_id, :price,
     const currentUser = useContext(UserContext);
@@ -61,9 +62,11 @@ const ListingModal = ({isModalOpen, setIsModalOpen, addListing}) => {
         onRequestClose={() => setIsModalOpen(false)}
         className="modal listing"
         overlayClassName="modal-overlay">
-          
+         
         <form onSubmit={handleSubmit}>
+       
             <div className="inputs">
+            <RxCross2 id='exit-btn' onClick={()=>setIsModalOpen(false)}/>
                 <h4>Title</h4>
                 <input type="text" onChange={(e) => setTitle(e.target.value)}/>
             </div>
