@@ -21,9 +21,7 @@
 .navigation {
   position: relative;
 }
-#profile{
-  z-index: 9999909999999999999;
-}
+
 .profile-pop-up {
   position: absolute;
   z-index: 9999999999999999999999999999999 !important;
@@ -299,5 +297,12 @@ footer h1{
     width: 400px !important;
     height: 200px !important;
     overflow-y: auto !important;
+ }
+ /* Favorites */
+ .Favorites h1{
+  font-size:  24px;
+ }
+ .load{
+  margin-bottom: 24px;
  }
 }
