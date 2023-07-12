@@ -18,7 +18,7 @@
     color: white;
     box-shadow: 0px 2.98px 7.46px 0px rgba(0, 0, 0, 0.1);
     animation: fade-in 0.2s ease;
-    overflow-y: auto !important;
+   
   }
 
   .loading{
