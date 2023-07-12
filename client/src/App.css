@@ -15,7 +15,7 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
- overflow: hidden;
+ 
   
 }
 
@@ -82,9 +82,7 @@
 }
 
 @media (max-width: 768px) {
-  .App{
-    overflow: auto !important;
-  }
+  
   /* Nav */
   .nav-wrapper {
     max-width: 640px;
