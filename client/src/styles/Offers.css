@@ -2,3 +2,9 @@
     color: #1cc592;
     margin-top: 24px;
 }
+#displayOffersLength{
+ 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

@@ -56,7 +56,7 @@ const Offers = ({ userListings, userOffers }) => {
     .filter(item => item.offers.length > 0)
     .map(item => {
       const truncatedTitle = truncateTitle(item.title, 20);
-
+      
       return (
         <div className="display-item" key={item.id}>
           <div className="image-container" onClick={() => handleItemClick(item.id)}>
@@ -66,6 +66,7 @@ const Offers = ({ userListings, userOffers }) => {
             <div className="display-details">
               <p>{truncatedTitle}</p>
               <p>${item.price.toFixed(2)}</p>
+              <p className='totalOffersLength' id='displayOffersLength'>{item.offers.length}</p>
               <h4>{item.location}</h4>
             </div>
           </div>
