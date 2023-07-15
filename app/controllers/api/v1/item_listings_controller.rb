@@ -33,14 +33,16 @@ class Api::V1::ItemListingsController < ApplicationController
 
     end
     def create
-        item = @user.item_listings.new(item_params)
+      item = @user.item_listings.new(item_params)
+      item.image.attach(params[:image]) # Attach the uploaded image file to the item
+    
+      if item.save
         
-
-        if item.save
-          render json: item, status: :created
-        else
-          render json: { errors: item.errors.full_messages }, status: :unprocessable_entity
-        end
+    
+        render json: item, status: :created
+      else
+        render json: { errors: item.errors.full_messages }, status: :unprocessable_entity
+      end
     end
     def update
       item = find_item
@@ -69,7 +71,7 @@ class Api::V1::ItemListingsController < ApplicationController
       private
 
       def item_params
-        params.permit(:title, :description, :image_url, :location, :price)
+        params.permit(:title, :description, :location, :price, :image, :user_id)
       end
       def find_item
         ItemListing.find(params[:id])

@@ -57,4 +57,10 @@ Rails.application.configure do
 
   # Annotate rendered view with file names.
   # config.action_view.annotate_rendered_view_with_filenames = true
+  Rails.application.config.active_storage.service = :google
+  Rails.application.config.active_storage.service_config = {
+    project: 'marketplace-storage-392920',
+    keyfile: Rails.root.join('config', '../marketplace-storage-392920-cb864f280e53.json'),
+    bucket: 'bucket-storage123'
+  }
 end

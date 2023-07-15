@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { ImSpinner8 } from 'react-icons/im';
 import "../styles/Main.css";
 import { useNavigate } from 'react-router-dom';
@@ -6,7 +6,6 @@ import banner from "../assets/dollar2.svg";
 import UserContext from "../context/UserContext";
 import ListingModal from './modals/ListingModal';
 import { BsBookmarkFill, BsBookmark } from 'react-icons/bs';
-import { toast } from 'react-toastify';
 
 const Main = ({ items, isModalOpen, setIsModalOpen, addListing, toggleBookmark, isItemBookmarked }) => {
     const navigate = useNavigate();
@@ -39,7 +38,7 @@ const Main = ({ items, isModalOpen, setIsModalOpen, addListing, toggleBookmark, 
                     <div className="display-details">
                         <p>{truncatedTitle}</p>
                         <p>${item.price.toFixed(2)}</p>
-                        <h4>{item.location}</h4>
+                        <h4>{item?.location}</h4>
                     </div>
                     <div className="bookmark" onClick={() => toggleBookmark(item.id)}>
                         {isItemBookmarked(item.id) ? <BsBookmarkFill /> : <BsBookmark />}

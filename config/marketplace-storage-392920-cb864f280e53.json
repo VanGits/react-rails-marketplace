@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "marketplace-storage-392920",
+  "private_key_id": "cb864f280e5355157cb600b74f623c449fe8f11c",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQDMhRSSGBDn3KyD\nkGBkKs8gDGi9iZSv2vzSTmAFP5bx47UQHduORWYHBScZRV4oxjLewo9Lf5aJ9ICv\nagfe8pF3kFOz17TohXQCSAYwDjm8Pb2nJUvPxNotmZPM60KRpQtpZ6QJzWvQfzYK\nY3mlgkac7RGGoISaqpwMMgu6gf7nI6jCDK7AQ1GfkciSo3TwzG0Im/GwU7PdaiZG\nmKMEw266tDd0q+jYvvjq0INjZd8FV0TA+35BNVQzybSajOM0Y9foPUhasJPz+cVA\nzdCzk8HdYpQLZ7DOs1skZ9Dt1jPoi9R1PceUL+g9tbJiOAlrlwKtTq5MmKUKe1bb\nqlPnpv0lAgMBAAECggEAUlzLpnQDpuRTIx6K+vvUcuMccSwNUW6evzDp8WMk7h/W\nBHoJt7dR+cTE9KPfYgtDZDs1CuIEZWUuR7YrGklUdLKOStA1HijUSbDosQShkqHI\nlR3rdG4hsRh2kaEyq0WsnVOsF3h/ETWRtUhPLmyS9FJyauWM0V6gvjaPS5pbZYhZ\nimxwsRwMspSG8AeffffQ5gkJ368KXEH9qW3bRBWGJ1XMvsQlqupYK+9eY7TxVBcP\n7nIJFR/+nNZPYDxWRGHs3JJ4ZpIQ89DeDix3F377D+zm4cM329dMX1vYLB9pRLt2\n+wEo5CZ53NyAX7S5u4BQkqBtQGxyDHscc6WIFqnkhwKBgQD1NFqKE6MxfOXNhGax\nnebbh+6lFDGPUKP7tvPnuvxPqh3sPV3XBfDpezUgZYUnYR7es97u1LYJnGrSXloD\n6Srjhcy59tdWU9GpQ4HIMlhINPD1LqMKRGW60d/5NAYF4oulXecJ4iQkersFutYz\nZeE4wq+x8bQ8CrFhRPzVrSEKHwKBgQDVhi3D4Bv6dKHeWUYahgGnvGEeVc+qY3+T\nyNU3+BL//3jtV2l/CXK9y6byE5PlKrVDU3z9Y1cGh6rjgp3dcuH+hVEQ+h81n94Q\nGODC6h1gXKy+BCwdyILJ03PSeAnetRfR8ymPiU21SU/f4YQ6HI/s1giLUN7Y/i/Y\njMn71pFYOwKBgBwzDiqNAZqiY4dUL79DipY6ts5TWTPDMWi0bK58yaGbzd8qW41s\nCH3BhqWYJ00VFUjFZOEQo3LNg1d4NF/4w87wx0+nvLIX56fQtK9CYvbC5+c6mtOG\ndDCdDGYLfpnUqPy2pOh1EnUDjFinWRUGJXWypiQPyQuSqz2lgnJMe90/AoGAUG6V\n6LYP8/1hSC+az7zw/K1ibBno+wc19IZvgwDIr3QdqlIGJFt7xHDld0TWrjmzRCQ7\n7fswuf366m62Zseyx7ySd/GwNfP9o1SrveCQpk7ip0VNFP8F/V7Qv1SGa0UOLwEJ\nA8+13Pc7xlreA0HlGVLarxgMifLeNRV7tIj0AScCgYAje17GAzwu4WIJTO5GNB88\nD3j0SAlY3n565IoQh0YElrJy5btVw8imJEHsqn+p6RCTT8YEJDA54g3UmSW8Xovd\nQ957KeaFOVxKcsjK1pb2qxCmKmqyuD1qxXibE5Hf3dfLFBU812lPLr/Qcg3qFXxW\nOyYoR+aMtOyh0/fGGYbW0w==\n-----END PRIVATE KEY-----\n",
+  "client_email": "vahne-307@marketplace-storage-392920.iam.gserviceaccount.com",
+  "client_id": "103300610819691396456",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/vahne-307%40marketplace-storage-392920.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}

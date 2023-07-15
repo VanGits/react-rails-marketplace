@@ -7,10 +7,10 @@ Rails.application.configure do
   # it changes. This slows down response time but is perfect for development
   # since you don't have to restart the web server when you make code changes.
   config.cache_classes = false
-
+  
   # Do not eager load code on boot.
   config.eager_load = false
-
+  OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE if Rails.env.development?
   # Show full error reports.
   config.consider_all_requests_local = true
 
@@ -62,4 +62,10 @@ Rails.application.configure do
   # config.action_cable.allowed_request_origins = [/http:\/\/*/, /https:\/\/*/, /file:\/\/*/, 'file://', nil]
   # Uncomment if you wish to allow Action Cable access from any origin.
   config.action_cable.disable_request_forgery_protection = true
+  Rails.application.config.active_storage.service = :google
+Rails.application.config.active_storage.service_config = {
+  project: 'marketplace-storage-392920',
+  keyfile: Rails.root.join('config', '../marketplace-storage-392920-cb864f280e53.json'),
+  bucket: 'bucket-storage123'
+}
 end

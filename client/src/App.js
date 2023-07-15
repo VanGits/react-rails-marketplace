@@ -5,7 +5,7 @@ import LoginModal from "./components/modals/LoginModal";
 import Main from "./components/Main";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
-import { BrowserRouter, Navigate, Route, Routes, useNavigate, useParams } from "react-router-dom";
+import {  Route, Routes } from "react-router-dom";
 import ItemDisplay from "./components/ItemDisplay";
 import UserListings from "./components/UserListings";
 import UserContext from "./context/UserContext";
@@ -55,6 +55,7 @@ function App() {
       .then(itemsData => setItems(itemsData))
   }, [])
 
+  
 
   useEffect(() => {
     fetch("/me").then((res) => {
@@ -285,7 +286,7 @@ const handleNewOfferFromUser = (offer) => {
                 <Nav totalOffersLength={totalOffersLength}handleLogInModal={handleLogInModal} handleProfileClick={handleProfileClick}  setSearchedItems={setSearchedItems} setSearchInput={setSearchInput} searchInput = {searchInput}/>
                 {isProfileClicked && currentUser && <div className="profile-pop-up">
                   <div className="profile-details">
-                    <img src={currentUser && currentUser.image_url} />
+                    <img src={currentUser && currentUser.image_url} alt="user" />
                     <div className="profile-texts">
                       <h1>{currentUser && currentUser.name}</h1>
                       
@@ -308,7 +309,7 @@ const handleNewOfferFromUser = (offer) => {
                 <Nav  totalOffersLength={totalOffersLength}setSearchedItems={setSearchedItems} handleLogInModal={handleLogInModal}  handleProfileClick={handleProfileClick} setSearchInput={setSearchInput} searchInput = {searchInput}/>
                 {isProfileClicked && currentUser && <div className="profile-pop-up">
                   <div className="profile-details">
-                    <img src={currentUser && currentUser.image_url} />
+                    <img src={currentUser && currentUser.image_url} alt="user" />
                     <div className="profile-texts">
                       <h1>{currentUser && currentUser.name}</h1>
                       
@@ -331,7 +332,7 @@ const handleNewOfferFromUser = (offer) => {
                 <Nav totalOffersLength={totalOffersLength}handleLogInModal={handleLogInModal}  handleProfileClick={handleProfileClick}  setSearchedItems={setSearchedItems} setSearchInput={setSearchInput} searchInput = {searchInput}/>
                 {isProfileClicked && currentUser && <div className="profile-pop-up">
                   <div className="profile-details">
-                    <img src={currentUser && currentUser.image_url} />
+                    <img src={currentUser && currentUser.image_url}alt="user" />
                     <div className="profile-texts">
                       <h1>{currentUser && currentUser.name}</h1>
                       
@@ -353,7 +354,7 @@ const handleNewOfferFromUser = (offer) => {
                 <Nav totalOffersLength={totalOffersLength}handleLogInModal={handleLogInModal}  handleProfileClick={handleProfileClick}  setSearchedItems={setSearchedItems} setSearchInput={setSearchInput} searchInput = {searchInput}/>
                 {isProfileClicked && currentUser && <div className="profile-pop-up">
                   <div className="profile-details">
-                    <img src={currentUser && currentUser.image_url} />
+                    <img src={currentUser && currentUser.image_url}alt="user" />
                     <div className="profile-texts">
                       <h1>{currentUser && currentUser.name}</h1>
                       
@@ -375,7 +376,7 @@ const handleNewOfferFromUser = (offer) => {
                 <Nav totalOffersLength={totalOffersLength}handleLogInModal={handleLogInModal}  handleProfileClick={handleProfileClick}  setSearchedItems={setSearchedItems} setSearchInput={setSearchInput} searchInput = {searchInput}/>
                 {isProfileClicked && currentUser && <div className="profile-pop-up">
                   <div className="profile-details">
-                    <img src={currentUser && currentUser.image_url} />
+                    <img src={currentUser && currentUser.image_url}alt="user" />
                     <div className="profile-texts">
                       <h1>{currentUser && currentUser.name}</h1>
                       
@@ -397,7 +398,7 @@ const handleNewOfferFromUser = (offer) => {
                 <Nav totalOffersLength={totalOffersLength}handleLogInModal={handleLogInModal}  handleProfileClick={handleProfileClick}  setSearchedItems={setSearchedItems} setSearchInput={setSearchInput} searchInput = {searchInput}/>
                 {isProfileClicked && currentUser && <div className="profile-pop-up">
                   <div className="profile-details">
-                    <img src={currentUser && currentUser.image_url} />
+                    <img src={currentUser && currentUser.image_url} alt="user"/>
                     <div className="profile-texts">
                       <h1>{currentUser && currentUser.name}</h1>
                       
@@ -419,7 +420,7 @@ const handleNewOfferFromUser = (offer) => {
                 <Nav totalOffersLength={totalOffersLength}handleLogInModal={handleLogInModal}  handleProfileClick={handleProfileClick}  setSearchedItems={setSearchedItems} setSearchInput={setSearchInput} searchInput = {searchInput}/>
                 {isProfileClicked && currentUser && <div className="profile-pop-up">
                   <div className="profile-details">
-                    <img src={currentUser && currentUser.image_url} />
+                    <img src={currentUser && currentUser.image_url} alt="user"/>
                     <div className="profile-texts">
                       <h1>{currentUser && currentUser.name}</h1>
                       

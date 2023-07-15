@@ -1,4 +1,5 @@
 class ItemListing < ApplicationRecord
+  has_one_attached :image
     belongs_to :user
     has_many :favorites , dependent: :destroy
   has_many :favorited_by_users, through: :favorites, source: :user
@@ -7,6 +8,15 @@ class ItemListing < ApplicationRecord
   #validations
   validates :title, presence: true, length: {maximum: 20}
   validates :price, presence: true, numericality: { only_integer: true }
-  validates :image_url, presence: true
+  validate :validate_image_presence
   validates :description, presence: true
+  before_save :set_image_url
+
+  private
+  def set_image_url
+    self.image_url = image.url if image.attached?
+  end
+  def validate_image_presence
+    errors.add(:image, "must be attached") unless image.attached?
+  end
 end

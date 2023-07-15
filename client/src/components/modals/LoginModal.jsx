@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import '../../styles/modals/LoginModal.css';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import ReactModal from 'react-modal';
 import Autocomplete from 'react-google-autocomplete';
 import { ImSpinner8 } from 'react-icons/im';
 
-
+import { BsFillCloudArrowUpFill } from 'react-icons/bs';
 
 const LoginModal = ({
   isLoginModalOpen,
@@ -15,11 +15,11 @@ const LoginModal = ({
 }) => {
   const [isLoginModal, setIsLoginModal] = useState(true);
   const [name, setName] = useState('');
-  const [image, setImage] = useState('');
+  // const [image, setImage] = useState('');
   const [password, setPassword] = useState('');
   const [location, setLocation] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-
+  const [selectedFile, setSelectedFile] = useState(null);
   const handleClick = () => {
     setIsLoginModal(!isLoginModal);
   };
@@ -41,35 +41,43 @@ const LoginModal = ({
 
     loadGoogleMapsPlacesAPI();
   }, []);
+  const handleFileSelect = (event) => {
+    // Retrieve the selected file from the input element
 
+    const file = event.target.files[0];
+   
+   
+    // Update the state with the selected file
+    setSelectedFile(file);
+  };
   const handleSignUp = (e) => {
     e.preventDefault();
-    setIsLoading(true);
-
-    fetch('/signup', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        name: name,
-        image_url: image,
-        location: location,
-        password: password,
-      }),
+    setIsLoading(true)
+    const formData = new FormData();
+    formData.append('name', name);
+    formData.append('image', selectedFile);
+    formData.append('location', location);
+    formData.append('password', password);
+  
+    fetch("/signup", {
+      method: "POST",
+      body: formData,
     })
-      .then((r) => {
-        setIsLoading(false);
-        if (r.ok) {
-          setIsLoginModalOpen(false);
-          setIsProfileClicked(false);
-          toast.success('Signed up successfully!');
-          r.json().then((user) => onLogin(user));
-        } else {
-          r.json().then((err) => toast.error(err.errors && err.errors[0]));
-        }
-      });
-  };
+      
+            .then((r) => {
+              setIsLoading(false);
+              if (r.ok) {
+                setIsLoginModalOpen(false);
+                setIsProfileClicked(false);
+                toast.success('Signed up successfully!');
+                r.json().then((user) => onLogin(user));
+              } else {
+                r.json().then((err) => toast.error(err.errors && err.errors[0]));
+              }
+            });
+          };
+
+  
 
   const handleLogIn = (e) => {
     e.preventDefault();
@@ -97,6 +105,10 @@ const LoginModal = ({
         }
       });
   };
+  const handleUpload = (e) => {
+    e.preventDefault()
+    document.querySelector('input[type=file]').click()
+  }
 
   const loginModal = (
     <>
@@ -134,10 +146,15 @@ const LoginModal = ({
           <h4>Username</h4>
           <input type="text" placeholder="Username" onChange={(e) => setName(e.target.value)} />
         </div>
-        <div className="inputs">
+        {/* <div className="inputs">
           <h4>Image Url</h4>
           <input type="text" placeholder="Enter an image url" onChange={(e) => setImage(e.target.value)} />
-        </div>
+        </div> */}
+        
+        <input id="input-file"type="file" name="image" accept="image/*"onChange={handleFileSelect} style={{ display: 'none' }} />
+          <button id="upload-btn" onClick={(e) => handleUpload(e)}><BsFillCloudArrowUpFill/> Upload File</button>
+          {selectedFile && <p>Selected File: {selectedFile.name}</p>}
+       
         <div className="inputs autocomplete">
           <h4>City</h4>
           <Autocomplete
