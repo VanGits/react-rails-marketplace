@@ -74,11 +74,7 @@ Rails.application.configure do
   # Use a different logger for distributed setups.
   # require "syslog/logger"
   # config.logger = ActiveSupport::TaggedLogging.new(Syslog::Logger.new "app-name")
-  Rails.application.config.active_storage.service_config = {
-    project: 'marketplace-storage-392920',
-    keyfile: Rails.root.join('config', '../marketplace-storage-392920-cb864f280e53.json'),
-    bucket: 'bucket-storage123'
-  }
+ 
 
   if ENV["RAILS_LOG_TO_STDOUT"].present?
     logger           = ActiveSupport::Logger.new(STDOUT)
@@ -88,4 +84,10 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+   Rails.application.config.active_storage.service = :google
+  Rails.application.config.active_storage.service_config = {
+    project: 'marketplace-storage-392920',
+    keyfile: Rails.root.join('config', '../marketplace-storage-392920-cb864f280e53.json'),
+    bucket: 'bucket-storage123'
+  }
 end
