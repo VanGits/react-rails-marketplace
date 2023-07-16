@@ -116,7 +116,6 @@ const LoginModal = ({
         <h1>Log in</h1>
         <h2 onClick={() => setIsLoginModalOpen(false)}>Cancel</h2>
       </div>
-      <h1 id="logo">MarketPlace</h1>
       <form action="" onSubmit={handleLogIn}>
         <div className="inputs">
           <h4>Username</h4>
@@ -140,7 +139,7 @@ const LoginModal = ({
         <h1>Sign up</h1>
         <h2 onClick={() => setIsLoginModalOpen(false)}>Cancel</h2>
       </div>
-      <h1 id="logo">MarketPlace</h1>
+     
       <form onSubmit={handleSignUp}>
         <div className="inputs">
           <h4>Username</h4>
