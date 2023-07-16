@@ -60,7 +60,7 @@ Rails.application.configure do
   Rails.application.config.active_storage.service = :google
   Rails.application.config.active_storage.service_config = {
     project: 'marketplace-storage-392920',
-    keyfile: Rails.root.join('config', '../marketplace-storage-392920-cb864f280e53.json'),
+    keyfile: Rails.root.join('config', 'credentials.json'),
     bucket: 'bucket-storage123'
   }
 end

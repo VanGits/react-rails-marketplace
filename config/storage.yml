@@ -8,7 +8,7 @@ local:
 google:
   service: GCS
   project: marketplace-storage-392920
-  credentials: <%= Rails.root.join('config', 'marketplace-storage-392920-cb864f280e53.json') %>
+  credentials: <%= Rails.root.join('config', 'credentials.json') %>
   bucket: bucket-storage123
 # Use bin/rails credentials:edit to set the AWS secrets (as aws:access_key_id|secret_access_key)
 # amazon:

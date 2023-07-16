@@ -26,10 +26,20 @@ class User < ApplicationRecord
     return false unless location =~ location_regex
     true
   end
+  require 'uri'
+
   def set_image_url
     if image.attached?
-      self.image_url = image.url(expire_at: 1.year.from_now)
+      signed_url = image.url
+      image_url_auth = signed_url
+      self.image_url = generate_public_url(signed_url)
     end
+  end
+  
+  def generate_public_url(signed_url)
+    uri = URI.parse(signed_url)
+    public_url = "#{uri.scheme}://#{uri.host}#{uri.path}"
+    public_url
   end
 
 end
