@@ -27,7 +27,9 @@ class User < ApplicationRecord
     true
   end
   def set_image_url
-    self.image_url = image.url if image.attached?
+    if image.attached?
+      self.image_url = image.url(expire_at: 1.year.from_now)
+    end
   end
 
 end

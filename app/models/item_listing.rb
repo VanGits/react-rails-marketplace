@@ -14,7 +14,9 @@ class ItemListing < ApplicationRecord
 
   private
   def set_image_url
-    self.image_url = image.url if image.attached?
+    if image.attached?
+      self.image_url = image.url(expire_at: 1.year.from_now)
+    end
   end
   def validate_image_presence
     errors.add(:image, "must be attached") unless image.attached?
