@@ -10,7 +10,7 @@ import { toast } from 'react-toastify';
 
 
 
-const ItemDisplay = ({ handleOfferClick,items, item, setItem, updateListing, isItemBookmarked, toggleBookmark }) => {
+const ItemDisplay = ({  getRecipientName, getConvoId, getRecipientId, handleOfferClick,items, item, setItem, updateListing, isItemBookmarked, toggleBookmark }) => {
 
   const [isLoading, setIsLoading] = useState(true);
   const [isEditing, setIsEditing] = useState(false);
@@ -20,7 +20,7 @@ const ItemDisplay = ({ handleOfferClick,items, item, setItem, updateListing, isI
   const params = useParams();
 
   const currentUser = useContext(UserContext);
-
+  
   useEffect(() => {
     const fetchItem = () => {
       setIsLoading(true);
@@ -126,6 +126,41 @@ const ItemDisplay = ({ handleOfferClick,items, item, setItem, updateListing, isI
 
   };
   
+  const handleProfileClick = (recipientId, recipientName) => {
+    getRecipientId(recipientId)
+    // Make a POST request to create a new conversation (message) with a new UUID
+    fetch('/conversations', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        recipient_id: recipientId,
+        sender_id: currentUser.id
+      })
+    })
+      .then(response => {
+        if (response.ok) {
+          // Request was successful, extract the generated UUID from the response data
+          return response.json();
+        } else {
+          // Handle errors if needed
+          throw new Error('Request failed');
+        }
+      })
+      .then(convData => {
+        
+        getConvoId(convData.id)
+        getRecipientName(recipientName)
+        // Navigate to the new chat using the generated UUID
+        navigate(`/chat/${convData.conversation_uuid}`);
+      })
+      .catch(error => {
+        // Handle any errors that occurred during the fetch process
+        console.error(error);
+      });
+  };
+  
 
   return (
     <div className='item-display'>
@@ -180,7 +215,11 @@ const ItemDisplay = ({ handleOfferClick,items, item, setItem, updateListing, isI
                     {isItemBookmarked(item.id) ? <BsBookmarkFill /> : <BsBookmark />}
                       <h4>Favorite</h4>
                     </span>
+                    <div className="buttons">
                     {currentUser?.id !== item.user.id && currentUser && <button onClick={() => handleOfferClick(item.id)}>Offer Price</button>}
+                    {currentUser?.id !== item.user.id && currentUser && <button onClick={() => handleProfileClick(item.user.id, item.user.name)}>Message</button>}
+                    </div>
+                    
                   </>
                 )}
               </div>

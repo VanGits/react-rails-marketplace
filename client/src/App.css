@@ -11,6 +11,7 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  
  
   
 }
@@ -306,5 +307,12 @@ footer h1{
  }
  .load{
   margin-bottom: 24px;
+ }
+ /* Chat */
+ .messages{
+  width: 400px !important;
+ }
+ .Chat h1{
+  font-size: 18px;
  }
 }

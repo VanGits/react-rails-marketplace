@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :conversations
+  
  
   
   namespace :api do
@@ -22,6 +24,9 @@ Rails.application.routes.draw do
   get "/me", to: "users#show"
   delete "/logout", to: "sessions#destroy"
  
+  resources :messages
+  # action cable server
+  mount ActionCable.server => "/cable"
  
   # fix deploy problem
   get "*path", to: "root#index", constraints: ->(req) { !req.xhr? && req.format.html? }

@@ -15,11 +15,12 @@ import Favorites from "./components/Favorites";
 import Offers from "./components/Offers";
 import OfferDisplay from "./components/OfferDisplay";
 import OfferModal from "./components/modals/OfferModal";
+import Chat from "./components/Chat";
 
 
 
 
-function App() {
+function App({ cable }) {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false)
   const [items, setItems] = useState([])
   const [userListings, setUserListings] = useState([])
@@ -34,6 +35,8 @@ function App() {
   const [isOfferModalOpen, setIsOfferModalOpen] = useState(false)
   const [offerItemId, setOfferItemId] = useState(null)
   const [userOffers, setUserOffers] = useState([])
+ 
+  
 
 
   const handleLogInModal = (clicked) => {
@@ -267,6 +270,57 @@ const totalOffersLength = userListings.reduce((total, item) => {
 const handleNewOfferFromUser = (offer) => {
     setUserOffers([...userOffers, offer])
 }
+const [recipientId, setRecipientId] = useState(null)
+const getRecipientId = (id) => {
+  setRecipientId(id);
+  
+  if (id !== null) {
+    localStorage.setItem('recipientId', id);
+  } else {
+    localStorage.removeItem('recipientId');
+  }
+};
+const [convoId, setConvoId] = useState(null)
+const getConvoId = (id) => {
+  setConvoId(id)
+  if (id !== null) {
+    localStorage.setItem('convoId', id);
+  } else {
+    localStorage.removeItem('convoId');
+  }
+}
+const [recipientName, setRecipientName] = useState("")
+const  getRecipientName = (name) => {
+  setRecipientName(name)
+  
+  if (name !== null) {
+    localStorage.setItem('recipientName', name);
+  } else {
+    localStorage.removeItem('recipientName');
+  }
+  }
+  
+useEffect(() => {
+  // Get the recipientId from localStorage
+  const storedRecipientId = localStorage.getItem('recipientId');
+  const storedConvoId = localStorage.getItem('convoId');
+  const storedRecipientName = localStorage.getItem('recipientName');
+  
+  // Set the recipientId state if it is not null
+  if (storedRecipientId) {
+    setRecipientId(storedRecipientId);
+  }
+
+  if (storedConvoId){
+    setConvoId(storedConvoId)
+  }
+  if (storedRecipientName){
+    setRecipientName(storedRecipientName)
+  }
+
+  
+}, []);
+
 
   
 
@@ -322,7 +376,7 @@ const handleNewOfferFromUser = (offer) => {
               </div>
 
               <LoginModal setIsProfileClicked={setIsProfileClicked} onLogin={onLogin} isLoginModalOpen={isLoginModalOpen} setIsLoginModalOpen={setIsLoginModalOpen} />
-              <ItemDisplay isItemBookmarked={isItemBookmarked}toggleBookmark={toggleBookmark}item={item} setItem={setItem} items = {items} updateListing={updateListing} handleOfferClick={handleOfferClick}/>
+              <ItemDisplay  getRecipientName={getRecipientName}getConvoId={getConvoId} getRecipientId={getRecipientId}isItemBookmarked={isItemBookmarked}toggleBookmark={toggleBookmark}item={item} setItem={setItem} items = {items} updateListing={updateListing} handleOfferClick={handleOfferClick}/>
               <OfferModal isOfferModalOpen={isOfferModalOpen} setIsOfferModalOpen={setIsOfferModalOpen} offerItemId={offerItemId} handleNewOfferFromUser={handleNewOfferFromUser}/>
               <Footer/>
             </>} />
@@ -435,6 +489,28 @@ const handleNewOfferFromUser = (offer) => {
               <LoginModal setIsProfileClicked={setIsProfileClicked} onLogin={onLogin} isLoginModalOpen={isLoginModalOpen} setIsLoginModalOpen={setIsLoginModalOpen} />
               {currentUser && <OfferDisplay item={item} setItem={setItem} />}
               <Footer/>
+              
+            </>} />
+            <Route path="/chat/:id" element={
+            <>
+              <div className="navigation">
+                <Nav totalOffersLength={totalOffersLength}handleLogInModal={handleLogInModal}  handleProfileClick={handleProfileClick}  setSearchedItems={setSearchedItems} setSearchInput={setSearchInput} searchInput = {searchInput}/>
+                {isProfileClicked && currentUser && <div className="profile-pop-up">
+                  <div className="profile-details">
+                    <img src={currentUser && currentUser.image_url} alt="user"/>
+                    <div className="profile-texts">
+                      <h1>{currentUser && currentUser.name}</h1>
+                      
+                    </div>
+
+                  </div>
+                  <p onClick={handleLogOut}>Log out</p>
+
+                </div>}
+              </div>
+              <LoginModal setIsProfileClicked={setIsProfileClicked} onLogin={onLogin} isLoginModalOpen={isLoginModalOpen} setIsLoginModalOpen={setIsLoginModalOpen} />
+              <Chat recipientName={recipientName} cable={cable} recipientId={recipientId} convoId={convoId}/>
+              
             </>} />
             
         </Routes>

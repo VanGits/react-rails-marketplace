@@ -4,13 +4,17 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import Modal from "react-modal";
+import actionCable from 'actioncable'
 import { BrowserRouter, Navigate, Route, Routes, useNavigate, useParams } from "react-router-dom";
 
+// Allows to connect frontend with websockets.
+const CableApp = {}
+CableApp.cable = actionCable.createConsumer('ws://localhost:3000/cable')
 Modal.setAppElement("#root");
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
-    <App />
+    <App cable={CableApp.cable}/>
   </BrowserRouter>
 );
 

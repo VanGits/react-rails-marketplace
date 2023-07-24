@@ -1,6 +1,7 @@
 class Api::V1::OffersController < ApplicationController
     wrap_parameters format: []
     def show
+    
         item = find_item
         if item.user.id == @user.id
             render json: item.offers, status: :ok
