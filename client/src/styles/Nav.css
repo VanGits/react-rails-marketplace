@@ -94,6 +94,7 @@ nav{
     flex-direction: column;
     color: #222831;
     height: 50px;
+   
     cursor: pointer;
     border-right: 1px solid rgb(204, 204, 204);
     position: relative;
@@ -122,15 +123,16 @@ a{
     border-color: #1cc592;
 }
 
-.totalOffersLength{
+.totalUnreadLength{
     position: absolute;
     color: white !important;
     background-color: #1cc592;
     border-radius: 12px;
     z-index: 0;
-    right: 0;
+    left: 0;
     top: 0;
-    width: 20px;
+    min-width: 22px;
+
     display: flex;
     align-items: center;
     justify-content: center;
@@ -138,7 +140,7 @@ a{
 }
 
 .nav-offers{
-    width: 140px;
+    
     
     display: flex;
     align-items: flex-end;

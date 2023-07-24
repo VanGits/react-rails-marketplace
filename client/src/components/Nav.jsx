@@ -4,11 +4,12 @@ import { BsBookmark } from 'react-icons/bs';
 import { GrTransaction } from 'react-icons/gr';
 import { MdSell } from 'react-icons/md';
 import { AiOutlineSearch } from 'react-icons/ai';
+import { BiMessageDots } from 'react-icons/bi';
 
 import { Link, useNavigate } from 'react-router-dom';
 import UserContext from "../context/UserContext";
 
-const Nav = ({ handleLogInModal, handleProfileClick, setSearchedItems, searchInput, setSearchInput,totalOffersLength }) => {
+const Nav = ({unreadMessages, setUnreadMessages, handleLogInModal, handleProfileClick, setSearchedItems, searchInput, setSearchInput, totalOffersLength }) => {
     const currentUser = useContext(UserContext);
 
 
@@ -67,9 +68,14 @@ const Nav = ({ handleLogInModal, handleProfileClick, setSearchedItems, searchInp
                     </div>
                 ) : (
                     <div className="nav-elements">
-                        <Link to="/user-offers"><span className='nav-offers'><GrTransaction /><p>Offers</p><p className='totalOffersLength'>{totalOffersLength}</p></span></Link>
+                        <Link to="/messages"><span><BiMessageDots /><p>Messages</p>{unreadMessages > 0 && (
+                            <div className="totalUnreadLength">
+                                {unreadMessages}
+                            </div>
+                        )}</span></Link>
+                        <Link to="/user-offers"><span className='nav-offers'><GrTransaction /><p>Offers</p></span></Link>
                         <Link to="/user-favorites"><span><BsBookmark /><p> Favorites</p></span></Link>
-                        <Link to="/user-listings"><span><MdSell /><p>My Listings</p></span></Link>
+                        <Link to="/user-listings"><span><MdSell /><p>Listings</p></span></Link>
                         <span id='profile'><img src={currentUser.image_url} alt="" onClick={handleProfileClick} /></span>
                     </div>
                 )}

@@ -4,9 +4,34 @@ class MessagesController < ApplicationController
 
   # GET /messages
   def index
-    @messages = Message.all
+    # Find all messages where the recipient_id is equal to the current user's ID
+    received_messages = Message.where(recipient_id: @user.id)
 
-    render json: @messages
+    # Extract unique sender IDs from the received messages
+    sender_ids = received_messages.distinct.pluck(:user_id)
+
+    # Find the users who sent the messages to the current user
+    senders = User.where(id: sender_ids)
+
+    # Prepare the response data as a hash with sender_id as the key
+    messages_data = Hash.new { |hash, key| hash[key] = [] }
+
+    received_messages.each do |message|
+      sender_info = senders.find { |sender| sender.id == message.user_id }
+
+      message_data = {
+        id: message.id,
+        body: message.body,
+        sent_by: sender_info, # Include the entire sender object
+        sent_to: @user,       # Include the entire current user object
+        created_at: message.created_at
+      }
+
+      # Group the message data by sender_id
+      messages_data[message.user_id] << message_data
+    end
+
+    render json: messages_data.values, status: :ok
   end
 
   # GET /messages/1

@@ -66,7 +66,7 @@ const Offers = ({ userListings, userOffers }) => {
             <div className="display-details">
               <p>{truncatedTitle}</p>
               <p>${item.price.toFixed(2)}</p>
-              <p className='totalOffersLength' id='displayOffersLength'>{item.offers.length}</p>
+              <p className='totalUnreadLength' id='displayOffersLength'>{item.offers.length}</p>
               <h4>{item.location}</h4>
             </div>
           </div>

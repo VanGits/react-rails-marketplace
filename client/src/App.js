@@ -16,6 +16,7 @@ import Offers from "./components/Offers";
 import OfferDisplay from "./components/OfferDisplay";
 import OfferModal from "./components/modals/OfferModal";
 import Chat from "./components/Chat";
+import Messages from "./components/Messages";
 
 
 
@@ -35,7 +36,8 @@ function App({ cable }) {
   const [isOfferModalOpen, setIsOfferModalOpen] = useState(false)
   const [offerItemId, setOfferItemId] = useState(null)
   const [userOffers, setUserOffers] = useState([])
- 
+  const [unreadMessages, setUnreadMessages] = useState(0);
+  
   
 
 
@@ -299,7 +301,7 @@ const  getRecipientName = (name) => {
     localStorage.removeItem('recipientName');
   }
   }
-  
+const [senderId, setSenderId] = useState(null)
 useEffect(() => {
   // Get the recipientId from localStorage
   const storedRecipientId = localStorage.getItem('recipientId');
@@ -322,6 +324,7 @@ useEffect(() => {
 }, []);
 
 
+
   
 
   return (
@@ -337,7 +340,7 @@ useEffect(() => {
             <>
             
               <div className="navigation">
-                <Nav totalOffersLength={totalOffersLength}handleLogInModal={handleLogInModal} handleProfileClick={handleProfileClick}  setSearchedItems={setSearchedItems} setSearchInput={setSearchInput} searchInput = {searchInput}/>
+                <Nav unreadMessages={unreadMessages} setUnreadMessages={setUnreadMessages}totalOffersLength={totalOffersLength}handleLogInModal={handleLogInModal} handleProfileClick={handleProfileClick}  setSearchedItems={setSearchedItems} setSearchInput={setSearchInput} searchInput = {searchInput}/>
                 {isProfileClicked && currentUser && <div className="profile-pop-up">
                   <div className="profile-details">
                     <img src={currentUser && currentUser.image_url} alt="user" />
@@ -360,7 +363,7 @@ useEffect(() => {
           <Route path="/item/:id" element={
             <>
               <div className="navigation">
-                <Nav  totalOffersLength={totalOffersLength}setSearchedItems={setSearchedItems} handleLogInModal={handleLogInModal}  handleProfileClick={handleProfileClick} setSearchInput={setSearchInput} searchInput = {searchInput}/>
+                <Nav unreadMessages={unreadMessages} setUnreadMessages={setUnreadMessages} totalOffersLength={totalOffersLength}setSearchedItems={setSearchedItems} handleLogInModal={handleLogInModal}  handleProfileClick={handleProfileClick} setSearchInput={setSearchInput} searchInput = {searchInput}/>
                 {isProfileClicked && currentUser && <div className="profile-pop-up">
                   <div className="profile-details">
                     <img src={currentUser && currentUser.image_url} alt="user" />
@@ -383,7 +386,7 @@ useEffect(() => {
           <Route path="/user-listings" element={
             <>
               <div className="navigation">
-                <Nav totalOffersLength={totalOffersLength}handleLogInModal={handleLogInModal}  handleProfileClick={handleProfileClick}  setSearchedItems={setSearchedItems} setSearchInput={setSearchInput} searchInput = {searchInput}/>
+                <Nav unreadMessages={unreadMessages} setUnreadMessages={setUnreadMessages}totalOffersLength={totalOffersLength}handleLogInModal={handleLogInModal}  handleProfileClick={handleProfileClick}  setSearchedItems={setSearchedItems} setSearchInput={setSearchInput} searchInput = {searchInput}/>
                 {isProfileClicked && currentUser && <div className="profile-pop-up">
                   <div className="profile-details">
                     <img src={currentUser && currentUser.image_url}alt="user" />
@@ -405,7 +408,7 @@ useEffect(() => {
             <Route path="/searchs?" element={
             <>
               <div className="navigation">
-                <Nav totalOffersLength={totalOffersLength}handleLogInModal={handleLogInModal}  handleProfileClick={handleProfileClick}  setSearchedItems={setSearchedItems} setSearchInput={setSearchInput} searchInput = {searchInput}/>
+                <Nav unreadMessages={unreadMessages} setUnreadMessages={setUnreadMessages}totalOffersLength={totalOffersLength}handleLogInModal={handleLogInModal}  handleProfileClick={handleProfileClick}  setSearchedItems={setSearchedItems} setSearchInput={setSearchInput} searchInput = {searchInput}/>
                 {isProfileClicked && currentUser && <div className="profile-pop-up">
                   <div className="profile-details">
                     <img src={currentUser && currentUser.image_url}alt="user" />
@@ -427,7 +430,7 @@ useEffect(() => {
             <Route path="/user-favorites" element={
             <>
               <div className="navigation">
-                <Nav totalOffersLength={totalOffersLength}handleLogInModal={handleLogInModal}  handleProfileClick={handleProfileClick}  setSearchedItems={setSearchedItems} setSearchInput={setSearchInput} searchInput = {searchInput}/>
+                <Nav unreadMessages={unreadMessages} setUnreadMessages={setUnreadMessages}totalOffersLength={totalOffersLength}handleLogInModal={handleLogInModal}  handleProfileClick={handleProfileClick}  setSearchedItems={setSearchedItems} setSearchInput={setSearchInput} searchInput = {searchInput}/>
                 {isProfileClicked && currentUser && <div className="profile-pop-up">
                   <div className="profile-details">
                     <img src={currentUser && currentUser.image_url}alt="user" />
@@ -449,7 +452,7 @@ useEffect(() => {
             <Route path="/user-offers" element={
             <>
               <div className="navigation">
-                <Nav totalOffersLength={totalOffersLength}handleLogInModal={handleLogInModal}  handleProfileClick={handleProfileClick}  setSearchedItems={setSearchedItems} setSearchInput={setSearchInput} searchInput = {searchInput}/>
+                <Nav unreadMessages={unreadMessages} setUnreadMessages={setUnreadMessages}totalOffersLength={totalOffersLength}handleLogInModal={handleLogInModal}  handleProfileClick={handleProfileClick}  setSearchedItems={setSearchedItems} setSearchInput={setSearchInput} searchInput = {searchInput}/>
                 {isProfileClicked && currentUser && <div className="profile-pop-up">
                   <div className="profile-details">
                     <img src={currentUser && currentUser.image_url} alt="user"/>
@@ -471,7 +474,7 @@ useEffect(() => {
             <Route path="/item/offers/:id" element={
             <>
               <div className="navigation">
-                <Nav totalOffersLength={totalOffersLength}handleLogInModal={handleLogInModal}  handleProfileClick={handleProfileClick}  setSearchedItems={setSearchedItems} setSearchInput={setSearchInput} searchInput = {searchInput}/>
+                <Nav unreadMessages={unreadMessages} setUnreadMessages={setUnreadMessages}totalOffersLength={totalOffersLength}handleLogInModal={handleLogInModal}  handleProfileClick={handleProfileClick}  setSearchedItems={setSearchedItems} setSearchInput={setSearchInput} searchInput = {searchInput}/>
                 {isProfileClicked && currentUser && <div className="profile-pop-up">
                   <div className="profile-details">
                     <img src={currentUser && currentUser.image_url} alt="user"/>
@@ -494,7 +497,7 @@ useEffect(() => {
             <Route path="/chat/:id" element={
             <>
               <div className="navigation">
-                <Nav totalOffersLength={totalOffersLength}handleLogInModal={handleLogInModal}  handleProfileClick={handleProfileClick}  setSearchedItems={setSearchedItems} setSearchInput={setSearchInput} searchInput = {searchInput}/>
+                <Nav unreadMessages={unreadMessages} setUnreadMessages={setUnreadMessages}totalOffersLength={totalOffersLength}handleLogInModal={handleLogInModal}  handleProfileClick={handleProfileClick}  setSearchedItems={setSearchedItems} setSearchInput={setSearchInput} searchInput = {searchInput}/>
                 {isProfileClicked && currentUser && <div className="profile-pop-up">
                   <div className="profile-details">
                     <img src={currentUser && currentUser.image_url} alt="user"/>
@@ -509,7 +512,28 @@ useEffect(() => {
                 </div>}
               </div>
               <LoginModal setIsProfileClicked={setIsProfileClicked} onLogin={onLogin} isLoginModalOpen={isLoginModalOpen} setIsLoginModalOpen={setIsLoginModalOpen} />
-              <Chat recipientName={recipientName} cable={cable} recipientId={recipientId} convoId={convoId}/>
+              <Chat  setUnreadMessages={setUnreadMessages}recipientName={recipientName} cable={cable} recipientId={recipientId} convoId={convoId}/>
+              
+            </>} />
+            <Route path="/messages" element={
+            <>
+              <div className="navigation">
+                <Nav unreadMessages={unreadMessages} setUnreadMessages={setUnreadMessages}totalOffersLength={totalOffersLength}handleLogInModal={handleLogInModal}  handleProfileClick={handleProfileClick}  setSearchedItems={setSearchedItems} setSearchInput={setSearchInput} searchInput = {searchInput}/>
+                {isProfileClicked && currentUser && <div className="profile-pop-up">
+                  <div className="profile-details">
+                    <img src={currentUser && currentUser.image_url} alt="user"/>
+                    <div className="profile-texts">
+                      <h1>{currentUser && currentUser.name}</h1>
+                      
+                    </div>
+
+                  </div>
+                  <p onClick={handleLogOut}>Log out</p>
+
+                </div>}
+              </div>
+              <LoginModal setIsProfileClicked={setIsProfileClicked} onLogin={onLogin} isLoginModalOpen={isLoginModalOpen} setIsLoginModalOpen={setIsLoginModalOpen} />
+              <Messages getRecipientId={getRecipientId} getConvoId={getConvoId} getRecipientName={getRecipientName}/>
               
             </>} />
             

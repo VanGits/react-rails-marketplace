@@ -105,14 +105,13 @@
     border: 0 solid rgb(204, 204, 204);
     border-left: 1px;
     
+    
   }
 
   .nav-elements span p {
     font-size: 13px;
   }
-  .nav-offers {
-    width: 95px !important;
-  }
+ 
 
   nav input{
     margin: 0 !important;

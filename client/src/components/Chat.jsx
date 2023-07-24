@@ -6,10 +6,11 @@ import { AiOutlineSend } from 'react-icons/ai';
 import { toast } from 'react-toastify';
 
 
-const Chat = ({ cable, recipientId, convoId, recipientName }) => {
+const Chat = ({ setUnreadMessages ,cable, recipientId, convoId, recipientName }) => {
   const currentUser = useContext(UserContext);
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
+
   const navigate = useNavigate()
   const messagesContainerRef = useRef(null);
   useEffect(() => {
@@ -17,13 +18,18 @@ const Chat = ({ cable, recipientId, convoId, recipientName }) => {
     messagesContainerRef.current.scrollTop = messagesContainerRef.current.scrollHeight;
   }, [messages]);
   const received = (message) => {
-    
+   
    
     setMessages(prevMessages => [...prevMessages, message])
-      
+ 
+      // Increment the unreadMessages state when a new message arrives
+    if (!isCurrentUserMessage(message)) {
+      setUnreadMessages(prevUnread => prevUnread + 1);
+    }
     
     
   };
+  
   const isCurrentUserMessage = (message) => {
     return message?.user?.id === currentUser?.id;
   };
@@ -107,7 +113,7 @@ const Chat = ({ cable, recipientId, convoId, recipientName }) => {
         if(messages.length === 0){
           setMessages([data])
         }
-      
+        setUnreadMessages(0);
   
       })
       .catch(error => {
@@ -126,6 +132,7 @@ const Chat = ({ cable, recipientId, convoId, recipientName }) => {
      
       <div className="messageHeader">
         <h1>Messages {recipientName ?  "with " + recipientName: ""}</h1>
+        
       </div>
       <div className="messages" id="messages" ref={messagesContainerRef}>
         {messages?.map((message) => (
@@ -152,6 +159,7 @@ const Chat = ({ cable, recipientId, convoId, recipientName }) => {
           </button>
         </form>
       </div>
+   
     </div>
     </div>
   );
