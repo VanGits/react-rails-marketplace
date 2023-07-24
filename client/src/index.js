@@ -9,7 +9,7 @@ import { BrowserRouter, Navigate, Route, Routes, useNavigate, useParams } from "
 
 // Allows to connect frontend with websockets.
 const CableApp = {}
-CableApp.cable = actionCable.createConsumer('ws://localhost:3000/cable')
+CableApp.cable = actionCable.createConsumer('wss://marketplace-ylzj.onrender.com/cable');
 Modal.setAppElement("#root");
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
