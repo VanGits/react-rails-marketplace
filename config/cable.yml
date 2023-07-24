@@ -7,5 +7,7 @@ test:
 
 production:
   adapter: redis
-  url: redis://red-cive6llgkuvoiga7j5tg:6379 %> # The link you get from the provider of the cloud service that you deploy your code.
+  url: redis://red-cive6llgkuvoiga7j5tg:6379/1  # The link you get from the provider of the cloud service that you deploy your code.
   channel_prefix: phase_5_production
+  allowed_request_origins:
+    - https://marketplace-ylzj.onrender.com
