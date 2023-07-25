@@ -44,3 +44,8 @@
 .message-noti p{
     margin-left: 12px;
 }
+
+.Messages h1{
+    color: #1cc592 !important;
+    font-size: 18px !important;
+}
