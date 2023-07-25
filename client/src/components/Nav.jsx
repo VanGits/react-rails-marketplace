@@ -68,7 +68,7 @@ const Nav = ({unreadMessages, setUnreadMessages, handleLogInModal, handleProfile
                     </div>
                 ) : (
                     <div className="nav-elements">
-                        <Link to="/messages"><span><BiMessageDots /><p>Messages</p>{unreadMessages > 0 && (
+                        <Link to="/user-messages"><span><BiMessageDots /><p>Messages</p>{unreadMessages > 0 && (
                             <div className="totalUnreadLength">
                                 {unreadMessages}
                             </div>

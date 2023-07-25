@@ -515,7 +515,7 @@ useEffect(() => {
               <Chat  setUnreadMessages={setUnreadMessages}recipientName={recipientName} cable={cable} recipientId={recipientId} convoId={convoId}/>
               
             </>} />
-            <Route path="/messages" element={
+            <Route path="/user-messages" element={
             <>
               <div className="navigation">
                 <Nav unreadMessages={unreadMessages} setUnreadMessages={setUnreadMessages}totalOffersLength={totalOffersLength}handleLogInModal={handleLogInModal}  handleProfileClick={handleProfileClick}  setSearchedItems={setSearchedItems} setSearchInput={setSearchInput} searchInput = {searchInput}/>
