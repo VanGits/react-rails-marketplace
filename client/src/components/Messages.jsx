@@ -56,8 +56,8 @@ const Messages = ({ getRecipientId, getConvoId, getRecipientName }) => {
         {messages && messages.length > 0 ? (
           messages.map((sentArray, arrayIndex) => (
             <div key={arrayIndex} className='message-noti' onClick={() => handleProfileClick(sentArray[0].sent_by.id, sentArray[0].sent_by.name)}>
-              <p>{sentArray[0].sent_by.name}</p>
-              <img src={sentArray[0].sent_by.image_url} alt="" />
+              <p>{sentArray[0].sent_by?.name}</p>
+              <img src={sentArray[0].sent_by?.image_url} alt="" />
             </div>
           ))
         ) : (
