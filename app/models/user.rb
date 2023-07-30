@@ -13,19 +13,19 @@ class User < ApplicationRecord
     # validates :email, presence: true, uniqueness: true
     validates :password, presence: true, length: { minimum: 6 }
     before_save :set_image_url
-    validate :valid_location
+  #   validate :valid_location
 
-  def valid_location
-    unless location_valid?
-      errors.add(:location, 'is not a valid location')
-    end
-  end
+  # def valid_location
+  #   unless location_valid?
+  #     errors.add(:location, 'is not a valid location')
+  #   end
+  # end
 
-  def location_valid?
-    location_regex = /\A[\p{L}\s']+,\s*\p{L}+,\s*\p{L}+\z/
-    return false unless location =~ location_regex
-    true
-  end
+  # def location_valid?
+  #   location_regex = /\A[\p{L}\s']+,\s*\p{L}+,\s*\p{L}+\z/
+  #   return false unless location =~ location_regex
+  #   true
+  # end
   require 'uri'
 
   def set_image_url

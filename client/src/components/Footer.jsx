@@ -24,7 +24,7 @@ const Footer = () => {
                 </div>
                 <div className="footer-element">
                     <h3>Future Features</h3>
-                    <p>Real time chat</p>
+                    <p>Real time notifications</p>
                    
                     
                 </div>
