@@ -169,7 +169,7 @@ const ItemDisplay = ({  getRecipientName, getConvoId, getRecipientId, handleOffe
       ) : (
         <div className='item-viewer'>
           <div className={item ? 'item-details-wrapper' : ''}>
-            {currentUser && currentUser.id === item?.user.id ? (
+            {currentUser && currentUser?.id === item?.user.id ? (
               <FaUserEdit
                 id='user-edit'
                 onClick={isEditing ? handleSaveClick : handleEditClick}
