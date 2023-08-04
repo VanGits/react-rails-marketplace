@@ -186,9 +186,9 @@ const ItemDisplay = ({  getRecipientName, getConvoId, getRecipientId, handleOffe
             {item && (
               <div className='item-details'>
                 <div className='item-details-profile'>
-                  {item && <img src={item.user.image_url} alt='' />}
+                  {item && <img src={item?.user?.image_url} alt='' />}
                   <div className='item-details-profile-elements'>
-                    <h3>{item && item.user.name}</h3>
+                    <h3>{item && item?.user?.name}</h3>
                     <h4>Posted at {formattedDate}</h4>
                   </div>
                 </div>
