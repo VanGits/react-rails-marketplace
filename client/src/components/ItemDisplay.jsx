@@ -209,15 +209,15 @@ const ItemDisplay = ({  getRecipientName, getConvoId, getRecipientId, handleOffe
                   </>
                 ) : (
                   <>
-                    <h2 className='title price'>{item && item.title}</h2>
-                    <h2 className='price'>${item && item.price.toFixed(2)}</h2>
-                    <span onClick={() => toggleBookmark(item.id)}>
-                    {isItemBookmarked(item.id) ? <BsBookmarkFill /> : <BsBookmark />}
+                    <h2 className='title price'>{item && item?.title}</h2>
+                    <h2 className='price'>${item && item?.price?.toFixed(2)}</h2>
+                    <span onClick={() => toggleBookmark(item?.id)}>
+                    {isItemBookmarked(item?.id) ? <BsBookmarkFill /> : <BsBookmark />}
                       <h4>Favorite</h4>
                     </span>
                     <div className="buttons">
-                    {currentUser?.id !== item.user.id && currentUser && <button onClick={() => handleOfferClick(item.id)}>Offer Price</button>}
-                    {currentUser?.id !== item.user.id && currentUser && <button onClick={() => handleProfileClick(item.user.id, item.user.name)}>Message</button>}
+                    {currentUser?.id !== item?.user?.id && currentUser && <button onClick={() => handleOfferClick(item.id)}>Offer Price</button>}
+                    {currentUser?.id !== item?.user?.id && currentUser && <button onClick={() => handleProfileClick(item?.user?.id, item?.user?.name)}>Message</button>}
                     </div>
                     
                   </>
