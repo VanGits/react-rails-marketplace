@@ -25,14 +25,14 @@ const Main = ({ items, isModalOpen, setIsModalOpen, addListing, toggleBookmark, 
 
     
     
-    const displayItem = items?.map((item) => {
+    const displayItem = items?.map((item, index) => {
         const truncatedTitle = truncateTitle(item.title, 20);
         
 
         return (
             <div className='display-item' key={item.id}>
                 <div className="image-container" onClick={() => handleItemClick(item.id)}>
-                    <img src={item.image_url} alt="" />
+                    <img src={item.image_url} alt={index} loading='lazy'/>
                     <div className="bookmark" onClick={() => toggleBookmark(item.id)}>
                         {isItemBookmarked(item.id) ? <BsBookmarkFill className='filled' /> : <BsBookmark className='empty'/>}
                     </div>

@@ -118,7 +118,8 @@
  
   display: inline-block;
   height: 250px;
-  width: 100%;
+  width: 335px;
+ 
   overflow: hidden;
   box-shadow: 0px 2.98px 7.46px 0px rgba(0, 0, 0, 0.15);
   position: relative;
@@ -134,6 +135,9 @@
   object-fit: cover;
   width: 100%;
   
+}
+.display__items{
+  padding: 24px;
 }
 .display__items h1{
   margin-top: 24px;
