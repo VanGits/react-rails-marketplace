@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import "../../styles/Modals/OfferModal.css"
+import "../../styles/App Modals/OfferModal.css"
 import ReactModal from 'react-modal';
 import UserContext from "../../context/UserContext";
 import { toast } from 'react-toastify';

@@ -4,7 +4,7 @@ import "../../styles/General Components/Main.css";
 import { useNavigate } from 'react-router-dom';
 import banner from "../../assets/banner.jpg";
 import UserContext from "../../context/UserContext";
-import ListingModal from '../Modals/ListingModal';
+import ListingModal from '../App Modals/ListingModal';
 import { BsBookmarkFill, BsBookmark } from 'react-icons/bs';
 
 const Main = ({ items, isModalOpen, setIsModalOpen, addListing, toggleBookmark, isItemBookmarked }) => {

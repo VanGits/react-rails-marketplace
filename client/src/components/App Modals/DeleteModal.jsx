@@ -1,5 +1,5 @@
 import React from 'react';
-import "../../styles/Modals/DeleteModal.css"
+import "../../styles/App Modals/DeleteModal.css"
 import ReactModal from "react-modal";
 const DeleteModal = ({ isModalDeleteOpen, setIsModalDeleteOpen, itemUserId, listingId, deleteListing }) => {
    

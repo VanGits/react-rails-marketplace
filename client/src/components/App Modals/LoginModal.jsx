@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import '../../styles/Modals/LoginModal.css';
+import '../../styles/App Modals/LoginModal.css';
 import { toast } from 'react-toastify';
 import ReactModal from 'react-modal';
 import Autocomplete from 'react-google-autocomplete';

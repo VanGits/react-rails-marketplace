@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import "../src/App.css"
 import Nav from "./components/General Components/Nav";
-import LoginModal from "./components/Modals/LoginModal";
+import LoginModal from "./components/App Modals/LoginModal";
 import Main from "./components/General Components/Main";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
@@ -21,7 +21,7 @@ import SearchMain from "./components/General Components/SearchMain";
 // Main Components
 
 // Modals
-import OfferModal from "./components/Modals/OfferModal";
+import OfferModal from "./components/App Modals/OfferModal";
 // Modals
 
 // Chats
