@@ -4,13 +4,15 @@ Rails.application.routes.draw do
  
   
   namespace :api do
+   
     namespace :v1 do
       resources :favorites, only: [:index, :show, :update, :destroy]
       resources :item_listings
       resources :offers
+      get "/trending-four", to: "item_listings#topFour"
       get "/my-listings", to: "item_listings#userIndex"
       get "/my-listings/:id", to: "item_listings#protected_show"
-      get "/trending-four", to: "item_listings#top_four_highest_priced"
+     
     end
   end
     
@@ -20,6 +22,7 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "articles#index"
+  
   post "/login", to: "sessions#create"
   post "/signup", to: "users#create"
   get "/me", to: "users#show"

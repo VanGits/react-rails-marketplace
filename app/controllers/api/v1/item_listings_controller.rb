@@ -1,6 +1,6 @@
 class Api::V1::ItemListingsController < ApplicationController
 
-  skip_before_action :authorize, only: [:index, :show]
+  skip_before_action :authorize, only: [:index, :show, :topFour]
   def index
     if params[:search].present?
       search_query = params[:search].downcase
@@ -12,7 +12,7 @@ class Api::V1::ItemListingsController < ApplicationController
     render json: items.order(created_at: :desc), status: :ok
   end
 
-  def top_four_highest_priced
+  def topFour
     top_items = ItemListing.all.order(price: :desc).limit(4)
     render json: top_items, status: :ok
   end

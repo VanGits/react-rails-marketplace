@@ -76,7 +76,6 @@ const Main = ({ itemsPopular, items, isModalOpen, setIsModalOpen, addListing, to
             </div>
         );
     });
-    console.log(displayItem, displayPopular)
    
     
     const handleClick = () => {
