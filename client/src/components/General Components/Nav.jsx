@@ -53,7 +53,7 @@ const Nav = ({unreadMessages, setUnreadMessages, handleLogInModal, handleProfile
                 <div className="search-wrapper">
                         <input
                             type="text"
-                            placeholder='Search'
+                            placeholder='Search here...'
                             value={searchInput}
                             onChange={handleChange}
                             onKeyPress={handleKeyPress}

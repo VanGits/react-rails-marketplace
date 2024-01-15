@@ -22,10 +22,39 @@
   margin-top: 12px ;
 }
 
-.main-banner{
+.main__banner{
 
   width: 100%;
-  height: 425px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.main__banner h1{
+  
+  color: var(--text-color-light);
+  text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.8);
+  font-size: 48px;
+  font-weight: 600;
+  background-color: #00000067;
+  padding: 24px;
+}
+.items__text{
+  width: 100%;
+  text-align: start;
+}
+.banner__search{
+
+  margin-top: 24px;
+  width: 900px;
+  height: 100px;
+  background-color: #000000b1;
+}
+.banner__typography{
+  position: absolute;
+  height: 100%;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -40,6 +69,8 @@
 }
 .title-detail{
   font-size: 18px !important;
+  font-weight: 400 !important;
+  color: var(--text-color-dark) !important;
 }
 
 .no-items{
@@ -54,6 +85,7 @@
   grid-gap: 10px; 
   margin: 64px 0;
   color: #222831;
+
  
  
   
@@ -83,7 +115,7 @@
 .bookmark{
   font-size: 24px;
   cursor: pointer;
- 
+  color: #e48c08eb;
   position: absolute;
   top: 0;
   right: 0;

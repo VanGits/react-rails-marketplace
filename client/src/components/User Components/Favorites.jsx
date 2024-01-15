@@ -4,7 +4,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import UserContext from "../../context/UserContext";
 import { useNavigate } from 'react-router-dom';
 import { BsBookmark, BsBookmarkFill } from 'react-icons/bs';
-import { ImSpinner8 } from 'react-icons/im';
+import Skeleton from "react-loading-skeleton";
 const Favorites = ({ bookmarkedItems, toggleBookmark, isItemBookmarked}) => {
     const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(true);
@@ -55,11 +55,32 @@ const Favorites = ({ bookmarkedItems, toggleBookmark, isItemBookmarked}) => {
 
   return (
     <div className='Main Favorites'>
-        <h1>{currentUser.name}'s favorites</h1>
+        <h1>Your Favorites</h1>
       {isLoading ? (
-        <div className='no-items-wrapper'>
-          <ImSpinner8 className='load' />
+        <div className='display__items'>
+        <div className='display-items-wrapper'>
+            {Array.from({ length: 8 }).map((_, index) => {
+                console.log("skeleton");
+                return (
+                    <div className='display-item' key={index}>
+                        <div className="image-container">
+                            {/* Add skeleton loading */}
+                            {<Skeleton height={"100%"} />}
+
+                        </div>
+                        <div className="item-details-display">
+                            <div className="display-details">
+                                <p className='title-detail'><Skeleton height={"100%"} width={"100%"} /></p>
+                                <p><Skeleton /></p>
+                                <h4><Skeleton /></h4>
+                            </div>
+
+                        </div>
+                    </div>
+                );
+            })}
         </div>
+    </div>
       ) : bookmarkedItems.length > 0 ? (
         <div className='display-items-wrapper'>{displayItem}</div>
       ) : (

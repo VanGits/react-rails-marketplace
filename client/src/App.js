@@ -6,6 +6,8 @@ import Main from "./components/General Components/Main";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
 import { Route, Routes } from "react-router-dom";
+import { SkeletonTheme } from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 // User Components
 import Favorites from "./components/User Components/Favorites";
 import ItemDisplay from "./components/Item Components/ItemDisplay";
@@ -340,9 +342,11 @@ function App({ cable }) {
   return (
 
     <div className="App">
+       <SkeletonTheme baseColor="#636363" highlightColor="#525252">
       <ToastContainer />
 
       <UserContext.Provider value={currentUser}>
+       
         <Routes>
 
 
@@ -548,8 +552,9 @@ function App({ cable }) {
             </>} />
 
         </Routes>
+        
       </UserContext.Provider>
-
+      </SkeletonTheme>
     </div>
 
   );
