@@ -5,6 +5,7 @@ import { GrTransaction } from 'react-icons/gr';
 import { MdSell } from 'react-icons/md';
 import { AiOutlineSearch } from 'react-icons/ai';
 import { BiMessageDots } from 'react-icons/bi';
+import cart from "../../assets/cart.png"
 
 import { Link, useNavigate } from 'react-router-dom';
 import UserContext from "../../context/UserContext";
@@ -46,8 +47,10 @@ const Nav = ({unreadMessages, setUnreadMessages, handleLogInModal, handleProfile
         <nav className='nav'>
             <div className="nav-wrapper">
                 <div className="nav-logo-search">
-                    <Link to="/"><h1 id='logo'>MarketPlace</h1></Link>
-                    <div className="search-wrapper">
+                    <Link to="/"><img src={cart} alt="logo" /><h1 id='logo'>GoRecycle</h1></Link>
+                    
+                </div>
+                <div className="search-wrapper">
                         <input
                             type="text"
                             placeholder='Search'
@@ -59,12 +62,12 @@ const Nav = ({unreadMessages, setUnreadMessages, handleLogInModal, handleProfile
                             <AiOutlineSearch className="search-icon" />
                         </div>
                     </div>
-                </div>
 
                 {!currentUser ? (
                     <div className="nav-elements">
-                        <span><p>Sell an item</p></span>
-                        <span onClick={handleLogInModal}><p>Log in</p></span>
+                        
+                        <button onClick={handleLogInModal}>Log in</button>
+                        <button onClick={handleLogInModal} id='sign__up'>Sign Up</button>
                     </div>
                 ) : (
                     <div className="nav-elements">
@@ -76,7 +79,7 @@ const Nav = ({unreadMessages, setUnreadMessages, handleLogInModal, handleProfile
                         <Link to="/user-offers"><span className='nav-offers'><GrTransaction /><p>Offers</p></span></Link>
                         <Link to="/user-favorites"><span><BsBookmark /><p> Favorites</p></span></Link>
                         <Link to="/user-listings"><span><MdSell /><p>Listings</p></span></Link>
-                        <span id='profile'><img src={currentUser.image_url} alt="" onClick={handleProfileClick} /></span>
+                        <span id='profile'><img src={currentUser.image_url} alt="profile" onClick={handleProfileClick} /></span>
                     </div>
                 )}
             </div>

@@ -1,5 +1,5 @@
 .Favorites h1{
     margin-top: 64px;
-    color: #1cc592;
+    color: var(--text-color-dark);
     font-weight: 600;
 }

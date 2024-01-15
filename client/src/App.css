@@ -1,10 +1,26 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Poppins";
+  font-family: "Mona Sans";
+}
+
+/* Define main colors */
+:root{
+  --primary-color: #1cc592;
+  --text-color-dark: #242424;
+  --text-color-light: #fff;
+  --text-color-gray: rgb(155, 155, 155);
+}
+
+/* Font */
+@font-face {
+  font-family: "Mona Sans";
+  src: local("Mona Sans"),
+    url("./assets/fonts/Mona-Sans.ttf");
+  font-display: swap;
+  
 }
 
 .App {
@@ -60,8 +76,11 @@
 }
 .profile-details h1 {
   margin: 0 12px;
-  color: #222831;
+  color: var(--text-color-dark);
   font-size: 24px;
+}
+button{
+  cursor: pointer;
 }
 
 .profile-pop-up p {
