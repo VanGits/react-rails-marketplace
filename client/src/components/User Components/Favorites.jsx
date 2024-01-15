@@ -1,7 +1,7 @@
 
-import "../styles/Favorites.css"
+import "../../styles/User Components/Favorites.css"
 import React, { useState, useEffect, useContext } from 'react';
-import UserContext from "../context/UserContext";
+import UserContext from "../../context/UserContext";
 import { useNavigate } from 'react-router-dom';
 import { BsBookmark, BsBookmarkFill } from 'react-icons/bs';
 import { ImSpinner8 } from 'react-icons/im';

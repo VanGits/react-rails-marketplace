@@ -2,10 +2,10 @@ import React, { useContext, useEffect, useRef, useState } from 'react';
 import { ImSpinner8 } from 'react-icons/im';
 import { FaUserEdit } from 'react-icons/fa';
 import { useNavigate, useParams } from 'react-router-dom';
-import "../styles/ItemDisplay.css"
+import "../../styles/Item Components/ItemDisplay.css"
 import { BsBookmark, BsBookmarkFill } from 'react-icons/bs';
 import MapDisplay from './MapDisplay';
-import UserContext from "../context/UserContext";
+import UserContext from "../../context/UserContext";
 import { toast } from 'react-toastify';
 
 

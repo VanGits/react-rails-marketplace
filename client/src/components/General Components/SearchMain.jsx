@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import '../styles/SearchMain.css';
+import '../../styles/General Components/SearchMain.css';
 import { useNavigate } from 'react-router-dom';
 import { BsBookmarkFill, BsBookmark } from 'react-icons/bs';
 import { ImSpinner8 } from 'react-icons/im';

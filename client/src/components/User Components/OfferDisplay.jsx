@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { ImSpinner8 } from 'react-icons/im';
-import "../styles/OfferDisplay.css"
+import "../../styles/User Components/OfferDisplay.css"
 
 import { toast } from 'react-toastify';
 const OfferDisplay = ({item, setItem }) => {

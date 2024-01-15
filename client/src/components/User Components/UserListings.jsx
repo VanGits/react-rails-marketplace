@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import "../styles/UserListings.css"
-import ListingModal from './modals/ListingModal';
+import "../../styles/User Components/UserListings.css"
+import ListingModal from '../Modals/ListingModal';
 import { IoMdAddCircle } from 'react-icons/io';
 import { ImSpinner8 } from 'react-icons/im';
 import { useNavigate } from 'react-router-dom';
 import { AiFillDelete } from 'react-icons/ai';
-import DeleteModal from './modals/DeleteModal';
+import DeleteModal from '../Modals/DeleteModal';
 
 
 const UserListings = ({ userListings, isModalOpen, setIsModalOpen, deleteListing, addListing, isModalDeleteOpen, setIsModalDeleteOpen }) => {

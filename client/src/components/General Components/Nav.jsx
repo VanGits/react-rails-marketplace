@@ -1,5 +1,5 @@
-import React, { useContext, useState } from 'react';
-import "../styles/Nav.css"
+import React, { useContext } from 'react';
+import "../../styles/General Components/Nav.css"
 import { BsBookmark } from 'react-icons/bs';
 import { GrTransaction } from 'react-icons/gr';
 import { MdSell } from 'react-icons/md';
@@ -7,7 +7,7 @@ import { AiOutlineSearch } from 'react-icons/ai';
 import { BiMessageDots } from 'react-icons/bi';
 
 import { Link, useNavigate } from 'react-router-dom';
-import UserContext from "../context/UserContext";
+import UserContext from "../../context/UserContext";
 
 const Nav = ({unreadMessages, setUnreadMessages, handleLogInModal, handleProfileClick, setSearchedItems, searchInput, setSearchInput, totalOffersLength }) => {
     const currentUser = useContext(UserContext);

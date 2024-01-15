@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
-import "../styles/Chat.css"
-import UserContext from "../context/UserContext";
+import "../../styles/Chat Components/Chat.css"
+import UserContext from "../../context/UserContext";
 import { useNavigate } from 'react-router-dom';
 import { AiOutlineSend } from 'react-icons/ai';
 import { toast } from 'react-toastify';

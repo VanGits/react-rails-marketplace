@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import "../styles/MapDisplay.css";
+import "../../styles/Item Components/MapDisplay.css";
 
 const MapDisplay = ({ item }) => {
   const [map, setMap] = useState(null);

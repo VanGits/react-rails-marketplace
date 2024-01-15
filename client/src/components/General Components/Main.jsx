@@ -1,10 +1,10 @@
 import React, { useContext } from 'react';
 import { ImSpinner8 } from 'react-icons/im';
-import "../styles/Main.css";
+import "../../styles/General Components/Main.css";
 import { useNavigate } from 'react-router-dom';
-import banner from "../assets/dollar2.svg";
-import UserContext from "../context/UserContext";
-import ListingModal from './modals/ListingModal';
+import banner from "../../assets/dollar2.svg";
+import UserContext from "../../context/UserContext";
+import ListingModal from '../Modals/ListingModal';
 import { BsBookmarkFill, BsBookmark } from 'react-icons/bs';
 
 const Main = ({ items, isModalOpen, setIsModalOpen, addListing, toggleBookmark, isItemBookmarked }) => {

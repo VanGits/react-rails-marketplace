@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
-import "../styles/Messages.css"
-import UserContext from '../context/UserContext';
+import "../../styles/Chat Components/Messages.css"
+import UserContext from '../../context/UserContext';
 import { useNavigate } from 'react-router-dom';
 const Messages = ({ getRecipientId, getConvoId, getRecipientName }) => {
   const [messages, setMessages] = useState(null)

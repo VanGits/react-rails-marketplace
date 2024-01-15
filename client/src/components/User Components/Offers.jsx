@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import '../styles/SearchMain.css';
+import '../../styles/General Components/SearchMain.css';
 import { useNavigate } from 'react-router-dom';
-import { BsBookmarkFill, BsBookmark } from 'react-icons/bs';
 import { ImSpinner8 } from 'react-icons/im';
-import "../styles/Offers.css"
+import "../../styles/User Components/Offers.css"
 const Offers = ({ userListings, userOffers }) => {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(true);
