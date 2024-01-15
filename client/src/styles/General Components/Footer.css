@@ -1,7 +1,7 @@
 footer{
-    height: 250px;
+    height: 550px;
     width: 100%;
-    background-color: #141414;
+    background: url("../../assets/footer-banner.jpg");
    
     display: flex;
     align-items: center;
@@ -9,37 +9,79 @@ footer{
     margin-top: auto;
     flex-direction: column;
     color: white;
+    background-size:initial;
+    background-repeat: no-repeat;
 }
 
-.footer-content{
+.footer__wrapper{
+    background-color: #141414e2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+  
+}
+.footer__content{
+    display: grid;
+    justify-content: center;
+    grid-template-columns: repeat(4, 1fr);
     max-width: 1200px;
     width: 100%;
-    border-bottom: 1px solid white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    padding: 24px;
+    height: 100%;
+    margin-top: 64px;
+
+}
+.footer__content h1{
+    color: var(--primary-color);
+}
+.first-col{
+    width: 400px;
+}
+.second-col h4, .third-col h4, .fourth-col h4{
+    
+   
+    margin-top: 4px;
+}
+ .second-col p:nth-child(2), .third-col p:nth-child(2), .fourth-col p:nth-child(2){
+    
+   
+    margin-top: 52px;
 }
 
 
 
-.footer-elements {
-    width: 80%;
+.first-col p{
+    margin-top: 32px;
+    
+    width: 200px;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 1.4;
+  
+}
+.second-col p,.third-col p,.fourth-col p{
+    margin-top: 32px;
+    cursor: not-allowed;
+}
+footer h4{
+    font-weight: 500;
+    font-size: 18px;
+}
+.footer__socials{
+    margin-top: 64px;
     display: flex;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: flex-start;
+    flex-direction: row;
+}
+.footer__social{
+    font-size: 24px;
     
 }
+.footer__social:nth-child(2),.footer__social:nth-child(3),.footer__social:nth-child(4){
+    margin-left: 24px;
+}
 
-.footer-element{
-    height: 100px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    width: 100%;
-}
-.footer h1{
-    margin-top: 12px;
-}
+
