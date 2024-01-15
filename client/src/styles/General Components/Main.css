@@ -34,11 +34,11 @@
 .main__banner h1{
   
   color: var(--text-color-light);
-  text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.8);
-  font-size: 48px;
+  font-size: 56px;
   font-weight: 600;
-  background-color: #00000067;
-  padding: 24px;
+  width: 100%;
+  text-align: center;
+  
 }
 .items__text{
   width: 100%;
@@ -49,7 +49,7 @@
   margin-top: 24px;
   width: 900px;
   height: 100px;
-  background-color: #000000b1;
+ 
 }
 .banner__typography{
   position: absolute;
@@ -59,6 +59,16 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  background-color: #00000066;
+}
+.banner__typography button{
+  margin-top: 32px;
+  padding: 16px 32px;
+  border: 2px solid white;
+  background-color: transparent;
+  color: white;
+  font-size: 20px;
+  font-weight: 400;
 }
 
 .load{
@@ -163,7 +173,7 @@
   object-fit: cover;
 }
 .Main .banner{
-  height: 60vh;
+  height: 70vh;
   object-fit: cover;
   width: 100%;
   

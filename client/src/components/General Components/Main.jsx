@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useRef } from 'react';
 import "../../styles/General Components/Main.css";
 import { useNavigate } from 'react-router-dom';
 import banner from "../../assets/banner.jpg";
@@ -11,7 +11,7 @@ import Skeleton from 'react-loading-skeleton';
 const Main = ({ itemsPopular, items, isModalOpen, setIsModalOpen, addListing, toggleBookmark, isItemBookmarked }) => {
     const navigate = useNavigate();
     const currentUser = useContext(UserContext);
-
+    const displayRef = useRef(null);
 
     const handleItemClick = (itemId) => {
         navigate(`/item/${itemId}`);
@@ -24,6 +24,12 @@ const Main = ({ itemsPopular, items, isModalOpen, setIsModalOpen, addListing, to
         return title;
     };
 
+    // Moves view to items when clicked
+    const scrollToDisplay = () => {
+        if (displayRef.current) {
+            displayRef.current.scrollIntoView({ behavior: 'smooth' });
+        }
+    };
 
 
     const displayItem = items?.map((item, index) => {
@@ -88,7 +94,10 @@ const Main = ({ itemsPopular, items, isModalOpen, setIsModalOpen, addListing, to
                 <div className='main__banner'>
                     <img src={banner} alt="" className='banner' />
                     <div className="banner__typography">
-                        <h1>The best place to buy and sell recycled items.</h1>
+                      
+                        <h1>The best place to buy </h1>
+                        <h1>and sell recycled items.</h1>
+                        <button onClick={scrollToDisplay}>BROWSE ITEMS</button>
                         {/* <div className="banner__search">
 
                         </div> */}
@@ -105,7 +114,7 @@ const Main = ({ itemsPopular, items, isModalOpen, setIsModalOpen, addListing, to
 
             {items.length > 0 ? (
                 <div className='display__items'>
-                    <h1>Trending on GoRecycle</h1>
+                    <h1 ref={displayRef}>Trending on GoRecycle</h1>
                     <p>Promoted items you might be interested in.</p>
                     <div className='display-items-wrapper'>{displayPopular}</div>
                     <h1>Recent Postings</h1>
