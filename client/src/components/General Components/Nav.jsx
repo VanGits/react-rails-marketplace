@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import "../../styles/General Components/Nav.css"
-import { BsBookmark } from 'react-icons/bs';
+import { IoMdHeartEmpty } from "react-icons/io";
 import { GrTransaction } from 'react-icons/gr';
 import { MdSell } from 'react-icons/md';
 import { AiOutlineSearch } from 'react-icons/ai';
@@ -47,7 +47,7 @@ const Nav = ({unreadMessages, setUnreadMessages, handleLogInModal, handleProfile
         <nav className='nav'>
             <div className="nav-wrapper">
                 <div className="nav-logo-search">
-                    <Link to="/"><img src={cart} alt="logo" /><h1 id='logo'>GoRecycle</h1></Link>
+                    <Link to="/"><img src={cart} alt="logo" /><h1 id='logo'><span>Go</span>Recycle</h1></Link>
                     
                 </div>
                 <div className="search-wrapper">
@@ -77,7 +77,7 @@ const Nav = ({unreadMessages, setUnreadMessages, handleLogInModal, handleProfile
                             </div>
                         )}</span></Link>
                         <Link to="/user-offers"><span className='nav-offers'><GrTransaction /><p>Offers</p></span></Link>
-                        <Link to="/user-favorites"><span><BsBookmark /><p> Favorites</p></span></Link>
+                        <Link to="/user-favorites"><span><IoMdHeartEmpty /><p> Liked</p></span></Link>
                         <Link to="/user-listings"><span><MdSell /><p>Listings</p></span></Link>
                         <span id='profile'><img src={currentUser.image_url} alt="profile" onClick={handleProfileClick} /></span>
                     </div>

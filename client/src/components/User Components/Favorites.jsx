@@ -3,7 +3,7 @@ import "../../styles/User Components/Favorites.css"
 import React, { useState, useEffect, useContext } from 'react';
 import UserContext from "../../context/UserContext";
 import { useNavigate } from 'react-router-dom';
-import { BsBookmark, BsBookmarkFill } from 'react-icons/bs';
+import { IoMdHeartEmpty, IoMdHeart } from "react-icons/io";
 import Skeleton from "react-loading-skeleton";
 const Favorites = ({ bookmarkedItems, toggleBookmark, isItemBookmarked}) => {
     const navigate = useNavigate();
@@ -46,7 +46,7 @@ const Favorites = ({ bookmarkedItems, toggleBookmark, isItemBookmarked}) => {
             <h4>{item.location}</h4>
           </div>
           <div className='bookmark' onClick={() => toggleBookmark(item.id)}>
-          {isItemBookmarked(item.id) ? <BsBookmarkFill /> : <BsBookmark />}
+          {isItemBookmarked(item.id) ? <IoMdHeart /> : <IoMdHeartEmpty />}
           </div>
         </div>
       </div>
@@ -60,7 +60,7 @@ const Favorites = ({ bookmarkedItems, toggleBookmark, isItemBookmarked}) => {
         <div className='display__items'>
         <div className='display-items-wrapper'>
             {Array.from({ length: 8 }).map((_, index) => {
-                console.log("skeleton");
+  
                 return (
                     <div className='display-item' key={index}>
                         <div className="image-container">

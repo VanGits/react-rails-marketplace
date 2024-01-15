@@ -6,7 +6,7 @@ nav {
     align-items: center;
     justify-content: center;
     color: #1cc592;
-
+    position: sticky;
     border-bottom: 1px solid rgb(204, 204, 204);
 }
 
@@ -38,7 +38,13 @@ nav {
 }
 
 .nav-logo-search #logo {
-    margin-left: 8px;
+    margin-left: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#logo span{
+    color: var(--primary-color);
 }
 
 .nav button {
@@ -49,6 +55,7 @@ nav {
     text-align: center;
     font-size: 14px;
     white-space: nowrap;
+    border-radius: 8px;
 
 
 }

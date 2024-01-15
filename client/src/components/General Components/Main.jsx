@@ -1,14 +1,14 @@
 import React, { useContext } from 'react';
-import { ImSpinner8 } from 'react-icons/im';
 import "../../styles/General Components/Main.css";
 import { useNavigate } from 'react-router-dom';
 import banner from "../../assets/banner.jpg";
 import UserContext from "../../context/UserContext";
 import ListingModal from '../App Modals/ListingModal';
-import { BsBookmarkFill, BsBookmark } from 'react-icons/bs';
+
+import { IoMdHeartEmpty, IoMdHeart } from "react-icons/io";
 import Skeleton from 'react-loading-skeleton';
 
-const Main = ({ items, isModalOpen, setIsModalOpen, addListing, toggleBookmark, isItemBookmarked }) => {
+const Main = ({ itemsPopular, items, isModalOpen, setIsModalOpen, addListing, toggleBookmark, isItemBookmarked }) => {
     const navigate = useNavigate();
     const currentUser = useContext(UserContext);
 
@@ -33,11 +33,9 @@ const Main = ({ items, isModalOpen, setIsModalOpen, addListing, toggleBookmark, 
         return (
             <div className='display-item' key={item.id}>
                 <div className="image-container" onClick={() => handleItemClick(item.id)}>
-                    {/* Add skeleton loading */}
-                    {<img src={item.image_url} alt={index} loading='lazy' /> || <Skeleton />}
-                    <div className="bookmark" onClick={() => toggleBookmark(item.id)}>
-                        {isItemBookmarked(item.id) ? <BsBookmarkFill className='filled' /> : <BsBookmark className='empty' />}
-                    </div>
+                  
+                    <img src={item.image_url} alt={index} loading='lazy' />  
+                   
                 </div>
                 <div className="item-details-display">
                     <div className="display-details">
@@ -47,10 +45,40 @@ const Main = ({ items, isModalOpen, setIsModalOpen, addListing, toggleBookmark, 
                     </div>
 
                 </div>
+                <div className="bookmark" onClick={() => toggleBookmark(item.id)}>
+                        {isItemBookmarked(item.id) ? <IoMdHeart className='filled' /> : <IoMdHeartEmpty className='empty' />}
+                    </div>
             </div>
         );
     });
+    const displayPopular = itemsPopular?.map((item, index) => {
+        const truncatedTitle = truncateTitle(item.title, 20);
 
+
+        return (
+            <div className='display-item' key={item.id}>
+                <div className="image-container" onClick={() => handleItemClick(item.id)}>
+                  
+                    {<img src={item.image_url} alt={index} loading='lazy' />}
+                   
+                </div>
+                <div className="item-details-display">
+                    <div className="display-details">
+                        <p className='title-detail'>{truncatedTitle}</p>
+                        <p>${item.price.toFixed(2)}</p>
+                        <h4>{item?.location}</h4>
+                    </div>
+
+                </div>
+                <div className="bookmark" onClick={() => toggleBookmark(item.id)}>
+                        {isItemBookmarked(item.id) ? <IoMdHeart className='filled' /> : <IoMdHeartEmpty className='empty' />}
+                    </div>
+            </div>
+        );
+    });
+    console.log(displayItem, displayPopular)
+   
+    
     const handleClick = () => {
         setIsModalOpen(!isModalOpen);
     };
@@ -80,6 +108,9 @@ const Main = ({ items, isModalOpen, setIsModalOpen, addListing, toggleBookmark, 
                 <div className='display__items'>
                     <h1>Trending on GoRecycle</h1>
                     <p>Promoted items you might be interested in.</p>
+                    <div className='display-items-wrapper'>{displayPopular}</div>
+                    <h1>Recent Postings</h1>
+                    <p>Recent items you might be interested in.</p>
                     <div className='display-items-wrapper'>{displayItem}</div>
                 </div>
             ) : (
@@ -88,7 +119,7 @@ const Main = ({ items, isModalOpen, setIsModalOpen, addListing, toggleBookmark, 
                     <p>Promoted items you might be interested in.</p>
                     <div className='display-items-wrapper'>
                         {Array.from({ length: 8 }).map((_, index) => {
-                            console.log("skeleton");
+                          
                             return (
                                 <div className='display-item' key={index}>
                                     <div className="image-container">

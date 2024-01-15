@@ -113,9 +113,9 @@
 }
 
 .bookmark{
-  font-size: 24px;
+  font-size: 28px;
   cursor: pointer;
-  color: #e48c08eb;
+  color: #e40039eb;
   position: absolute;
   top: 0;
   right: 0;
@@ -124,7 +124,7 @@
   background: transparent;
 }
 .filled{
-  color: #e48c08eb;
+  color: #e40039eb;
 }
 .empty{
   color: var(--text-color-light);;

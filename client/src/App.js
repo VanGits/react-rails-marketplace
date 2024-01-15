@@ -53,6 +53,7 @@ function App({ cable }) {
   const [offerItemId, setOfferItemId] = useState(null)
   const [userOffers, setUserOffers] = useState([])
   const [unreadMessages, setUnreadMessages] = useState(0);
+  const [itemsPopular, setItemsPopular] = useState([])
 
 
 
@@ -75,6 +76,14 @@ function App({ cable }) {
       .then((r) => r.json())
       .then(itemsData => setItems(itemsData))
   }, [])
+ 
+  useEffect(() => {
+    fetch("/api/v1/trending-four")
+      .then((r) => r.json())
+      .then(itemsData => setItemsPopular(itemsData))
+  }, [])
+ 
+
 
 
 
@@ -370,7 +379,7 @@ function App({ cable }) {
               </div>
 
               <LoginModal setIsProfileClicked={setIsProfileClicked} onLogin={onLogin} isLoginModalOpen={isLoginModalOpen} setIsLoginModalOpen={setIsLoginModalOpen} />
-              <Main isItemBookmarked={isItemBookmarked} toggleBookmark={toggleBookmark} addListing={addListing} items={items} isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} searchedItems={searchedItems} />
+              <Main itemsPopular = {itemsPopular}isItemBookmarked={isItemBookmarked} toggleBookmark={toggleBookmark} addListing={addListing} items={items} isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} searchedItems={searchedItems} />
               <Footer />
             </>} />
 

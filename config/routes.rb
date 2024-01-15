@@ -10,6 +10,7 @@ Rails.application.routes.draw do
       resources :offers
       get "/my-listings", to: "item_listings#userIndex"
       get "/my-listings/:id", to: "item_listings#protected_show"
+      get "/trending-four", to: "item_listings#top_four_highest_priced"
     end
   end
     
