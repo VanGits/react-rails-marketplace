@@ -1,13 +1,14 @@
 .map__container{
   width: 100%;
   height: 100%;
+  margin-top: auto;
 }
 
 #map{
     height: 200px;
     width: 100%;
     border-radius: 12px;
-    margin-top: auto;
+   
     
    
     

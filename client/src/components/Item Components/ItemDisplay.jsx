@@ -206,13 +206,14 @@ const ItemDisplay = ({ getRecipientName, getConvoId, getRecipientId, handleOffer
                     <div className='description-wrapper'>
 
                       <h3>{item && item.description}</h3>
-                      <div className="map__container">
-                        <MapDisplay item={item} />
-                      </div>
+                     
 
 
 
                     </div>
+                    <div className="map__container">
+                        <MapDisplay item={item} />
+                      </div>
 
 
                     <span onClick={() => toggleBookmark(item?.id)}>
