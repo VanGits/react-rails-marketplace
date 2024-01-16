@@ -29,6 +29,7 @@ import OfferModal from "./components/App Modals/OfferModal";
 // Chats
 import Chat from "./components/Chat Components/Chat";
 import Messages from "./components/Chat Components/Messages";
+import ScrollToTop from "./components/Data Components/ScrollToTop";
 // Chats
 
 
@@ -351,6 +352,7 @@ function App({ cable }) {
   return (
 
     <div className="App">
+      <ScrollToTop>
        <SkeletonTheme baseColor="#636363" highlightColor="#525252">
       <ToastContainer />
 
@@ -564,6 +566,7 @@ function App({ cable }) {
         
       </UserContext.Provider>
       </SkeletonTheme>
+      </ScrollToTop>
     </div>
 
   );
