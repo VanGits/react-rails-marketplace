@@ -1,5 +1,5 @@
 #offer-title{
-    color: #1cc592;
+    color: var(--text-color-dark);
     margin-top: 24px;
 }
 #displayOffersLength{

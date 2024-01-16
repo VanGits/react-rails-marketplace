@@ -61,7 +61,7 @@ const Messages = ({ getRecipientId, getConvoId, getRecipientName }) => {
             </div>
           ))
         ) : (
-          <h1>No messages found</h1>
+          <p className='no-item'>No messages found</p>
         )}
       </div>
     </div>

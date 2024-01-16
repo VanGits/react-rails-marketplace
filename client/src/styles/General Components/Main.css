@@ -85,7 +85,7 @@
 
 .no-items{
   margin-top: 48px;
-  color: #1cc592;
+  color: var(--text-color-dark);
 }
 
  .display-items-wrapper{

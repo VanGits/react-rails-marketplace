@@ -55,7 +55,7 @@ const Offers = ({ userListings, userOffers }) => {
     .filter(item => item.offers.length > 0)
     .map(item => {
       const truncatedTitle = truncateTitle(item.title, 20);
-      
+
       return (
         <div className="display-item" key={item.id}>
           <div className="image-container" onClick={() => handleItemClick(item.id)}>
@@ -79,24 +79,27 @@ const Offers = ({ userListings, userOffers }) => {
         <div className='no-items-wrapper'>
           <ImSpinner8 className='load' />
         </div>
-      ) : userListings.length > 0 || userOffers?.length > 0? (
+      ) : (
         <>
-          <h1 id='offer-title'>Check your listings offers</h1>
-          {userListings?.length > 0 ? <div className='display-items-wrapper'>{displayItem}</div> : 
-          <p className='no-items'>No offers sent to you.</p>
-    }
-          {userOffers?.length > 0 ? <h1 className='no-items'>Offers you sent</h1> : ""}
-          {userOffers?.length > 0 ? <div className='display-items-wrapper'>
-            {displayUserOffers}
-          </div> : <h1 className='no-items'>You haven't sent any offers.</h1>}
+         
+          {userListings?.offers?.length > 0 ? (
+            <>
+             <p id='no-items'>Check your listings offers</p>
+            <div className='display-items-wrapper'>{displayUserOffers}</div>
+            </>
+          ) : (
+            <p className='no-items'>No offers sent to you.</p>
+          )}
+
+
+          {/* <>
+            <h1 className='no-items'>Offers you sent</h1>
+            <div className='display-items-wrapper'>{displayUserOffers}</div>
+          </> */}
 
         </>
-
-      ) : (
-        <div className='no-items-wrapper'>
-          <p className='no-items'>No offers sent to you.</p>
-        </div>
       )}
+
 
 
     </div>

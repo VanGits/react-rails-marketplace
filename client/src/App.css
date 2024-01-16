@@ -181,7 +181,7 @@ button{
 }
 .image-container {
   height: max-content !important;
-  overflow: hidden;
+  
   box-shadow: none !important;
   display: flex !important;
   align-items: center !important;
@@ -306,6 +306,7 @@ footer h1{
 
  .no-items{
   font-size: 24px;
+  
  }
  .offers-wrapper{
   grid-template-columns: repeat(1, 1fr) !important; 

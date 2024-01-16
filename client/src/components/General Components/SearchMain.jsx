@@ -52,7 +52,7 @@ const SearchMain = ({ searchedItems, isItemBookmarked, toggleBookmark }) => {
   });
 
   return (
-    <div className='Main'>
+    <div className='SearchMain'>
       {isLoading ? (
         <div className='no-items-wrapper'>
           <ImSpinner8 className='load' />
