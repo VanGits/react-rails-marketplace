@@ -30,14 +30,8 @@ import OfferModal from "./components/App Modals/OfferModal";
 import Chat from "./components/Chat Components/Chat";
 import Messages from "./components/Chat Components/Messages";
 import ScrollToTop from "./components/Data Components/ScrollToTop";
+import MobileOverlay from "./components/Mobile Components/MobileOverlay";
 // Chats
-
-
-
-
-
-
-
 function App({ cable }) {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false)
   const [items, setItems] = useState([])
@@ -55,39 +49,37 @@ function App({ cable }) {
   const [userOffers, setUserOffers] = useState([])
   const [unreadMessages, setUnreadMessages] = useState(0);
   const [itemsPopular, setItemsPopular] = useState([])
+  const [isBurgerOpened, setIsBurgerOpened] = useState(false)
+  const [convoId, setConvoId] = useState(null)
+  const [recipientName, setRecipientName] = useState("")
+  const [recipientId, setRecipientId] = useState(null)
+ 
 
-
-
+  const handleBurgerClick = () => {
+    setIsBurgerOpened(!isBurgerOpened)
+  }
 
   const handleLogInModal = (clicked) => {
     if (clicked) {
       setIsLoginModalOpen(true)
     }
   }
-
   const handleOfferClick = (itemId) => {
     if (itemId) {
       setOfferItemId(itemId)
       setIsOfferModalOpen(true)
     }
   }
-
   useEffect(() => {
     fetch("/api/v1/item_listings")
       .then((r) => r.json())
       .then(itemsData => setItems(itemsData))
   }, [])
- 
   useEffect(() => {
     fetch("/api/v1/trending-four")
       .then((r) => r.json())
       .then(itemsData => setItemsPopular(itemsData))
   }, [])
- 
-
-
-
-
   useEffect(() => {
     fetch("/me").then((res) => {
       if (res.ok) {
@@ -97,7 +89,6 @@ function App({ cable }) {
       }
     });
   }, []);
-
   useEffect(() => {
     fetch("/api/v1/my-listings").then((res) => {
       if (res.ok) {
@@ -105,7 +96,6 @@ function App({ cable }) {
       }
     });
   }, [currentUser])
-
   useEffect(() => {
     fetch("/api/v1/favorites").then((res) => {
       if (res.ok) {
@@ -113,7 +103,6 @@ function App({ cable }) {
       }
     });
   }, [currentUser])
-
   useEffect(() => {
     fetch("/api/v1/offers").then((res) => {
       if (res.ok) {
@@ -122,17 +111,12 @@ function App({ cable }) {
       }
     })
   }, [currentUser])
-
-
   const onLogin = (user) => {
     setCurrentUser(user)
   }
-
   const handleProfileClick = () => {
     setIsProfileClicked(!isProfileClicked)
   }
-
-
   const handleLogOut = (e) => {
     e.preventDefault()
     fetch("/logout", {
@@ -140,26 +124,17 @@ function App({ cable }) {
       headers: {
         "Content-Type": "application/json",
       },
-
     }).then((r) => {
       if (r.ok) {
         setCurrentUser(null)
-
-
-
       }
     });
   }
-
-  // update state when changes to listings have been made
-
   const addListing = (newListing) => {
     setUserListings([newListing, ...userListings])
     setItems([newListing, ...items])
 
   }
-
-
   const updateListing = (editedListing) => {
     setItem(editedListing)
     const updatedListing = items.map((item) => {
@@ -180,10 +155,7 @@ function App({ cable }) {
     });
     setUserListings(updatedUserListing);
   }
-
-
-  const deleteListing = (itemUserId, listingId) => {
-
+  const deleteListing = (listingId) => {
     fetch(`/api/v1/item_listings/${listingId}`, {
       method: "DELETE",
     }).then((r) => {
@@ -216,18 +188,14 @@ function App({ cable }) {
         setIsProfileClicked(false);
       }
     };
-
     window.addEventListener("click", handleClickOutsideProfilePopUp);
-
     return () => {
       window.removeEventListener("click", handleClickOutsideProfilePopUp);
     };
   }, [isProfileClicked]);
-
   const isItemBookmarked = (itemId) => {
     return bookmarkedItems.find((item) => item.id === itemId);
   };
-
   const toggleBookmark = (itemId) => {
     if (isItemBookmarked(itemId)) {
       removeBookmark(itemId);
@@ -235,7 +203,6 @@ function App({ cable }) {
       addBookmark(itemId);
     }
   };
-
   const addBookmark = (itemId) => {
     // Perform a PATCH request to add the item to favorites
     fetch(`/api/v1/favorites/${itemId}`, {
@@ -284,27 +251,20 @@ function App({ cable }) {
         console.error("Error removing item from favorites:", error);
       });
   };
-
-  // get total offers
-
   const totalOffersLength = userListings.reduce((total, item) => {
     return total + item.offers.length;
   }, 0);
-
   const handleNewOfferFromUser = (offer) => {
     setUserOffers([...userOffers, offer])
   }
-  const [recipientId, setRecipientId] = useState(null)
   const getRecipientId = (id) => {
     setRecipientId(id);
-
     if (id !== null) {
       localStorage.setItem('recipientId', id);
     } else {
       localStorage.removeItem('recipientId');
     }
   };
-  const [convoId, setConvoId] = useState(null)
   const getConvoId = (id) => {
     setConvoId(id)
     if (id !== null) {
@@ -313,17 +273,14 @@ function App({ cable }) {
       localStorage.removeItem('convoId');
     }
   }
-  const [recipientName, setRecipientName] = useState("")
   const getRecipientName = (name) => {
     setRecipientName(name)
-
     if (name !== null) {
       localStorage.setItem('recipientName', name);
     } else {
       localStorage.removeItem('recipientName');
     }
   }
-  const [senderId, setSenderId] = useState(null)
   useEffect(() => {
     // Get the recipientId from localStorage
     const storedRecipientId = localStorage.getItem('recipientId');
@@ -341,8 +298,6 @@ function App({ cable }) {
     if (storedRecipientName) {
       setRecipientName(storedRecipientName)
     }
-
-
   }, []);
 
 
@@ -350,222 +305,69 @@ function App({ cable }) {
 
 
   return (
-
     <div className="App">
       <ScrollToTop>
-       <SkeletonTheme baseColor="#636363" highlightColor="#525252">
-      <ToastContainer />
-
-      <UserContext.Provider value={currentUser}>
-       
-        <Routes>
-
-
-          <Route path="/" element={
-            <>
-
-              <div className="navigation">
-                <Nav unreadMessages={unreadMessages} setUnreadMessages={setUnreadMessages} totalOffersLength={totalOffersLength} handleLogInModal={handleLogInModal} handleProfileClick={handleProfileClick} setSearchedItems={setSearchedItems} setSearchInput={setSearchInput} searchInput={searchInput} />
-                {isProfileClicked && currentUser && <div className="profile-pop-up">
-                  <div className="profile-details">
-                    <img src={currentUser && currentUser.image_url} alt="user" />
-                    <div className="profile-texts">
-                      <h1>{currentUser && currentUser.name}</h1>
-
-                    </div>
-
+        <SkeletonTheme baseColor="#636363" highlightColor="#525252">
+          <ToastContainer />
+          <UserContext.Provider value={currentUser}>
+            <MobileOverlay isBurgerOpened={isBurgerOpened} />
+            <LoginModal setIsProfileClicked={setIsProfileClicked} onLogin={onLogin} isLoginModalOpen={isLoginModalOpen} setIsLoginModalOpen={setIsLoginModalOpen} />
+            {/* Handles profile when clicked. */}
+            <div className="navigation" >
+              <Nav isBurgerOpened={isBurgerOpened}handleBurgerClick={handleBurgerClick} isBurgerOpened={isBurgerOpened} setIsBurgerOpened={setIsBurgerOpened} unreadMessages={unreadMessages} setUnreadMessages={setUnreadMessages} totalOffersLength={totalOffersLength} handleLogInModal={handleLogInModal} handleProfileClick={handleProfileClick} setSearchedItems={setSearchedItems} setSearchInput={setSearchInput} searchInput={searchInput} />
+              {isProfileClicked && currentUser && <div className="profile-pop-up">
+                <div className="profile-details">
+                  <img src={currentUser && currentUser.image_url} alt="user" />
+                  <div className="profile-texts">
+                    <h1>{currentUser && currentUser.name}</h1>
                   </div>
-                  <p onClick={handleLogOut}>Log out</p>
+                </div>
+                <p onClick={handleLogOut}>Log out</p>
+              </div>}
+            </div>
 
-                </div>}
-              </div>
-
-              <LoginModal setIsProfileClicked={setIsProfileClicked} onLogin={onLogin} isLoginModalOpen={isLoginModalOpen} setIsLoginModalOpen={setIsLoginModalOpen} />
-              <Main itemsPopular = {itemsPopular}isItemBookmarked={isItemBookmarked} toggleBookmark={toggleBookmark} addListing={addListing} items={items} isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} searchedItems={searchedItems} />
-              <Footer />
-            </>} />
-
-          <Route path="/item/:id" element={
-            <>
-              <div className="navigation">
-                <Nav unreadMessages={unreadMessages} setUnreadMessages={setUnreadMessages} totalOffersLength={totalOffersLength} setSearchedItems={setSearchedItems} handleLogInModal={handleLogInModal} handleProfileClick={handleProfileClick} setSearchInput={setSearchInput} searchInput={searchInput} />
-                {isProfileClicked && currentUser && <div className="profile-pop-up">
-                  <div className="profile-details">
-                    <img src={currentUser && currentUser.image_url} alt="user" />
-                    <div className="profile-texts">
-                      <h1>{currentUser && currentUser.name}</h1>
-
-                    </div>
-
-                  </div>
-                  <p onClick={handleLogOut}>Log out</p>
-
-                </div>}
-              </div>
-
-              <LoginModal setIsProfileClicked={setIsProfileClicked} onLogin={onLogin} isLoginModalOpen={isLoginModalOpen} setIsLoginModalOpen={setIsLoginModalOpen} />
-              <ItemDisplay getRecipientName={getRecipientName} getConvoId={getConvoId} getRecipientId={getRecipientId} isItemBookmarked={isItemBookmarked} toggleBookmark={toggleBookmark} item={item} setItem={setItem} items={items} updateListing={updateListing} handleOfferClick={handleOfferClick} />
-              <OfferModal isOfferModalOpen={isOfferModalOpen} setIsOfferModalOpen={setIsOfferModalOpen} offerItemId={offerItemId} handleNewOfferFromUser={handleNewOfferFromUser} />
-              <Footer />
-            </>} />
-          <Route path="/user-listings" element={
-            <>
-              <div className="navigation">
-                <Nav unreadMessages={unreadMessages} setUnreadMessages={setUnreadMessages} totalOffersLength={totalOffersLength} handleLogInModal={handleLogInModal} handleProfileClick={handleProfileClick} setSearchedItems={setSearchedItems} setSearchInput={setSearchInput} searchInput={searchInput} />
-                {isProfileClicked && currentUser && <div className="profile-pop-up">
-                  <div className="profile-details">
-                    <img src={currentUser && currentUser.image_url} alt="user" />
-                    <div className="profile-texts">
-                      <h1>{currentUser && currentUser.name}</h1>
-
-                    </div>
-
-                  </div>
-                  <p onClick={handleLogOut}>Log out</p>
-
-                </div>}
-              </div>
-
-              <LoginModal setIsProfileClicked={setIsProfileClicked} onLogin={onLogin} isLoginModalOpen={isLoginModalOpen} setIsLoginModalOpen={setIsLoginModalOpen} />
-              {currentUser && <UserListings userListings={userListings} isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} addListing={addListing} isModalDeleteOpen={isModalDeleteOpen} setIsModalDeleteOpen={setIsModalDeleteOpen} deleteListing={deleteListing} />}
-              <Footer />
-            </>} />
-          <Route path="/searchs?" element={
-            <>
-              <div className="navigation">
-                <Nav unreadMessages={unreadMessages} setUnreadMessages={setUnreadMessages} totalOffersLength={totalOffersLength} handleLogInModal={handleLogInModal} handleProfileClick={handleProfileClick} setSearchedItems={setSearchedItems} setSearchInput={setSearchInput} searchInput={searchInput} />
-                {isProfileClicked && currentUser && <div className="profile-pop-up">
-                  <div className="profile-details">
-                    <img src={currentUser && currentUser.image_url} alt="user" />
-                    <div className="profile-texts">
-                      <h1>{currentUser && currentUser.name}</h1>
-
-                    </div>
-
-                  </div>
-                  <p onClick={handleLogOut}>Log out</p>
-
-                </div>}
-              </div>
-
-              <LoginModal setIsProfileClicked={setIsProfileClicked} onLogin={onLogin} isLoginModalOpen={isLoginModalOpen} setIsLoginModalOpen={setIsLoginModalOpen} />
-              <SearchMain isItemBookmarked={isItemBookmarked} toggleBookmark={toggleBookmark} searchedItems={searchedItems} />
-              <Footer />
-            </>} />
-          <Route path="/user-favorites" element={
-            <>
-              <div className="navigation">
-                <Nav unreadMessages={unreadMessages} setUnreadMessages={setUnreadMessages} totalOffersLength={totalOffersLength} handleLogInModal={handleLogInModal} handleProfileClick={handleProfileClick} setSearchedItems={setSearchedItems} setSearchInput={setSearchInput} searchInput={searchInput} />
-                {isProfileClicked && currentUser && <div className="profile-pop-up">
-                  <div className="profile-details">
-                    <img src={currentUser && currentUser.image_url} alt="user" />
-                    <div className="profile-texts">
-                      <h1>{currentUser && currentUser.name}</h1>
-
-                    </div>
-
-                  </div>
-                  <p onClick={handleLogOut}>Log out</p>
-
-                </div>}
-              </div>
-
-              <LoginModal setIsProfileClicked={setIsProfileClicked} onLogin={onLogin} isLoginModalOpen={isLoginModalOpen} setIsLoginModalOpen={setIsLoginModalOpen} />
-              {currentUser && <Favorites isItemBookmarked={isItemBookmarked} toggleBookmark={toggleBookmark} bookmarkedItems={bookmarkedItems} />}
-              <Footer />
-            </>} />
-          <Route path="/user-offers" element={
-            <>
-              <div className="navigation">
-                <Nav unreadMessages={unreadMessages} setUnreadMessages={setUnreadMessages} totalOffersLength={totalOffersLength} handleLogInModal={handleLogInModal} handleProfileClick={handleProfileClick} setSearchedItems={setSearchedItems} setSearchInput={setSearchInput} searchInput={searchInput} />
-                {isProfileClicked && currentUser && <div className="profile-pop-up">
-                  <div className="profile-details">
-                    <img src={currentUser && currentUser.image_url} alt="user" />
-                    <div className="profile-texts">
-                      <h1>{currentUser && currentUser.name}</h1>
-
-                    </div>
-
-                  </div>
-                  <p onClick={handleLogOut}>Log out</p>
-
-                </div>}
-              </div>
-
-              <LoginModal setIsProfileClicked={setIsProfileClicked} onLogin={onLogin} isLoginModalOpen={isLoginModalOpen} setIsLoginModalOpen={setIsLoginModalOpen} />
-              {currentUser && <Offers userListings={userListings} userOffers={userOffers} />}
-              <Footer />
-            </>} />
-          <Route path="/item/offers/:id" element={
-            <>
-              <div className="navigation">
-                <Nav unreadMessages={unreadMessages} setUnreadMessages={setUnreadMessages} totalOffersLength={totalOffersLength} handleLogInModal={handleLogInModal} handleProfileClick={handleProfileClick} setSearchedItems={setSearchedItems} setSearchInput={setSearchInput} searchInput={searchInput} />
-                {isProfileClicked && currentUser && <div className="profile-pop-up">
-                  <div className="profile-details">
-                    <img src={currentUser && currentUser.image_url} alt="user" />
-                    <div className="profile-texts">
-                      <h1>{currentUser && currentUser.name}</h1>
-
-                    </div>
-
-                  </div>
-                  <p onClick={handleLogOut}>Log out</p>
-
-                </div>}
-              </div>
-
-              <LoginModal setIsProfileClicked={setIsProfileClicked} onLogin={onLogin} isLoginModalOpen={isLoginModalOpen} setIsLoginModalOpen={setIsLoginModalOpen} />
-              {currentUser && <OfferDisplay item={item} setItem={setItem} />}
-              <Footer />
-
-            </>} />
-          <Route path="/chat/:id" element={
-            <>
-              <div className="navigation">
-                <Nav unreadMessages={unreadMessages} setUnreadMessages={setUnreadMessages} totalOffersLength={totalOffersLength} handleLogInModal={handleLogInModal} handleProfileClick={handleProfileClick} setSearchedItems={setSearchedItems} setSearchInput={setSearchInput} searchInput={searchInput} />
-                {isProfileClicked && currentUser && <div className="profile-pop-up">
-                  <div className="profile-details">
-                    <img src={currentUser && currentUser.image_url} alt="user" />
-                    <div className="profile-texts">
-                      <h1>{currentUser && currentUser.name}</h1>
-
-                    </div>
-
-                  </div>
-                  <p onClick={handleLogOut}>Log out</p>
-
-                </div>}
-              </div>
-              <LoginModal setIsProfileClicked={setIsProfileClicked} onLogin={onLogin} isLoginModalOpen={isLoginModalOpen} setIsLoginModalOpen={setIsLoginModalOpen} />
-              <Chat setUnreadMessages={setUnreadMessages} recipientName={recipientName} cable={cable} recipientId={recipientId} convoId={convoId} />
-
-            </>} />
-          <Route path="/user-messages" element={
-            <>
-              <div className="navigation">
-                <Nav unreadMessages={unreadMessages} setUnreadMessages={setUnreadMessages} totalOffersLength={totalOffersLength} handleLogInModal={handleLogInModal} handleProfileClick={handleProfileClick} setSearchedItems={setSearchedItems} setSearchInput={setSearchInput} searchInput={searchInput} />
-                {isProfileClicked && currentUser && <div className="profile-pop-up">
-                  <div className="profile-details">
-                    <img src={currentUser && currentUser.image_url} alt="user" />
-                    <div className="profile-texts">
-                      <h1>{currentUser && currentUser.name}</h1>
-
-                    </div>
-
-                  </div>
-                  <p onClick={handleLogOut}>Log out</p>
-
-                </div>}
-              </div>
-              <LoginModal setIsProfileClicked={setIsProfileClicked} onLogin={onLogin} isLoginModalOpen={isLoginModalOpen} setIsLoginModalOpen={setIsLoginModalOpen} />
-              <Messages getRecipientId={getRecipientId} getConvoId={getConvoId} getRecipientName={getRecipientName} />
-
-            </>} />
-
-        </Routes>
-        
-      </UserContext.Provider>
-      </SkeletonTheme>
+            <Routes>
+              <Route path="/" element={
+                <>
+                  <Main itemsPopular={itemsPopular} isItemBookmarked={isItemBookmarked} toggleBookmark={toggleBookmark} addListing={addListing} items={items} isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} searchedItems={searchedItems} />
+                </>} />
+              <Route path="/item/:id" element={
+                <>
+                  <ItemDisplay getRecipientName={getRecipientName} getConvoId={getConvoId} getRecipientId={getRecipientId} isItemBookmarked={isItemBookmarked} toggleBookmark={toggleBookmark} item={item} setItem={setItem} items={items} updateListing={updateListing} handleOfferClick={handleOfferClick} />
+                  <OfferModal isOfferModalOpen={isOfferModalOpen} setIsOfferModalOpen={setIsOfferModalOpen} offerItemId={offerItemId} handleNewOfferFromUser={handleNewOfferFromUser} />
+                </>} />
+              <Route path="/user-listings" element={
+                <>
+                  {currentUser && <UserListings userListings={userListings} isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} addListing={addListing} isModalDeleteOpen={isModalDeleteOpen} setIsModalDeleteOpen={setIsModalDeleteOpen} deleteListing={deleteListing} />}
+                </>} />
+              <Route path="/searchs?" element={
+                <>
+                  <SearchMain isItemBookmarked={isItemBookmarked} toggleBookmark={toggleBookmark} searchedItems={searchedItems} />
+                </>} />
+              <Route path="/user-favorites" element={
+                <>
+                  {currentUser && <Favorites isItemBookmarked={isItemBookmarked} toggleBookmark={toggleBookmark} bookmarkedItems={bookmarkedItems} />}
+                </>} />
+              <Route path="/user-offers" element={
+                <>
+                  {currentUser && <Offers userListings={userListings} userOffers={userOffers} />}
+                </>} />
+              <Route path="/item/offers/:id" element={
+                <>
+                  {currentUser && <OfferDisplay item={item} setItem={setItem} />}
+                </>} />
+              <Route path="/chat/:id" element={
+                <>
+                  <Chat setUnreadMessages={setUnreadMessages} recipientName={recipientName} cable={cable} recipientId={recipientId} convoId={convoId} />
+                </>} />
+              <Route path="/user-messages" element={
+                <>
+                  <Messages getRecipientId={getRecipientId} getConvoId={getConvoId} getRecipientName={getRecipientName} />
+                </>} />
+            </Routes>
+            <Footer />
+          </UserContext.Provider>
+        </SkeletonTheme>
       </ScrollToTop>
     </div>
 

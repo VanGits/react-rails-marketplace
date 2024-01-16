@@ -32,12 +32,10 @@
   
 }
 
-.navigation {
-  position: relative;
-}
+
 
 .profile-pop-up {
-  position: absolute;
+  position: fixed;
   z-index: 9999999 !important;
   background-color: white;
   right: 0;

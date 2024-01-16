@@ -10,13 +10,12 @@ import cart from "../../assets/cart.png"
 import { Link, useNavigate } from 'react-router-dom';
 import UserContext from "../../context/UserContext";
 
-const Nav = ({unreadMessages, setUnreadMessages, handleLogInModal, handleProfileClick, setSearchedItems, searchInput, setSearchInput, totalOffersLength }) => {
+const Nav = ({ handleBurgerClick, unreadMessages, handleLogInModal, handleProfileClick, setSearchedItems, searchInput, setSearchInput, totalOffersLength }) => {
     const currentUser = useContext(UserContext);
-
-
     const handleChange = (e) => {
         setSearchInput(e.target.value);
     };
+
 
     const handleKeyPress = (e) => {
         if (e.key === 'Enter') {
@@ -48,24 +47,31 @@ const Nav = ({unreadMessages, setUnreadMessages, handleLogInModal, handleProfile
             <div className="nav-wrapper">
                 <div className="nav-logo-search">
                     <Link to="/"><img src={cart} alt="logo" /><h1 id='logo'><span>Go</span>Recycle</h1></Link>
-                    
+
                 </div>
                 <div className="search-wrapper">
-                        <input
-                            type="text"
-                            placeholder='Search here...'
-                            value={searchInput}
-                            onChange={handleChange}
-                            onKeyPress={handleKeyPress}
-                        />
-                        <div className="search-icon-wrapper" onClick={handleSearch}>
-                            <AiOutlineSearch className="search-icon" />
-                        </div>
+                    <input
+                        type="text"
+                        placeholder='Search here...'
+                        value={searchInput}
+                        onChange={handleChange}
+                        onKeyPress={handleKeyPress}
+                    />
+                    <div className="search-icon-wrapper" onClick={handleSearch}>
+                        <AiOutlineSearch className="search-icon" />
                     </div>
-
+                </div>
+                {/* Hamburger Icon */}
+                <div id="menu_button" >
+                    <input type="checkbox" id="menu_checkbox" onClick={handleBurgerClick}/>
+                    <label htmlFor="menu_checkbox" id="menu_label">
+                        <div id="menu_text_bar"></div>
+                    </label>
+                </div>
+                {/* Hamburger Icon */}
                 {!currentUser ? (
                     <div className="nav-elements">
-                        
+
                         <button onClick={handleLogInModal}>Log in</button>
                         <button onClick={handleLogInModal} id='sign__up'>Sign Up</button>
                     </div>
@@ -76,10 +82,12 @@ const Nav = ({unreadMessages, setUnreadMessages, handleLogInModal, handleProfile
                                 {unreadMessages}
                             </div>
                         )}</span></Link>
+
                         <Link to="/user-offers"><span className='nav-offers'><GrTransaction /><p>Offers</p></span></Link>
                         <Link to="/user-favorites"><span><IoMdHeartEmpty /><p> Liked</p></span></Link>
                         <Link to="/user-listings"><span><MdSell /><p>Listings</p></span></Link>
                         <span id='profile'><img src={currentUser.image_url} alt="profile" onClick={handleProfileClick} /></span>
+
                     </div>
                 )}
             </div>
