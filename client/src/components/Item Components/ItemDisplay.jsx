@@ -1,16 +1,16 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import { ImSpinner8 } from 'react-icons/im';
-import { FaUserEdit } from 'react-icons/fa';
+import { MdOutlineDateRange } from "react-icons/md";
 import { useNavigate, useParams } from 'react-router-dom';
 import "../../styles/Item Components/ItemDisplay.css"
-import { BsBookmark, BsBookmarkFill } from 'react-icons/bs';
+import { IoMdHeartEmpty, IoMdHeart } from "react-icons/io";
 import MapDisplay from './MapDisplay';
 import UserContext from "../../context/UserContext";
 import { toast } from 'react-toastify';
 
 
 
-const ItemDisplay = ({  getRecipientName, getConvoId, getRecipientId, handleOfferClick,items, item, setItem, updateListing, isItemBookmarked, toggleBookmark }) => {
+const ItemDisplay = ({ getRecipientName, getConvoId, getRecipientId, handleOfferClick, items, item, setItem, updateListing, isItemBookmarked, toggleBookmark }) => {
 
   const [isLoading, setIsLoading] = useState(true);
   const [isEditing, setIsEditing] = useState(false);
@@ -20,7 +20,7 @@ const ItemDisplay = ({  getRecipientName, getConvoId, getRecipientId, handleOffe
   const params = useParams();
 
   const currentUser = useContext(UserContext);
-  
+
   useEffect(() => {
     const fetchItem = () => {
       setIsLoading(true);
@@ -70,12 +70,12 @@ const ItemDisplay = ({  getRecipientName, getConvoId, getRecipientId, handleOffe
         </div>
         <div className="item-details-display">
           <div className="display-details">
-            <p>{i.title}</p>
+            <p className='title-detail'>{i.title}</p>
             <p className='item-price'>${i.price.toFixed(2)}</p>
             <h4>{i.location}</h4>
           </div>
 
-          
+
 
         </div>
       </div>
@@ -96,7 +96,7 @@ const ItemDisplay = ({  getRecipientName, getConvoId, getRecipientId, handleOffe
     setEditedPrice(item && item.price.toFixed(2));
     setEditedDescription(item && item.description);
   };
- 
+
 
 
   const handleSaveClick = (e) => {
@@ -125,7 +125,7 @@ const ItemDisplay = ({  getRecipientName, getConvoId, getRecipientId, handleOffe
 
 
   };
-  
+
   const handleProfileClick = (recipientId, recipientName) => {
     getRecipientId(recipientId)
     // Make a POST request to create a new conversation (message) with a new UUID
@@ -149,7 +149,7 @@ const ItemDisplay = ({  getRecipientName, getConvoId, getRecipientId, handleOffe
         }
       })
       .then(convData => {
-        
+
         getConvoId(convData.id)
         getRecipientName(recipientName)
         // Navigate to the new chat using the generated UUID
@@ -160,7 +160,7 @@ const ItemDisplay = ({  getRecipientName, getConvoId, getRecipientId, handleOffe
         console.error(error);
       });
   };
-  
+
 
   return (
     <div className='item-display'>
@@ -169,14 +169,7 @@ const ItemDisplay = ({  getRecipientName, getConvoId, getRecipientId, handleOffe
       ) : (
         <div className='item-viewer'>
           <div className={item ? 'item-details-wrapper' : ''}>
-            {currentUser && currentUser?.id === item?.user.id ? (
-              <FaUserEdit
-                id='user-edit'
-                onClick={isEditing ? handleSaveClick : handleEditClick}
-              />
-            ) : (
-              ''
-            )}
+
             {item && <img id="product-img" src={item.image_url} alt='' />}
             {item ? (
               ''
@@ -185,13 +178,7 @@ const ItemDisplay = ({  getRecipientName, getConvoId, getRecipientId, handleOffe
             )}
             {item && (
               <div className='item-details'>
-                <div className='item-details-profile'>
-                  {item && <img src={item?.user?.image_url} alt='' />}
-                  <div className='item-details-profile-elements'>
-                    <h3>{item && item?.user?.name}</h3>
-                    <h4>Posted at {formattedDate}</h4>
-                  </div>
-                </div>
+
                 {isEditing ? (
                   <>
                     <input
@@ -204,44 +191,75 @@ const ItemDisplay = ({  getRecipientName, getConvoId, getRecipientId, handleOffe
                       value={editedPrice}
                       onChange={(e) => setEditedPrice(e.target.value)}
                     />
+                    <textarea
+                      value={editedDescription}
+                      onChange={(e) => setEditedDescription(e.target.value)}
+                    ></textarea>
 
                     <button onClick={handleSaveClick}>Save</button>
                   </>
                 ) : (
                   <>
-                    <h2 className='title price'>{item && item?.title}</h2>
+                    <h2 className='title'>{item && item?.title}</h2>
                     <h2 className='price'>${item && item?.price?.toFixed(2)}</h2>
+
+                    <div className='description-wrapper'>
+
+                      <h3>{item && item.description}</h3>
+                      <div className="map__container">
+                        <MapDisplay item={item} />
+                      </div>
+
+
+
+                    </div>
+
+
                     <span onClick={() => toggleBookmark(item?.id)}>
-                    {isItemBookmarked(item?.id) ? <BsBookmarkFill /> : <BsBookmark />}
-                      <h4>Favorite</h4>
+                      {isItemBookmarked(item?.id) ? <IoMdHeart className="item-favorite" /> : <IoMdHeartEmpty className="item-favorite" />}
+
                     </span>
                     <div className="buttons">
-                    {currentUser?.id !== item?.user?.id && currentUser && <button onClick={() => handleOfferClick(item.id)}>Offer Price</button>}
-                    {currentUser?.id !== item?.user?.id && currentUser && <button onClick={() => handleProfileClick(item?.user?.id, item?.user?.name)}>Message</button>}
+                      {currentUser?.id !== item?.user?.id && currentUser && <button onClick={() => handleOfferClick(item.id)}>Offer Price</button>}
+                      {currentUser?.id !== item?.user?.id && currentUser && <button onClick={() => handleProfileClick(item?.user?.id, item?.user?.name)}>Message</button>}
                     </div>
-                    
+
                   </>
+
                 )}
+
+                <div className='item-details-profile'>
+
+                  {item && <img src={item?.user?.image_url} alt='' />}
+                  <div className='item-details-profile-elements'>
+
+                    <span> <p>Posted by </p><h3>{item && item?.user?.name}</h3></span>
+                    <div className='date-posted'><MdOutlineDateRange id='date' /><h4>{formattedDate}</h4></div>
+                    {currentUser && currentUser?.id === item?.user.id ? (
+                      <button
+                        id='user-edit'
+                        onClick={isEditing ? handleSaveClick : handleEditClick}
+                      >Edit Post</button>
+                    ) : (
+                      ''
+                    )}
+                  </div>
+                </div>
               </div>
             )}
           </div>
-          {item && (
-            <div className='description-wrapper'>
-              
-              <h1>{item && 'Description'}</h1>
-              {isEditing ? (
-                <textarea
-                  value={editedDescription}
-                  onChange={(e) => setEditedDescription(e.target.value)}
-                ></textarea>
-              ) : (
-                <h3>{item && item.description}</h3>
-              )}
-              {item && <MapDisplay item={item} />}
-              {item && <h1>Other items</h1>}
-            </div>
-          )}
-          <div className='display-items-wrapper'>{recommendedItems}</div>
+
+
+          {/* Other recommended items */}
+          <div className="display__items">
+
+
+            {item && <h1>Other items</h1>}
+            <p>Other items you might be interested in.</p>
+            <div className='display-other-items-wrapper'>{recommendedItems}</div>
+
+          </div>
+
         </div>
       )}
     </div>

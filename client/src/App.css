@@ -149,16 +149,7 @@ button{
   .main-banner img{
     width: 350px !important;
   }
-  .display-items-wrapper{
-    display: grid;
-  grid-template-columns: repeat(3, 1fr) !important; 
-  grid-auto-rows: auto; 
-  grid-gap: 4px !important; 
-  padding: 4px;
   
-  color: #222831;
-  
-}
 .display-item img{
   width: 120px !important;
   border-radius: 8px !important;

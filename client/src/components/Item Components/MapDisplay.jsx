@@ -19,6 +19,8 @@ const MapDisplay = ({ item }) => {
           const mapOptions = {
             center: location,
             zoom: 12,
+            disableDefaultUI: true, // Disable default UI controls
+            gestureHandling: 'none', // Disable user interaction (pan and zoom)
           };
           const map = new window.google.maps.Map(document.getElementById('map'), mapOptions);
           setMap(map);

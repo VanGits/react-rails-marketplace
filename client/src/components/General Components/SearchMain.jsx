@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import '../../styles/General Components/SearchMain.css';
 import { useNavigate } from 'react-router-dom';
-import { BsBookmarkFill, BsBookmark } from 'react-icons/bs';
+import { IoMdHeartEmpty, IoMdHeart } from "react-icons/io";
 import { ImSpinner8 } from 'react-icons/im';
 
 const SearchMain = ({ searchedItems, isItemBookmarked, toggleBookmark }) => {
@@ -44,7 +44,7 @@ const SearchMain = ({ searchedItems, isItemBookmarked, toggleBookmark }) => {
             <h4>{item.location}</h4>
           </div>
           <div className="bookmark" onClick={() => toggleBookmark(item.id)}>
-            {isItemBookmarked(item.id) ? <BsBookmarkFill /> : <BsBookmark />}
+            {isItemBookmarked(item.id) ? <IoMdHeart /> : <IoMdHeartEmpty />}
           </div>
         </div>
       </div>
