@@ -169,8 +169,10 @@ const ItemDisplay = ({ getRecipientName, getConvoId, getRecipientId, handleOffer
       ) : (
         <div className='item-viewer'>
           <div className={item ? 'item-details-wrapper' : ''}>
+            <div className="product-img-wrapper">
+              {item && <img id="product-img" src={item.image_url} alt='' />}
+            </div>
 
-            {item && <img id="product-img" src={item.image_url} alt='' />}
             {item ? (
               ''
             ) : (
@@ -206,23 +208,21 @@ const ItemDisplay = ({ getRecipientName, getConvoId, getRecipientId, handleOffer
                     <div className='description-wrapper'>
 
                       <h3>{item && item.description}</h3>
-                     
+
 
 
 
                     </div>
-                    <div className="map__container">
-                        <MapDisplay item={item} />
-                      </div>
+                   
 
 
                     <span onClick={() => toggleBookmark(item?.id)}>
                       {isItemBookmarked(item?.id) ? <IoMdHeart className="item-favorite" /> : <IoMdHeartEmpty className="item-favorite" />}
 
                     </span>
-                    <div className="buttons">
-                      {currentUser?.id !== item?.user?.id && currentUser && <button onClick={() => handleOfferClick(item.id)}>Offer Price</button>}
-                      {currentUser?.id !== item?.user?.id && currentUser && <button onClick={() => handleProfileClick(item?.user?.id, item?.user?.name)}>Message</button>}
+                   
+                    <div className="map__container">
+                      <MapDisplay item={item} />
                     </div>
 
                   </>
@@ -242,7 +242,10 @@ const ItemDisplay = ({ getRecipientName, getConvoId, getRecipientId, handleOffer
                         onClick={isEditing ? handleSaveClick : handleEditClick}
                       >Edit Post</button>
                     ) : (
-                      ''
+                      <div className="buttons">
+                      {currentUser?.id !== item?.user?.id && currentUser && <button onClick={() => handleOfferClick(item.id)}>Offer Price</button>}
+                      {currentUser?.id !== item?.user?.id && currentUser && <button onClick={() => handleProfileClick(item?.user?.id, item?.user?.name)}>Message</button>}
+                    </div>
                     )}
                   </div>
                 </div>
