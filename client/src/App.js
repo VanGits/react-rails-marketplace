@@ -314,7 +314,7 @@ function App({ cable }) {
             <LoginModal setIsProfileClicked={setIsProfileClicked} onLogin={onLogin} isLoginModalOpen={isLoginModalOpen} setIsLoginModalOpen={setIsLoginModalOpen} />
             {/* Handles profile when clicked. */}
             <div className="navigation" >
-              <Nav isBurgerOpened={isBurgerOpened}handleBurgerClick={handleBurgerClick} isBurgerOpened={isBurgerOpened} setIsBurgerOpened={setIsBurgerOpened} unreadMessages={unreadMessages} setUnreadMessages={setUnreadMessages} totalOffersLength={totalOffersLength} handleLogInModal={handleLogInModal} handleProfileClick={handleProfileClick} setSearchedItems={setSearchedItems} setSearchInput={setSearchInput} searchInput={searchInput} />
+              <Nav isBurgerOpened={isBurgerOpened}handleBurgerClick={handleBurgerClick} setIsBurgerOpened={setIsBurgerOpened} unreadMessages={unreadMessages} setUnreadMessages={setUnreadMessages} totalOffersLength={totalOffersLength} handleLogInModal={handleLogInModal} handleProfileClick={handleProfileClick} setSearchedItems={setSearchedItems} setSearchInput={setSearchInput} searchInput={searchInput} />
               {isProfileClicked && currentUser && <div className="profile-pop-up">
                 <div className="profile-details">
                   <img src={currentUser && currentUser.image_url} alt="user" />
