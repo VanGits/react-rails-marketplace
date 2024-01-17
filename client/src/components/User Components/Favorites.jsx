@@ -1,15 +1,12 @@
 
 import "../../styles/User Components/Favorites.css"
 import React, { useState, useEffect, useContext } from 'react';
-import UserContext from "../../context/UserContext";
 import { useNavigate } from 'react-router-dom';
 import { IoMdHeartEmpty, IoMdHeart } from "react-icons/io";
 import Skeleton from "react-loading-skeleton";
 const Favorites = ({ bookmarkedItems, toggleBookmark, isItemBookmarked}) => {
     const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(true);
-  const currentUser = useContext(UserContext);
-
   const truncateTitle = (title, maxLength) => {
     if (title.length > maxLength) {
       return title.substring(0, maxLength) + '...';

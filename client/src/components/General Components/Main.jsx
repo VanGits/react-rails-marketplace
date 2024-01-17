@@ -2,7 +2,7 @@ import React, { useContext, useRef } from 'react';
 import "../../styles/General Components/Main.css";
 import { useNavigate } from 'react-router-dom';
 import banner from "../../assets/banner.jpg";
-import UserContext from "../../context/UserContext";
+
 import ListingModal from '../App Modals/ListingModal';
 
 import { IoMdHeartEmpty, IoMdHeart } from "react-icons/io";
@@ -10,7 +10,6 @@ import Skeleton from 'react-loading-skeleton';
 
 const Main = ({ itemsPopular, items, isModalOpen, setIsModalOpen, addListing, toggleBookmark, isItemBookmarked }) => {
     const navigate = useNavigate();
-    const currentUser = useContext(UserContext);
     const displayRef = useRef(null);
 
     const handleItemClick = (itemId) => {

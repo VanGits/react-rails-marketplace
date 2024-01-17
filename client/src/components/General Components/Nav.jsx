@@ -6,12 +6,12 @@ import { MdSell } from 'react-icons/md';
 import { AiOutlineSearch } from 'react-icons/ai';
 import { BiMessageDots } from 'react-icons/bi';
 import cart from "../../assets/cart.png"
-
 import { Link, useNavigate } from 'react-router-dom';
-import UserContext from "../../context/UserContext";
+import { useSelector } from 'react-redux';
 
 const Nav = ({ handleBurgerClick, unreadMessages, handleLogInModal, handleProfileClick, setSearchedItems, searchInput, setSearchInput, totalOffersLength }) => {
-    const currentUser = useContext(UserContext);
+    const currentUser = useSelector((state) => state.user.currentUser)
+    const navigate = useNavigate();
     const handleChange = (e) => {
         setSearchInput(e.target.value);
     };
@@ -23,7 +23,7 @@ const Nav = ({ handleBurgerClick, unreadMessages, handleLogInModal, handleProfil
         }
     };
 
-    const navigate = useNavigate();
+   
     const handleSearch = () => {
         const loweredSearchQuery = searchInput.toLowerCase();
 
@@ -61,14 +61,7 @@ const Nav = ({ handleBurgerClick, unreadMessages, handleLogInModal, handleProfil
                         <AiOutlineSearch className="search-icon" />
                     </div>
                 </div>
-                {/* Hamburger Icon */}
-                <div id="menu_button" >
-                    <input type="checkbox" id="menu_checkbox" onClick={handleBurgerClick}/>
-                    <label htmlFor="menu_checkbox" id="menu_label">
-                        <div id="menu_text_bar"></div>
-                    </label>
-                </div>
-                {/* Hamburger Icon */}
+
                 {!currentUser ? (
                     <div className="nav-elements">
 
@@ -87,7 +80,14 @@ const Nav = ({ handleBurgerClick, unreadMessages, handleLogInModal, handleProfil
                         <Link to="/user-favorites"><span><IoMdHeartEmpty /><p> Liked</p></span></Link>
                         <Link to="/user-listings"><span><MdSell /><p>Listings</p></span></Link>
                         <span id='profile'><img src={currentUser.image_url} alt="profile" onClick={handleProfileClick} /></span>
-
+                        {/* Hamburger Icon */}
+                        <div id="menu_button" >
+                            <input type="checkbox" id="menu_checkbox" onClick={handleBurgerClick} />
+                            <label htmlFor="menu_checkbox" id="menu_label">
+                                <div id="menu_text_bar"></div>
+                            </label>
+                        </div>
+                        {/* Hamburger Icon */}
                     </div>
                 )}
             </div>

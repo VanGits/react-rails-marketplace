@@ -12,7 +12,6 @@ import "react-loading-skeleton/dist/skeleton.css";
 import Favorites from "./components/User Components/Favorites";
 import ItemDisplay from "./components/Item Components/ItemDisplay";
 import UserListings from "./components/User Components/UserListings";
-import UserContext from "./context/UserContext";
 import Offers from "./components/User Components/Offers";
 import OfferDisplay from "./components/User Components/OfferDisplay";
 // User Components
@@ -32,12 +31,16 @@ import Messages from "./components/Chat Components/Messages";
 import ScrollToTop from "./components/Data Components/ScrollToTop";
 import MobileOverlay from "./components/Mobile Components/MobileOverlay";
 // Chats
+
+// Redux imports
+import { useDispatch, useSelector } from "react-redux";
+import { setCurrentUser } from "./state/user/userSlice";
+
 function App({ cable }) {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false)
   const [items, setItems] = useState([])
   const [userListings, setUserListings] = useState([])
   const [item, setItem] = useState(null)
-  const [currentUser, setCurrentUser] = useState(null)
   const [isProfileClicked, setIsProfileClicked] = useState(false)
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isModalDeleteOpen, setIsModalDeleteOpen] = useState(false)
@@ -54,41 +57,50 @@ function App({ cable }) {
   const [recipientName, setRecipientName] = useState("")
   const [recipientId, setRecipientId] = useState(null)
  
+  // Redux states
+  const dispatch = useDispatch()
+  const currentUser = useSelector((state) => state.user.currentUser)
 
+  // Handles mobile burger button when clicked
   const handleBurgerClick = () => {
     setIsBurgerOpened(!isBurgerOpened)
   }
-
+  // Handles log in button in Nav - shows the modal if true
   const handleLogInModal = (clicked) => {
     if (clicked) {
       setIsLoginModalOpen(true)
     }
   }
+  // Handles offer button when clicked, it will receive the item id and shows modal
   const handleOfferClick = (itemId) => {
     if (itemId) {
       setOfferItemId(itemId)
       setIsOfferModalOpen(true)
     }
   }
+  // Fetches all the item listings from the back end
   useEffect(() => {
     fetch("/api/v1/item_listings")
       .then((r) => r.json())
       .then(itemsData => setItems(itemsData))
   }, [])
+  // Fetches the top 4 most expensive listings
   useEffect(() => {
     fetch("/api/v1/trending-four")
       .then((r) => r.json())
       .then(itemsData => setItemsPopular(itemsData))
   }, [])
+  // Fetches if theres a currentUser or not
   useEffect(() => {
     fetch("/me").then((res) => {
       if (res.ok) {
-        res.json().then((user) => setCurrentUser(user));
+        res.json().then((user) => dispatch(setCurrentUser(user)));
       } else {
         toast.error("Please log in");
       }
     });
   }, []);
+  // Fetches the user's listings
   useEffect(() => {
     fetch("/api/v1/my-listings").then((res) => {
       if (res.ok) {
@@ -96,6 +108,7 @@ function App({ cable }) {
       }
     });
   }, [currentUser])
+  // Fetches the user's favorites
   useEffect(() => {
     fetch("/api/v1/favorites").then((res) => {
       if (res.ok) {
@@ -103,6 +116,7 @@ function App({ cable }) {
       }
     });
   }, [currentUser])
+  // Fetches the user's offers
   useEffect(() => {
     fetch("/api/v1/offers").then((res) => {
       if (res.ok) {
@@ -111,12 +125,15 @@ function App({ cable }) {
       }
     })
   }, [currentUser])
+  // Function that handles log in when successful, setting it up with redux state
   const onLogin = (user) => {
-    setCurrentUser(user)
+    dispatch(setCurrentUser(user))
   }
+  // Handles mouse click from user's profile, showing a box
   const handleProfileClick = () => {
     setIsProfileClicked(!isProfileClicked)
   }
+  // Handles user's log out
   const handleLogOut = (e) => {
     e.preventDefault()
     fetch("/logout", {
@@ -126,15 +143,17 @@ function App({ cable }) {
       },
     }).then((r) => {
       if (r.ok) {
-        setCurrentUser(null)
+        dispatch(setCurrentUser(null))
       }
     });
   }
+  // Adds listing with state
   const addListing = (newListing) => {
     setUserListings([newListing, ...userListings])
     setItems([newListing, ...items])
 
   }
+  // Update listing with state
   const updateListing = (editedListing) => {
     setItem(editedListing)
     const updatedListing = items.map((item) => {
@@ -145,7 +164,7 @@ function App({ cable }) {
       }
     });
     setItems(updatedListing);
-
+    // Also update it in the user's side
     const updatedUserListing = userListings.map((item) => {
       if (item.id === editedListing.id) {
         return { ...item, ...editedListing };
@@ -155,12 +174,14 @@ function App({ cable }) {
     });
     setUserListings(updatedUserListing);
   }
+  // Delete an item
   const deleteListing = (listingId) => {
     fetch(`/api/v1/item_listings/${listingId}`, {
       method: "DELETE",
     }).then((r) => {
       if (r.ok) {
         if (items && items.length > 0) {
+          // Also delete it with state
           const filteredItems = items.filter(
             (item) => item.id !== listingId
           );
@@ -178,6 +199,7 @@ function App({ cable }) {
       }
     })
   }
+  // Handles profile box, if clicked outside it removes itself.
   useEffect(() => {
     const handleClickOutsideProfilePopUp = (e) => {
       if (
@@ -193,9 +215,12 @@ function App({ cable }) {
       window.removeEventListener("click", handleClickOutsideProfilePopUp);
     };
   }, [isProfileClicked]);
+
+  // This checks if the item is bookmarked.
   const isItemBookmarked = (itemId) => {
     return bookmarkedItems.find((item) => item.id === itemId);
   };
+  // Toggles bookmark on and off
   const toggleBookmark = (itemId) => {
     if (isItemBookmarked(itemId)) {
       removeBookmark(itemId);
@@ -203,6 +228,7 @@ function App({ cable }) {
       addBookmark(itemId);
     }
   };
+  // Adds bookmark
   const addBookmark = (itemId) => {
     // Perform a PATCH request to add the item to favorites
     fetch(`/api/v1/favorites/${itemId}`, {
@@ -228,7 +254,7 @@ function App({ cable }) {
         console.error("Error adding item to favorites:", error);
       });
   };
-
+  // Removes bookmark
   const removeBookmark = (itemId) => {
     // Perform a DELETE request to remove the item from favorites
     fetch(`/api/v1/favorites/${itemId}`, {
@@ -251,12 +277,15 @@ function App({ cable }) {
         console.error("Error removing item from favorites:", error);
       });
   };
+  // Returns the total amount of offers in an item
   const totalOffersLength = userListings.reduce((total, item) => {
     return total + item.offers.length;
   }, 0);
+  // Handles state if theres a new offer
   const handleNewOfferFromUser = (offer) => {
     setUserOffers([...userOffers, offer])
   }
+  // Gets the id of the receiver
   const getRecipientId = (id) => {
     setRecipientId(id);
     if (id !== null) {
@@ -265,6 +294,7 @@ function App({ cable }) {
       localStorage.removeItem('recipientId');
     }
   };
+  // Get the convo's id
   const getConvoId = (id) => {
     setConvoId(id)
     if (id !== null) {
@@ -273,6 +303,7 @@ function App({ cable }) {
       localStorage.removeItem('convoId');
     }
   }
+  // Gets the recipient's name.
   const getRecipientName = (name) => {
     setRecipientName(name)
     if (name !== null) {
@@ -309,8 +340,10 @@ function App({ cable }) {
       <ScrollToTop>
         <SkeletonTheme baseColor="#636363" highlightColor="#525252">
           <ToastContainer />
-          <UserContext.Provider value={currentUser}>
+  
+            {/* Mobile Overlay When Burger is clicked */}
             <MobileOverlay isBurgerOpened={isBurgerOpened} />
+            {/* Login Modal that pops up when user tries to log in */}
             <LoginModal setIsProfileClicked={setIsProfileClicked} onLogin={onLogin} isLoginModalOpen={isLoginModalOpen} setIsLoginModalOpen={setIsLoginModalOpen} />
             {/* Handles profile when clicked. */}
             <div className="navigation" >
@@ -327,46 +360,56 @@ function App({ cable }) {
             </div>
 
             <Routes>
+              {/* Main Page */}
               <Route path="/" element={
                 <>
                   <Main itemsPopular={itemsPopular} isItemBookmarked={isItemBookmarked} toggleBookmark={toggleBookmark} addListing={addListing} items={items} isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} searchedItems={searchedItems} />
                 </>} />
+                {/* Item Page */}
               <Route path="/item/:id" element={
                 <>
                   <ItemDisplay getRecipientName={getRecipientName} getConvoId={getConvoId} getRecipientId={getRecipientId} isItemBookmarked={isItemBookmarked} toggleBookmark={toggleBookmark} item={item} setItem={setItem} items={items} updateListing={updateListing} handleOfferClick={handleOfferClick} />
                   <OfferModal isOfferModalOpen={isOfferModalOpen} setIsOfferModalOpen={setIsOfferModalOpen} offerItemId={offerItemId} handleNewOfferFromUser={handleNewOfferFromUser} />
                 </>} />
+                {/* User's Own Listings Page */}
               <Route path="/user-listings" element={
                 <>
                   {currentUser && <UserListings userListings={userListings} isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} addListing={addListing} isModalDeleteOpen={isModalDeleteOpen} setIsModalDeleteOpen={setIsModalDeleteOpen} deleteListing={deleteListing} />}
                 </>} />
+                {/* Search Page */}
               <Route path="/searchs?" element={
                 <>
                   <SearchMain isItemBookmarked={isItemBookmarked} toggleBookmark={toggleBookmark} searchedItems={searchedItems} />
                 </>} />
+                {/* User's Favorites Page */}
               <Route path="/user-favorites" element={
                 <>
                   {currentUser && <Favorites isItemBookmarked={isItemBookmarked} toggleBookmark={toggleBookmark} bookmarkedItems={bookmarkedItems} />}
                 </>} />
+                {/* User's Offers Page */}
               <Route path="/user-offers" element={
                 <>
                   {currentUser && <Offers userListings={userListings} userOffers={userOffers} />}
                 </>} />
+                {/* User's Offers on an Item Page */}
               <Route path="/item/offers/:id" element={
                 <>
                   {currentUser && <OfferDisplay item={item} setItem={setItem} />}
                 </>} />
+                {/* User's Chat 1 to 1 Page */}
               <Route path="/chat/:id" element={
                 <>
                   <Chat setUnreadMessages={setUnreadMessages} recipientName={recipientName} cable={cable} recipientId={recipientId} convoId={convoId} />
                 </>} />
+                {/* All of User's Chat Page */}
               <Route path="/user-messages" element={
                 <>
                   <Messages getRecipientId={getRecipientId} getConvoId={getConvoId} getRecipientName={getRecipientName} />
                 </>} />
             </Routes>
+            {/* Foooter */}
             <Footer />
-          </UserContext.Provider>
+         
         </SkeletonTheme>
       </ScrollToTop>
     </div>

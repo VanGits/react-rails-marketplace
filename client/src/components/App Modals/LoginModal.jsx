@@ -13,9 +13,9 @@ const LoginModal = ({
   onLogin,
   setIsProfileClicked,
 }) => {
+  // const [image, setImage] = useState('');
   const [isLoginModal, setIsLoginModal] = useState(true);
   const [name, setName] = useState('');
-  // const [image, setImage] = useState('');
   const [password, setPassword] = useState('');
   const [location, setLocation] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -50,6 +50,8 @@ const LoginModal = ({
     // Update the state with the selected file
     setSelectedFile(file);
   };
+  // Please move this to redux. this enables mobile overlay to be able to
+  // sign up as well
   const handleSignUp = (e) => {
     e.preventDefault();
     setIsLoading(true)
@@ -78,7 +80,8 @@ const LoginModal = ({
           };
 
   
-
+  // Please move this to redux. this enables mobile overlay to be able to
+  // log in as well
   const handleLogIn = (e) => {
     e.preventDefault();
     setIsLoading(true);
@@ -105,6 +108,7 @@ const LoginModal = ({
         }
       });
   };
+  // Move this to redux
   const handleUpload = (e) => {
     e.preventDefault()
     document.querySelector('input[type=file]').click()

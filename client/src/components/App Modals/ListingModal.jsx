@@ -2,18 +2,15 @@ import React, { useContext, useState } from 'react';
 import "../../styles/App Modals/ListingModal.css"
 import ReactModal from "react-modal";
 import { toast } from 'react-toastify';
-import UserContext from "../../context/UserContext";
 import { RxCross2 } from 'react-icons/rx';
 import { BsFillCloudArrowUpFill } from 'react-icons/bs';
+import { useSelector } from 'react-redux';
 
 const ListingModal = ({ isModalOpen, setIsModalOpen, addListing }) => {
-  //attributes :id, :title, :description, :image_url, :location, :user_id, :price,
-  const currentUser = useContext(UserContext);
-  // states to track inputs
 
+  const currentUser = useSelector((state) => state.user.currentUser)
   const [title, setTitle] = useState("")
   const [description, setDescription] = useState("")
-  // const [image, setImage] = useState("")
   const [price, setPrice] = useState("")
   const [selectedFile, setSelectedFile] = useState(null);
   const handleFileSelect = (event) => {
@@ -61,40 +58,6 @@ const ListingModal = ({ isModalOpen, setIsModalOpen, addListing }) => {
               toast.error(error?.message);
             });
           };
-    // fetch("/api/v1/item_listings", {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify({
-    //     title: title,
-    //     description: description,
-    //     image_url: selectedFile,
-    //     location: currentUser.location,
-    //     price: price,
-    //     user_id: currentUser.id
-    //   }),
-    // })
-    //   .then((r) => {
-    //     if (r.ok) {
-    //       return r.json();
-    //     } else {
-    //       return r.json().then((err) => {
-    //         throw new Error(err.errors[0]);
-    //       });
-    //     }
-    //   })
-    //   .then((newListing) => {
-
-    //     addListing(newListing);
-    //     setIsModalOpen(false)
-    //     toast.success("Listing created!");
-    //     // navigate("/home");
-    //   })
-    //   .catch((error) => {
-    //     console.error(error);
-    //     toast.error(error.message);
-    //   });
   
   const handleUpload = (e) => {
     e.preventDefault()
@@ -115,11 +78,6 @@ const ListingModal = ({ isModalOpen, setIsModalOpen, addListing }) => {
           <h4>Title</h4>
           <input type="text" onChange={(e) => setTitle(e.target.value)} />
         </div>
-
-        {/* <div className="inputs">
-          <h4>Listing Image URL</h4>
-          <input type="text" onChange={(e) => setImage(e.target.value)} />
-        </div> */}
 
         <div className="inputs">
           <h4>Price</h4>

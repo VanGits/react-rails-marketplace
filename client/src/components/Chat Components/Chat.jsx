@@ -1,13 +1,13 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import "../../styles/Chat Components/Chat.css"
-import UserContext from "../../context/UserContext";
 import { useNavigate } from 'react-router-dom';
 import { AiOutlineSend } from 'react-icons/ai';
 import { toast } from 'react-toastify';
+import { useSelector } from 'react-redux';
 
 
 const Chat = ({ setUnreadMessages ,cable, recipientId, convoId, recipientName }) => {
-  const currentUser = useContext(UserContext);
+  const currentUser = useSelector((state) => state.user.currentUser)
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
 

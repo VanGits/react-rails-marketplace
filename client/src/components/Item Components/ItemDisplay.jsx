@@ -5,13 +5,13 @@ import { useNavigate, useParams } from 'react-router-dom';
 import "../../styles/Item Components/ItemDisplay.css"
 import { IoMdHeartEmpty, IoMdHeart } from "react-icons/io";
 import MapDisplay from './MapDisplay';
-import UserContext from "../../context/UserContext";
 import { toast } from 'react-toastify';
+import { useSelector } from 'react-redux';
 
 
 
 const ItemDisplay = ({ getRecipientName, getConvoId, getRecipientId, handleOfferClick, items, item, setItem, updateListing, isItemBookmarked, toggleBookmark }) => {
-
+  const currentUser = useSelector((state) => state.user.currentUser)
   const [isLoading, setIsLoading] = useState(true);
   const [isEditing, setIsEditing] = useState(false);
   const [editedTitle, setEditedTitle] = useState('');
@@ -19,7 +19,7 @@ const ItemDisplay = ({ getRecipientName, getConvoId, getRecipientId, handleOffer
   const [editedDescription, setEditedDescription] = useState('');
   const params = useParams();
 
-  const currentUser = useContext(UserContext);
+
 
   useEffect(() => {
     const fetchItem = () => {

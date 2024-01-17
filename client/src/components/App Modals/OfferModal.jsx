@@ -1,12 +1,10 @@
 import React, { useContext, useState } from 'react';
 import "../../styles/App Modals/OfferModal.css"
 import ReactModal from 'react-modal';
-import UserContext from "../../context/UserContext";
 import { toast } from 'react-toastify';
+import { useSelector } from 'react-redux';
 const OfferModal = ({setIsOfferModalOpen, isOfferModalOpen, offerItemId,handleNewOfferFromUser}) => {
-
-  
-    const currentUser = useContext(UserContext);
+  const currentUser = useSelector((state) => state.user.currentUser)
     const [contact, setContact] = useState("")
     const [price, setPrice] = useState("")
     

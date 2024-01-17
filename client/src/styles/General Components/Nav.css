@@ -359,10 +359,10 @@ a {
     .nav-wrapper {
         max-width: 990px;
     }
-
-    .nav-elements {
+    .nav-elements a, .nav-elements span{
         display: none;
     }
+  
 
     .nav-logo-search img {
         width: 40px;

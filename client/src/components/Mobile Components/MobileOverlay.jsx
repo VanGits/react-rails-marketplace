@@ -4,8 +4,8 @@ const MobileOverlay = ({ isBurgerOpened }) => {
 
     
     return(
-        <div className="MobileOverlay">
-         
+        <div className={`MobileOverlay ${isBurgerOpened ? "show" : ""}`}>
+            hello
         </div>
     )
 }

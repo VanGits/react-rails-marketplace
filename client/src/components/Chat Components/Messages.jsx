@@ -1,10 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react';
 import "../../styles/Chat Components/Messages.css"
-import UserContext from '../../context/UserContext';
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 const Messages = ({ getRecipientId, getConvoId, getRecipientName }) => {
+  const currentUser = useSelector((state) => state.user.currentUser)
   const [messages, setMessages] = useState(null)
-  const currentUser = useContext(UserContext);
   const navigate = useNavigate()
   useEffect(() => {
     if (currentUser) {
