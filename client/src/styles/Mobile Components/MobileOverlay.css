@@ -92,5 +92,8 @@
     .MobileOverlay.show {
         left: 32%;
     }
+    .MobileOverlay span{
+        margin-top: 24px;
+    }
 }
 

@@ -300,10 +300,11 @@
 /* Small devices (phones) */
 @media (max-width: 767px) {
   .main__banner h1 {
-    font-size: 28px;
+    font-size: 24px;
+    font-weight: 500;
   }
   .banner__typography button{
-    font-size: 14px;
+    font-size: 12px;
     padding: 12px 20px;
   }
   .display__items{
@@ -332,6 +333,7 @@
   
    .display-details h4 {
     font-size: 14px;
+    font-weight: 500;
   }
   .title-detail{
     font-size: 14px !important;
