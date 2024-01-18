@@ -42,7 +42,7 @@
   }
   
   .modal h1, .modal h2, .modal p, .modal h4{
-    color: #222831
+    color: var(--text-color-dark)
   }
 
   .login-details{
@@ -162,7 +162,15 @@
   .pac-container{
     z-index: 10000000009;
   }
-
+  #upload-btn{
+    border-radius: 0;
+    max-width: 180px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size:medium;
+  }
   
   
   @keyframes fade-in {
@@ -174,5 +182,46 @@
     }
   }
   
+  /* Small devices (phones) */
+@media (max-width: 767px) {
+  .modal{
+    width: 340px;
+    min-height: 380px;
+  }
+  .modal h1{
+    font-size: 24px;
+  
+    
+  }
+  .login-details h2{
+   
+    font-weight: 400;
+    font-size: 14px;
+    padding: 12px;
+  }
+  .modal h4{
+    font-size: 12px;
+    
+  }
+  .modal input{
+    padding: 8px;
+  }
+  #no-account{
+   
+    font-size: 14px;
+  
+
+    
+  }
+  #upload-btn{
+    max-width: 140px;
+    width: 100%;
+    padding: 12px 20px;
+    font-size: 14px;
+  }
+  .modal form button{
+    font-size: 14px;
+  }
+}
   
   

@@ -140,6 +140,7 @@ footer h4{
         align-items: center;
         justify-content: center;
         flex-direction: column;
+        padding: 24px;
        
     }
     .first-col ,.second-col , .third-col , .fourth-col {
@@ -154,5 +155,6 @@ footer h4{
     .second-col h4, .third-col h4, .fourth-col h4{
         margin-top: 48px;
     }
+    
 }
 

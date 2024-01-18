@@ -475,4 +475,10 @@ a {
     .nav-logo-search #logo{
         margin-left: 4px;
     }
+    .nav button{
+        padding: 12px 20px;
+    }
+    #sign__up{
+        display: none;
+    }
 }
