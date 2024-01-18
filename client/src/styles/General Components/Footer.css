@@ -155,6 +155,17 @@ footer h4{
     .second-col h4, .third-col h4, .fourth-col h4{
         margin-top: 48px;
     }
-    
+    .first-col p, .second-col p, .third-col p, .fourth-col p{
+        font-size: 12px;
+    }
+    .footer__social{
+        font-size: 16px;
+    }
+    footer h4{
+        font-size: 14px;
+    }
+    footer h1{
+        font-size: 24px;
+    }
 }
 

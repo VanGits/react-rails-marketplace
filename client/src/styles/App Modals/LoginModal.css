@@ -190,7 +190,7 @@
   }
   .modal h1{
     font-size: 24px;
-  
+    font-weight: 500;
     
   }
   .login-details h2{
@@ -201,10 +201,12 @@
   }
   .modal h4{
     font-size: 12px;
+    font-weight: 400;
     
   }
   .modal input{
     padding: 8px;
+    font-size: 12px;
   }
   #no-account{
    

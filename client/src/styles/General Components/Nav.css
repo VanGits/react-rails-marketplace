@@ -217,7 +217,7 @@ a {
 }
 
 #menu_button {
-    width: 39px;
+    width: 32px;
     overflow: hidden;
     display: none;
 }
@@ -239,7 +239,7 @@ a {
     position: absolute;
     left: 0;
     width: 100%;
-    height: 4px;
+    height: 3px;
     background-color: var(--text-color-dark);
 }
 
@@ -268,8 +268,8 @@ a {
     right: 0;
     left: 0;
     color: var(--text-color-dark);
-    font-size: 12px;
-    font-weight: 900;
+    font-size: 10px;
+    font-weight: 600;
     text-align: center;
 }
 
@@ -476,7 +476,7 @@ a {
         margin-left: 4px;
     }
     .nav button{
-        padding: 12px 20px;
+        padding: 10px 20px;
     }
     #sign__up{
         display: none;
