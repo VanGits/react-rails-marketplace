@@ -2,17 +2,95 @@
     position: fixed;
    
     left: 100%;
-    height: 100vh;
+   height: 95vh;
     width: 100%;
     background-color: white;
     z-index: 9999;
-    transition: left 0.7s ease;
+    transition: left 0.3s ease-in-out;
     display: flex;
     align-items: flex-start;
     justify-content: flex-start;
     flex-direction: column;
+    padding: 48px;
+}
+.MobileOverlay img{
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 100%;
+}
+.mobile__profile{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 24px;
+}
+.mobile__profile h1{
+    margin-left: 12px;
+    font-weight: 600;
+}
+.MobileOverlay button{
+    padding: 12px 32px;
+    border-radius: 4px;
+    font-size: 24px;
+    border: none;
+    background-color: var(--primary-color);
+    color: var(--text-color-light);
+    margin-top: auto;
+}
+.mobile__items{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.mobile__items p{
+    margin-left: 12px;
 }
 
 .MobileOverlay.show {
-    left: 70%;
+    left: 60%;
 }
+.MobileOverlay span{
+    margin-top: 48px;
+    font-size: 20px;
+    color: var(--text-color-dark);
+    font-weight: 500;
+}
+
+/* Small devices (phones) */
+@media (max-width: 767px)  {
+    .mobile__items p{
+        margin-left: 8px;
+      
+       
+    }
+    .MobileOverlay span{
+        font-size: 18px;
+    }
+    .mobile__profile h1{
+        font-size: 24px;
+    }
+    .MobileOverlay img{
+        width: 60px;
+        height: 60px;
+        
+    }
+    .MobileOverlay.show {
+        left: 50%;
+    }
+    .MobileOverlay button{
+        font-size: 16px;
+    }
+    .MobileOverlay{
+        padding: 56px;
+    }
+    .mobile__profile h1{
+        display: none;
+    }
+}
+@media(max-width: 450px){
+    .MobileOverlay.show {
+        left: 32%;
+    }
+}
+
