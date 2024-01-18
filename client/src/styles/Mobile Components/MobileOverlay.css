@@ -12,6 +12,7 @@
     justify-content: flex-start;
     flex-direction: column;
     padding: 48px;
+    border-left: 1px solid rgb(204, 204, 204);
 }
 .MobileOverlay img{
     width: 80px;
@@ -93,7 +94,7 @@
         left: 32%;
     }
     .MobileOverlay span{
-        margin-top: 24px;
+        margin-top: 34px;
     }
 }
 

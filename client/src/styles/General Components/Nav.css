@@ -463,9 +463,12 @@ a {
         width: 20px;
     }
     
+.search-wrapper .search-icon {
+        font-size: 18px;
+    }
 
     #logo {
-        font-size: 20px;
+        font-size: 16px;
        
     }
     .nav input{
