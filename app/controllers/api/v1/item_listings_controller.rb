@@ -16,6 +16,10 @@ class Api::V1::ItemListingsController < ApplicationController
     top_items = ItemListing.all.order(price: :desc).limit(4)
     render json: top_items, status: :ok
   end
+  def bottomFour
+    top_items = ItemListing.all.order(price: :asc).limit(4)
+    render json: top_items, status: :ok
+  end
 
     def userIndex
       items = @user.item_listings.all.order(created_at: :desc)

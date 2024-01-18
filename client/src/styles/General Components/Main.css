@@ -257,12 +257,11 @@
     grid-template-columns: repeat(3, 1fr);
     margin: 32px 0;
   }
-  .image-container{
-    width: 300px;
-  }
+ 
   .display-details h4 {
     font-size: 14px;
   }
+  
 }
 /* Medium devices (phones) */
 @media (min-width: 768px) and (max-width: 991px) {
@@ -282,6 +281,7 @@
   .display-items-wrapper {
     overflow-x: scroll;  
     display: flex;
+   
     flex-wrap: nowrap; 
     max-width: 100vw;
     padding: 8px;
@@ -312,9 +312,10 @@
     flex-direction: column;
    
   }
+
   .display-items-wrapper {
-    overflow-x: scroll;  
-    display: flex;
+    overflow-x: auto;
+   display: flex;
     flex-wrap: nowrap; 
     max-width: 100vw;
     padding: 8px;

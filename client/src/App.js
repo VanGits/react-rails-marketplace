@@ -52,6 +52,7 @@ function App({ cable }) {
   const [userOffers, setUserOffers] = useState([])
   const [unreadMessages, setUnreadMessages] = useState(0);
   const [itemsPopular, setItemsPopular] = useState([])
+  const [itemsCheapest, setItemsCheapest] = useState([])
   const [isBurgerOpened, setIsBurgerOpened] = useState(false)
   const [convoId, setConvoId] = useState(null)
   const [recipientName, setRecipientName] = useState("")
@@ -89,6 +90,12 @@ function App({ cable }) {
     fetch("/api/v1/trending-four")
       .then((r) => r.json())
       .then(itemsData => setItemsPopular(itemsData))
+  }, [])
+  // Fetches the top 4 most cheapest listings
+  useEffect(() => {
+    fetch("/api/v1/cheapest-four")
+      .then((r) => r.json())
+      .then(itemsData => setItemsCheapest(itemsData))
   }, [])
   // Fetches if theres a currentUser or not
   useEffect(() => {
@@ -363,7 +370,7 @@ function App({ cable }) {
               {/* Main Page */}
               <Route path="/" element={
                 <>
-                  <Main itemsPopular={itemsPopular} isItemBookmarked={isItemBookmarked} toggleBookmark={toggleBookmark} addListing={addListing} items={items} isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} searchedItems={searchedItems} />
+                  <Main itemsCheapest={itemsCheapest}itemsPopular={itemsPopular} isItemBookmarked={isItemBookmarked} toggleBookmark={toggleBookmark} addListing={addListing} items={items} isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} searchedItems={searchedItems} />
                 </>} />
                 {/* Item Page */}
               <Route path="/item/:id" element={

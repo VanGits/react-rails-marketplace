@@ -8,7 +8,7 @@ import ListingModal from '../App Modals/ListingModal';
 import { IoMdHeartEmpty, IoMdHeart } from "react-icons/io";
 import Skeleton from 'react-loading-skeleton';
 
-const Main = ({ itemsPopular, items, isModalOpen, setIsModalOpen, addListing, toggleBookmark, isItemBookmarked }) => {
+const Main = ({ itemsCheapest, itemsPopular, items, isModalOpen, setIsModalOpen, addListing, toggleBookmark, isItemBookmarked }) => {
     const navigate = useNavigate();
     const displayRef = useRef(null);
 
@@ -81,6 +81,31 @@ const Main = ({ itemsPopular, items, isModalOpen, setIsModalOpen, addListing, to
             </div>
         );
     });
+    const displayCheapest = itemsCheapest?.map((item, index) => {
+        const truncatedTitle = truncateTitle(item.title, 20);
+
+
+        return (
+            <div className='display-item' key={item.id}>
+                <div className="image-container" onClick={() => handleItemClick(item.id)}>
+                  
+                    {<img src={item.image_url} alt={index} loading='lazy' />}
+                   
+                </div>
+                <div className="item-details-display">
+                    <div className="display-details">
+                        <p className='title-detail'>{truncatedTitle}</p>
+                        <p>${item.price.toFixed(2)}</p>
+                        <h4>{item?.location}</h4>
+                    </div>
+
+                </div>
+                <div className="bookmark" onClick={() => toggleBookmark(item.id)}>
+                        {isItemBookmarked(item.id) ? <IoMdHeart className='filled' /> : <IoMdHeartEmpty className='empty' />}
+                    </div>
+            </div>
+        );
+    });
    
     
     const handleClick = () => {
@@ -116,6 +141,9 @@ const Main = ({ itemsPopular, items, isModalOpen, setIsModalOpen, addListing, to
                     <h1 ref={displayRef}>Trending on GoRecycle</h1>
                     <p>Promoted items you might be interested in.</p>
                     <div className='display-items-wrapper'>{displayPopular}</div>
+                    <h1>Cheapest Postings</h1>
+                    <p>Cheap items you might be interested in.</p>
+                    <div className='display-items-wrapper'>{displayCheapest}</div>
                     <h1>Recent Postings</h1>
                     <p>Recent items you might be interested in.</p>
                     <div className='display-items-wrapper'>{displayItem}</div>
