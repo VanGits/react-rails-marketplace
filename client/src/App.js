@@ -355,7 +355,7 @@ function App({ cable }) {
           <ToastContainer />
 
           {/* Mobile Overlay When Burger is clicked */}
-          <MobileOverlay setIsBurgerOpened={setIsBurgerOpened}handleLogOut={() => handleLogOut()} isBurgerOpened={isBurgerOpened} />
+          <MobileOverlay setIsBurgerOpened={setIsBurgerOpened}handleLogOut={handleLogOut} isBurgerOpened={isBurgerOpened} />
           {/* Login Modal that pops up when user tries to log in */}
           <LoginModal setIsProfileClicked={setIsProfileClicked} onLogin={onLogin} isLoginModalOpen={isLoginModalOpen} setIsLoginModalOpen={setIsLoginModalOpen} />
           {/* Handles profile when clicked. */}

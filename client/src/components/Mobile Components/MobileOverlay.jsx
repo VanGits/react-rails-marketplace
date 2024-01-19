@@ -20,7 +20,7 @@ const MobileOverlay = ({ handleLogOut, isBurgerOpened, setIsBurgerOpened }) => {
             <Link to='/user-offers' onClick={() => setIsBurgerOpened(!isBurgerOpened)}><span className="mobile__items"><GrTransaction /><p>Offers</p></span></Link>
             <Link to='/user-favorites' onClick={() => setIsBurgerOpened(!isBurgerOpened)}><span className="mobile__items"><IoMdHeartEmpty /><p>Liked</p></span></Link>
             <Link to='/user-listings' onClick={() => setIsBurgerOpened(!isBurgerOpened)}><span className="mobile__items"><MdSell /><p>Listings</p></span></Link>
-            <button onClick={() => handleLogOut()}>Log Out</button>
+            <button onClick={handleLogOut}>Log Out</button>
 
         </div>
     )
