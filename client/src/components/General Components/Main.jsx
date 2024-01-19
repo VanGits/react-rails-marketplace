@@ -7,8 +7,10 @@ import ListingModal from '../App Modals/ListingModal';
 
 import { IoMdHeartEmpty, IoMdHeart } from "react-icons/io";
 import Skeleton from 'react-loading-skeleton';
+import { useSelector } from 'react-redux';
 
 const Main = ({ itemsCheapest, itemsPopular, items, isModalOpen, setIsModalOpen, addListing, toggleBookmark, isItemBookmarked }) => {
+    const currentUser = useSelector((state) => state.user.currentUser)
     const navigate = useNavigate();
     const displayRef = useRef(null);
 
@@ -50,9 +52,10 @@ const Main = ({ itemsCheapest, itemsPopular, items, isModalOpen, setIsModalOpen,
                     </div>
 
                 </div>
-                <div className="bookmark" onClick={() => toggleBookmark(item.id)}>
+                {/* Only displays bookmark buttons if theres a user */}
+                {currentUser && <div className="bookmark" onClick={() => toggleBookmark(item.id)}>
                         {isItemBookmarked(item.id) ? <IoMdHeart className='filled' /> : <IoMdHeartEmpty className='empty' />}
-                    </div>
+                    </div>}
             </div>
         );
     });
@@ -75,9 +78,10 @@ const Main = ({ itemsCheapest, itemsPopular, items, isModalOpen, setIsModalOpen,
                     </div>
 
                 </div>
-                <div className="bookmark" onClick={() => toggleBookmark(item.id)}>
+                 {/* Only displays bookmark buttons if theres a user */}
+                 {currentUser && <div className="bookmark" onClick={() => toggleBookmark(item.id)}>
                         {isItemBookmarked(item.id) ? <IoMdHeart className='filled' /> : <IoMdHeartEmpty className='empty' />}
-                    </div>
+                    </div>}
             </div>
         );
     });
@@ -100,9 +104,10 @@ const Main = ({ itemsCheapest, itemsPopular, items, isModalOpen, setIsModalOpen,
                     </div>
 
                 </div>
-                <div className="bookmark" onClick={() => toggleBookmark(item.id)}>
+                {/* Only displays bookmark buttons if theres a user */}
+                {currentUser && <div className="bookmark" onClick={() => toggleBookmark(item.id)}>
                         {isItemBookmarked(item.id) ? <IoMdHeart className='filled' /> : <IoMdHeartEmpty className='empty' />}
-                    </div>
+                    </div>}
             </div>
         );
     });

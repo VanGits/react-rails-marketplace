@@ -18,7 +18,7 @@ const ItemDisplay = ({ getRecipientName, getConvoId, getRecipientId, handleOffer
   const [editedPrice, setEditedPrice] = useState('');
   const [editedDescription, setEditedDescription] = useState('');
   const params = useParams();
-
+  
 
 
   useEffect(() => {
@@ -216,10 +216,10 @@ const ItemDisplay = ({ getRecipientName, getConvoId, getRecipientId, handleOffer
                    
 
 
-                    <span onClick={() => toggleBookmark(item?.id)}>
+                    {currentUser && <span onClick={() => toggleBookmark(item?.id)}>
                       {isItemBookmarked(item?.id) ? <IoMdHeart className="item-favorite" /> : <IoMdHeartEmpty className="item-favorite" />}
 
-                    </span>
+                    </span>}
                    
                     <div className="map__container">
                       <MapDisplay item={item} />

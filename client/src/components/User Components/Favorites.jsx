@@ -1,12 +1,17 @@
 
 import "../../styles/User Components/Favorites.css"
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { IoMdHeartEmpty, IoMdHeart } from "react-icons/io";
 import Skeleton from "react-loading-skeleton";
-const Favorites = ({ bookmarkedItems, toggleBookmark, isItemBookmarked}) => {
-    const navigate = useNavigate();
+
+
+const Favorites = ({ bookmarkedItems, toggleBookmark, isItemBookmarked }) => {
+  const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(true);
+  
+ 
+ 
   const truncateTitle = (title, maxLength) => {
     if (title.length > maxLength) {
       return title.substring(0, maxLength) + '...';
@@ -19,14 +24,14 @@ const Favorites = ({ bookmarkedItems, toggleBookmark, isItemBookmarked}) => {
   };
 
   useEffect(() => {
-    setIsLoading(true); 
+    setIsLoading(true);
 
     const delay = setTimeout(() => {
       setIsLoading(false);
     }, 1000);
 
     return () => clearTimeout(delay);
-  }, [bookmarkedItems]); 
+  }, [bookmarkedItems]);
 
   const displayItem = bookmarkedItems.map((item) => {
     const truncatedTitle = truncateTitle(item.title, 20);
@@ -43,7 +48,7 @@ const Favorites = ({ bookmarkedItems, toggleBookmark, isItemBookmarked}) => {
             <h4>{item.location}</h4>
           </div>
           <div className='bookmark' onClick={() => toggleBookmark(item.id)}>
-          {isItemBookmarked(item.id) ? <IoMdHeart /> : <IoMdHeartEmpty />}
+            {isItemBookmarked(item.id) ? <IoMdHeart /> : <IoMdHeartEmpty />}
           </div>
         </div>
       </div>
@@ -52,32 +57,32 @@ const Favorites = ({ bookmarkedItems, toggleBookmark, isItemBookmarked}) => {
 
   return (
     <div className='Main Favorites'>
-        <h1>Your Favorites</h1>
+      <h1>Your Favorites</h1>
       {isLoading ? (
         <div className='display__items'>
-        <div className='display-items-wrapper'>
+          <div className='display-items-wrapper'>
             {Array.from({ length: 8 }).map((_, index) => {
-  
-                return (
-                    <div className='display-item' key={index}>
-                        <div className="image-container">
-                            {/* Add skeleton loading */}
-                            {<Skeleton height={"100%"} />}
 
-                        </div>
-                        <div className="item-details-display">
-                            <div className="display-details">
-                                <p className='title-detail'><Skeleton height={"100%"} width={"100%"} /></p>
-                                <p><Skeleton /></p>
-                                <h4><Skeleton /></h4>
-                            </div>
+              return (
+                <div className='display-item' key={index}>
+                  <div className="image-container">
+                    {/* Add skeleton loading */}
+                    {<Skeleton height={"100%"} />}
 
-                        </div>
+                  </div>
+                  <div className="item-details-display">
+                    <div className="display-details">
+                      <p className='title-detail'><Skeleton height={"100%"} width={"100%"} /></p>
+                      <p><Skeleton /></p>
+                      <h4><Skeleton /></h4>
                     </div>
-                );
+
+                  </div>
+                </div>
+              );
             })}
+          </div>
         </div>
-    </div>
       ) : bookmarkedItems.length > 0 ? (
         <div className='display-items-wrapper'>{displayItem}</div>
       ) : (

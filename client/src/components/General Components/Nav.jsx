@@ -15,6 +15,7 @@ const Nav = ({ handleBurgerClick, unreadMessages, handleLogInModal, handleProfil
     const handleChange = (e) => {
         setSearchInput(e.target.value);
     };
+   
 
 
     const handleKeyPress = (e) => {

@@ -3,8 +3,10 @@ import '../../styles/General Components/SearchMain.css';
 import { useNavigate } from 'react-router-dom';
 import { IoMdHeartEmpty, IoMdHeart } from "react-icons/io";
 import { ImSpinner8 } from 'react-icons/im';
+import { useSelector } from 'react-redux';
 
 const SearchMain = ({ searchedItems, isItemBookmarked, toggleBookmark }) => {
+  const currentUser = useSelector((state) => state.user.currentUser)
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(true);
 
@@ -43,9 +45,10 @@ const SearchMain = ({ searchedItems, isItemBookmarked, toggleBookmark }) => {
             <p>${item.price.toFixed(2)}</p>
             <h4>{item.location}</h4>
           </div>
-          <div className="bookmark" onClick={() => toggleBookmark(item.id)}>
-            {isItemBookmarked(item.id) ? <IoMdHeart /> : <IoMdHeartEmpty />}
-          </div>
+          {/* Only displays bookmark buttons if theres a user */}
+          {currentUser && <div className="bookmark" onClick={() => toggleBookmark(item.id)}>
+            {isItemBookmarked(item.id) ? <IoMdHeart className='filled' /> : <IoMdHeartEmpty className='empty' />}
+          </div>}
         </div>
       </div>
     );

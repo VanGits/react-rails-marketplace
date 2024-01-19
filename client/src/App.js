@@ -7,6 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
 import { Route, Routes } from "react-router-dom";
 import { SkeletonTheme } from "react-loading-skeleton";
+
 import "react-loading-skeleton/dist/skeleton.css";
 // User Components
 import Favorites from "./components/User Components/Favorites";
@@ -37,6 +38,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setCurrentUser } from "./state/user/userSlice";
 
 function App({ cable }) {
+ 
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false)
   const [items, setItems] = useState([])
   const [userListings, setUserListings] = useState([])
@@ -57,11 +59,10 @@ function App({ cable }) {
   const [convoId, setConvoId] = useState(null)
   const [recipientName, setRecipientName] = useState("")
   const [recipientId, setRecipientId] = useState(null)
- 
+
   // Redux states
   const dispatch = useDispatch()
   const currentUser = useSelector((state) => state.user.currentUser)
-
   // Handles mobile burger button when clicked
   const handleBurgerClick = () => {
     setIsBurgerOpened(!isBurgerOpened)
@@ -150,7 +151,12 @@ function App({ cable }) {
       },
     }).then((r) => {
       if (r.ok) {
+        // Closes mobile overlay when logged out
+        setIsBurgerOpened(false)
+        // Sets current user to null
         dispatch(setCurrentUser(null))
+        
+
       }
     });
   }
@@ -347,76 +353,76 @@ function App({ cable }) {
       <ScrollToTop>
         <SkeletonTheme baseColor="#636363" highlightColor="#525252">
           <ToastContainer />
-  
-            {/* Mobile Overlay When Burger is clicked */}
-            <MobileOverlay isBurgerOpened={isBurgerOpened} />
-            {/* Login Modal that pops up when user tries to log in */}
-            <LoginModal setIsProfileClicked={setIsProfileClicked} onLogin={onLogin} isLoginModalOpen={isLoginModalOpen} setIsLoginModalOpen={setIsLoginModalOpen} />
-            {/* Handles profile when clicked. */}
-            <div className="navigation" >
-              <Nav isBurgerOpened={isBurgerOpened}handleBurgerClick={handleBurgerClick} setIsBurgerOpened={setIsBurgerOpened} unreadMessages={unreadMessages} setUnreadMessages={setUnreadMessages} totalOffersLength={totalOffersLength} handleLogInModal={handleLogInModal} handleProfileClick={handleProfileClick} setSearchedItems={setSearchedItems} setSearchInput={setSearchInput} searchInput={searchInput} />
-              {isProfileClicked && currentUser && <div className="profile-pop-up">
-                <div className="profile-details">
-                  <img src={currentUser && currentUser.image_url} alt="user" />
-                  <div className="profile-texts">
-                    <h1>{currentUser && currentUser.name}</h1>
-                  </div>
-                </div>
-                <p onClick={handleLogOut}>Log out</p>
-              </div>}
-            </div>
 
-            <Routes>
-              {/* Main Page */}
-              <Route path="/" element={
-                <>
-                  <Main itemsCheapest={itemsCheapest}itemsPopular={itemsPopular} isItemBookmarked={isItemBookmarked} toggleBookmark={toggleBookmark} addListing={addListing} items={items} isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} searchedItems={searchedItems} />
-                </>} />
-                {/* Item Page */}
-              <Route path="/item/:id" element={
-                <>
-                  <ItemDisplay getRecipientName={getRecipientName} getConvoId={getConvoId} getRecipientId={getRecipientId} isItemBookmarked={isItemBookmarked} toggleBookmark={toggleBookmark} item={item} setItem={setItem} items={items} updateListing={updateListing} handleOfferClick={handleOfferClick} />
-                  <OfferModal isOfferModalOpen={isOfferModalOpen} setIsOfferModalOpen={setIsOfferModalOpen} offerItemId={offerItemId} handleNewOfferFromUser={handleNewOfferFromUser} />
-                </>} />
-                {/* User's Own Listings Page */}
-              <Route path="/user-listings" element={
-                <>
-                  {currentUser && <UserListings userListings={userListings} isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} addListing={addListing} isModalDeleteOpen={isModalDeleteOpen} setIsModalDeleteOpen={setIsModalDeleteOpen} deleteListing={deleteListing} />}
-                </>} />
-                {/* Search Page */}
-              <Route path="/searchs?" element={
-                <>
-                  <SearchMain isItemBookmarked={isItemBookmarked} toggleBookmark={toggleBookmark} searchedItems={searchedItems} />
-                </>} />
-                {/* User's Favorites Page */}
-              <Route path="/user-favorites" element={
-                <>
-                  {currentUser && <Favorites isItemBookmarked={isItemBookmarked} toggleBookmark={toggleBookmark} bookmarkedItems={bookmarkedItems} />}
-                </>} />
-                {/* User's Offers Page */}
-              <Route path="/user-offers" element={
-                <>
-                  {currentUser && <Offers userListings={userListings} userOffers={userOffers} />}
-                </>} />
-                {/* User's Offers on an Item Page */}
-              <Route path="/item/offers/:id" element={
-                <>
-                  {currentUser && <OfferDisplay item={item} setItem={setItem} />}
-                </>} />
-                {/* User's Chat 1 to 1 Page */}
-              <Route path="/chat/:id" element={
-                <>
-                  <Chat setUnreadMessages={setUnreadMessages} recipientName={recipientName} cable={cable} recipientId={recipientId} convoId={convoId} />
-                </>} />
-                {/* All of User's Chat Page */}
-              <Route path="/user-messages" element={
-                <>
-                  <Messages getRecipientId={getRecipientId} getConvoId={getConvoId} getRecipientName={getRecipientName} />
-                </>} />
-            </Routes>
-            {/* Foooter */}
-            <Footer />
-         
+          {/* Mobile Overlay When Burger is clicked */}
+          <MobileOverlay setIsBurgerOpened={setIsBurgerOpened}handleLogOut={() => handleLogOut()} isBurgerOpened={isBurgerOpened} />
+          {/* Login Modal that pops up when user tries to log in */}
+          <LoginModal setIsProfileClicked={setIsProfileClicked} onLogin={onLogin} isLoginModalOpen={isLoginModalOpen} setIsLoginModalOpen={setIsLoginModalOpen} />
+          {/* Handles profile when clicked. */}
+          <div className="navigation" >
+            <Nav isBurgerOpened={isBurgerOpened} handleBurgerClick={handleBurgerClick} setIsBurgerOpened={setIsBurgerOpened} unreadMessages={unreadMessages} setUnreadMessages={setUnreadMessages} totalOffersLength={totalOffersLength} handleLogInModal={handleLogInModal} handleProfileClick={handleProfileClick} setSearchedItems={setSearchedItems} setSearchInput={setSearchInput} searchInput={searchInput} />
+            {isProfileClicked && currentUser && <div className="profile-pop-up">
+              <div className="profile-details">
+                <img src={currentUser && currentUser.image_url} alt="user" />
+                <div className="profile-texts">
+                  <h1>{currentUser && currentUser.name}</h1>
+                </div>
+              </div>
+              <p onClick={handleLogOut}>Log out</p>
+            </div>}
+          </div>
+
+          <Routes>
+            {/* Main Page */}
+            <Route path="/" element={
+              <>
+                <Main itemsCheapest={itemsCheapest} itemsPopular={itemsPopular} isItemBookmarked={isItemBookmarked} toggleBookmark={toggleBookmark} addListing={addListing} items={items} isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} searchedItems={searchedItems} />
+              </>} />
+            {/* Item Page */}
+            <Route path="/item/:id" element={
+              <>
+                <ItemDisplay getRecipientName={getRecipientName} getConvoId={getConvoId} getRecipientId={getRecipientId} isItemBookmarked={isItemBookmarked} toggleBookmark={toggleBookmark} item={item} setItem={setItem} items={items} updateListing={updateListing} handleOfferClick={handleOfferClick} />
+                <OfferModal isOfferModalOpen={isOfferModalOpen} setIsOfferModalOpen={setIsOfferModalOpen} offerItemId={offerItemId} handleNewOfferFromUser={handleNewOfferFromUser} />
+              </>} />
+            {/* User's Own Listings Page */}
+            <Route path="/user-listings" element={
+              <>
+                {currentUser && <UserListings userListings={userListings} isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} addListing={addListing} isModalDeleteOpen={isModalDeleteOpen} setIsModalDeleteOpen={setIsModalDeleteOpen} deleteListing={deleteListing} />}
+              </>} />
+            {/* Search Page */}
+            <Route path="/searchs?" element={
+              <>
+                <SearchMain isItemBookmarked={isItemBookmarked} toggleBookmark={toggleBookmark} searchedItems={searchedItems} />
+              </>} />
+            {/* User's Favorites Page */}
+            <Route path="/user-favorites" element={
+              <>
+                {currentUser && <Favorites isItemBookmarked={isItemBookmarked} toggleBookmark={toggleBookmark} bookmarkedItems={bookmarkedItems} />}
+              </>} />
+            {/* User's Offers Page */}
+            <Route path="/user-offers" element={
+              <>
+                {currentUser && <Offers userListings={userListings} userOffers={userOffers} />}
+              </>} />
+            {/* User's Offers on an Item Page */}
+            <Route path="/item/offers/:id" element={
+              <>
+                {currentUser && <OfferDisplay item={item} setItem={setItem} />}
+              </>} />
+            {/* User's Chat 1 to 1 Page */}
+            <Route path="/chat/:id" element={
+              <>
+                <Chat setUnreadMessages={setUnreadMessages} recipientName={recipientName} cable={cable} recipientId={recipientId} convoId={convoId} />
+              </>} />
+            {/* All of User's Chat Page */}
+            <Route path="/user-messages" element={
+              <>
+                <Messages getRecipientId={getRecipientId} getConvoId={getConvoId} getRecipientName={getRecipientName} />
+              </>} />
+          </Routes>
+          {/* Foooter */}
+          <Footer />
+
         </SkeletonTheme>
       </ScrollToTop>
     </div>
