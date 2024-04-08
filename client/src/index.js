@@ -13,10 +13,10 @@ import { store } from './state/store';
 const CableApp = {}
 
 // Socket for Production
-// CableApp.cable = actionCable.createConsumer('wss://marketplace-ylzj.onrender.com/cable');
+CableApp.cable = actionCable.createConsumer('wss://marketplace-ylzj.onrender.com/cable');
 
 // Socket for Development
-CableApp.cable = actionCable.createConsumer('ws://localhost:3000/cable')
+// CableApp.cable = actionCable.createConsumer('ws://localhost:3000/cable')
 Modal.setAppElement("#root");
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
